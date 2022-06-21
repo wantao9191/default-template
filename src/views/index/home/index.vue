@@ -1,8 +1,15 @@
 <template>
-  <div>首页</div>
+  <div>
+    <button @click="onClick">点我</button>
+  </div>
 </template>
 <script>
+import libs from '@/libs'
 export default {
-  setup() {},
+  setup() {
+    const onClick = () => {
+    };
+    return { onClick };
+  },
 };
 </script>
