@@ -1,5 +1,7 @@
-import message from './message.vue'
+import Dialog from './dialog.vue'
+import Button from './button.vue'
 function libs (Vue){
-    Vue.component('wt-message',message)
+    Vue.component('tg-dialog',Dialog)
+    Vue.component('tg-button',Button)
 }
 export default libs

@@ -1,5 +1,6 @@
 import './index.less'
 import '@/assets/css/normal.less'
+import './libs/tg-ui.less'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'

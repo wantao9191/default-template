@@ -1,9 +1,14 @@
 <template>
-  <m-header></m-header>
-  <router-view />
+  <div id="app-view">
+    <m-header></m-header>
+    <main>
+      <router-view />
+    </main>
+  </div>
 </template>
 <script>
 import MHeader from "@/components/MHeader.vue";
+
 export default {
   components: {
     MHeader,
@@ -12,16 +17,13 @@ export default {
 };
 </script>
 
-<style>
-html,
-body {
+<style lang="less">
+#app-view {
   height: 100%;
-}
-#app {
-  height: 100%;
-}
-* {
-  padding: 0;
-  margin: 0;
+  background: #f5f7f9;
+  > main {
+    display: flex;
+    height: calc(100% - 50px);
+  }
 }
 </style>

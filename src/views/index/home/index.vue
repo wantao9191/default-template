@@ -1,14 +1,14 @@
 <template>
   <div>
-    <button @click="onClick">点我</button>
+    <m-aside></m-aside>
   </div>
 </template>
 <script>
-import libs from '@/libs'
+import MAside from "@/components/MAside.vue";
 export default {
+  components:{MAside},
   setup() {
-    const onClick = () => {
-    };
+    const onClick = () => {};
     return { onClick };
   },
 };

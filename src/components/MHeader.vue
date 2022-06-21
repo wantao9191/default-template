@@ -21,6 +21,7 @@ export default {
   align-content: center;
   padding: 0 24px;
   height: 50px;
+  background: #fff;
   .logo {
     cursor: pointer;
     img {
