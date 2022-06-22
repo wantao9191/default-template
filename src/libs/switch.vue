@@ -64,7 +64,7 @@ $h2s: $hs - 2px;
   width: $h * 2;
   border: none;
   background: rgba(0, 0, 0, 0.25);
-  border-radius: $h/2;
+  border-radius:calc($h/2) ;
   vertical-align: middle;
   position: relative;
   cursor: pointer;
@@ -76,7 +76,7 @@ $h2s: $hs - 2px;
     height: $h2;
     width: $h2;
     background: white;
-    border-radius: $h2 / 2;
+    border-radius:calc($h2 / 2) ;
     transition: all 250ms;
   }
 
@@ -106,7 +106,7 @@ $h2s: $hs - 2px;
 
   &.normal:active {
     >span {
-      width: $h2 + 4px;
+      width:calc($h2 + 4px) ;
     }
   }
 
@@ -128,7 +128,7 @@ $h2s: $hs - 2px;
   >span {
     height: $h2s;
     width: $h2s;
-    border-radius: $h2s/2;
+    border-radius:calc( $h2s/2);
     top: 1.2px;
     left: 1.2px;
   }
@@ -141,7 +141,7 @@ $h2s: $hs - 2px;
 
   &.normal:active {
     >span {
-      width: $h2s + 2px;
+      width:calc($h2s + 2px) ;
     }
   }
 
