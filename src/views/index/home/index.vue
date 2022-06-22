@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div id="home-page">
+    <div class="banner"></div>
   </div>
 </template>
 <script>
@@ -10,3 +11,15 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+#home-page {
+  height: 100%;
+
+  >.banner {
+    background: url(../../../assets/images/bg.png) center center no-repeat;
+    background-size: cover;
+    // width: 720px;
+    height: 100%;
+  }
+}
+</style>

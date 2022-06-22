@@ -2,7 +2,7 @@
   <div id="app-view">
     <m-header></m-header>
     <main>
-      <router-view />
+      <router-view class="router-view" />
     </main>
   </div>
 </template>
@@ -22,8 +22,10 @@ export default {
   height: 100%;
   background: #f5f7f9;
   > main {
-    display: flex;
     height: calc(100% - 50px);
+    .router-view {
+      height: 100%;
+    }
   }
 }
 </style>
