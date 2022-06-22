@@ -1,6 +1,6 @@
 <template>
   <div class="m-header shadow">
-    <div class="logo">
+    <div class="logo" @click="onClick">
       <img src="@/assets/images/logo.svg" alt="" />
       <span>TG Design</span>
     </div>
@@ -10,8 +10,15 @@
   </div>
 </template>
 <script>
+import { useRouter } from "vue-router";
 export default {
-  setup() {},
+  setup() {
+    const router = useRouter()
+    const onClick=() =>{
+      router.replace('/home')
+    }
+    return {onClick}
+  },
 };
 </script>
 <style lang="scss" scoped>
