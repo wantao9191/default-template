@@ -1,10 +1,12 @@
 <template>
-  <span :class="[type, size, { 'tg-checked': value }]" class="active-text switch-text" style="margin-right:8px"
-    v-if="activeText">{{ activeText }}</span>
-  <button class="tg-switch" @click="toggle" :class="[{ 'tg-checked': value }, type, btnClass, size]">
-    <span></span>
-  </button>
-  <span :class="[type, size]" class="switch-text" style="margin-left:8px" v-if="activeText">{{ inactiveText }}</span>
+  <span>
+    <span :class="[type, size, { 'tg-checked': value }]" class="active-text switch-text" style="margin-right:8px"
+      v-if="activeText">{{ activeText }}</span>
+    <button class="tg-switch" @click="toggle" :class="[{ 'tg-checked': value }, type, btnClass, size]">
+      <span></span>
+    </button>
+    <span :class="[type, size]" class="switch-text" style="margin-left:8px" v-if="activeText">{{ inactiveText }}</span>
+  </span>
 </template>
 <script lang='ts'>
 import { ref } from "vue";
