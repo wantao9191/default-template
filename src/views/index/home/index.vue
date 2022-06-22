@@ -18,7 +18,6 @@ export default {
   >.banner {
     background: url(../../../assets/images/bg.png) center center no-repeat;
     background-size: cover;
-    // width: 720px;
     height: 100%;
   }
 }
