@@ -1,7 +1,9 @@
 <template>
   <main class="doc-main">
     <m-aside></m-aside>
-    <router-view class="router-view"></router-view>
+    <main class="router-main">
+      <router-view class="router-view"></router-view>
+    </main>
   </main>
 </template>
 <script>
@@ -9,19 +11,33 @@ import MAside from "@/components/MAside.vue";
 export default {
   components: { MAside },
   setup() {
-    const onClick = () => {};
+    const onClick = () => { };
     return { onClick };
   },
 };
 </script>
-<style lang="less" scoped>
+<style lang="scss">
+@import './demo/demo.scss';
+</style>
+<style lang="scss" scoped>
 .doc-main {
   height: 100%;
   display: flex;
-  > .router-view {
-    margin: 12px;
-    background: #fff;
+
+  >.router-main {
+    width: calc(100vw - 200px);
+    height: 100%;
+    overflow-y: auto;
     border-radius: 4px;
+
+    >.router-view {
+      background: #fff;
+      margin: 12px;
+      padding: 12px;
+
+
+    }
   }
+
 }
 </style>

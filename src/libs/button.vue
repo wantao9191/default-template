@@ -29,19 +29,17 @@ export default {
   },
 };
 </script>
-<style lang="less">
-@h: 32px;
-@border-color: #d9d9d9;
-@color: #333;
-@blue: #40a9ff;
-@radius: 4px;
-@red: red;
-@grey: #ddd;
-@green: #83d944;
+<style lang="scss" scoped>
+$h: 28px;
+$border-color: #d9d9d9;
+$color: #333;
+$radius: 4px;
+$grey: #ddd;
+
 .tg-button {
   box-sizing: border-box;
   font-size: 14px;
-  height: @h;
+  height: $h;
   padding: 0 12px;
   cursor: pointer;
   display: inline-flex;
@@ -49,157 +47,211 @@ export default {
   align-items: center;
   white-space: nowrap;
   background: white;
-  color: @color;
-  border: 1px solid @border-color;
-  border-radius: @radius;
+  color: $color;
+  border: 1px solid $border-color;
+  border-radius: $radius;
   box-shadow: 0 1px 0 fade-out(black, 0.95);
   transition: background 250ms;
   vertical-align: bottom;
-  & + & {
+
+  &+& {
     margin-left: 8px;
   }
+
   &.tg-round-button {
-    border-radius: @h;
+    border-radius: $h;
   }
+
   &:hover,
   &:focus {
-    color: @blue;
-    border-color: @blue;
+    color: $primary;
+    border-color: $primary;
   }
+
   &:focus {
     outline: none;
   }
+
   &::-moz-focus-inner {
     border: 0;
   }
+
   &.tg-theme-link {
     border-color: transparent;
     box-shadow: none;
-    color: @blue;
+    color: $primary;
+
     &:hover,
     &:focus {
-      color: lighten(@blue, 10%);
+      color: lighten($primary, 10%);
     }
   }
+
   &.tg-theme-text {
     border-color: transparent;
     box-shadow: none;
     color: inherit;
+
     &:hover,
     &:focus {
       background: darken(white, 5%);
     }
   }
+
   &.tg-large-button {
-    font-size: 24px;
-    height: 48px;
+    font-size: 18px;
+    height: 34px;
     padding: 0 16px;
   }
+
   &.tg-small-button {
     font-size: 12px;
     height: 20px;
     padding: 0 4px;
   }
+
   &.tg-theme-button {
     &.tg-primary-button {
-      background: @blue;
+      background: $primary;
       color: white;
-      border-color: @blue;
+      border-color: $primary;
+
       &:hover,
       &:focus {
-        background: darken(@blue, 10%);
-        border-color: darken(@blue, 10%);
+        background: darken($primary, 10%);
+        border-color: darken($primary, 10%);
       }
     }
+
     &.tg-danger-button {
-      background: @red;
-      border-color: @red;
+      background: $danger;
+      border-color: $danger;
       color: white;
+
       &:hover,
       &:focus {
-        background: darken(@red, 10%);
-        border-color: darken(@red, 10%);
+        background: darken($danger, 10%);
+        border-color: darken($danger, 10%);
       }
     }
+
     &.tg-success-button {
-      background: @green;
-      border-color: @green;
+      background: $success;
+      border-color: $success;
       color: white;
+
       &:hover,
       &:focus {
-        background: darken(@green, 10%);
-        border-color: darken(@green, 10%);
+        background: darken($success, 10%);
+        border-color: darken($success, 10%);
       }
     }
   }
+
   &.tg-theme-link {
     &.tg-danger-button {
-      color: @red;
+      color: $danger;
+
       &:hover,
       &:focus {
-        color: darken(@red, 10%);
+        color: darken($danger, 10%);
       }
     }
   }
+
   &.tg-theme-text {
     &.tg-primary-button {
-      color: @blue;
+      color: $primary;
+
       &:hover,
       &:focus {
-        color: darken(@blue, 10%);
+        color: darken($primary, 10%);
       }
     }
+
     &.tg-danger-button {
-      color: @red;
+      color: $danger;
+
       &:hover,
       &:focus {
-        color: darken(@red, 10%);
+        color: darken($danger, 10%);
       }
     }
+
     &.tg-success-button {
-      color: @green;
+      color: $success;
+
       &:hover,
       &:focus {
-        color: darken(@green, 10%);
+        color: darken($success, 10%);
       }
     }
+
     &:hover,
     &:focus {
       background: none;
     }
   }
+
   &.tg-theme-button {
     &[disabled] {
       cursor: not-allowed;
-      color: @grey;
+      opacity: .6;
+
       &:hover {
-        border-color: @grey;
+        background: $primary;
       }
     }
   }
+
+  &.tg-danger-button {
+    &[disabled] {
+      cursor: not-allowed;
+      opacity: .6;
+
+      &:hover {
+        background: $danger;
+      }
+    }
+  }
+
+  &.tg-success-button {
+    &[disabled] {
+      cursor: not-allowed;
+      opacity: .6;
+
+      &:hover {
+        background: $success;
+      }
+    }
+  }
+
   &.tg-theme-link,
   &.tg-theme-text {
     &[disabled] {
       cursor: not-allowed;
-      color: @grey;
+      color: $grey;
     }
   }
-  > .tg-loadingIndicator {
+
+  >.tg-loadingIndicator {
     width: 14px;
     height: 14px;
     display: inline-block;
     margin-right: 4px;
     border-radius: 8px;
-    border-color: @blue @blue @blue transparent;
+    border-color: $primary $primary $primary transparent;
     border-style: solid;
     border-width: 2px;
     animation: tg-spin 1s infinite linear;
   }
 }
+
 @keyframes tg-spin {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

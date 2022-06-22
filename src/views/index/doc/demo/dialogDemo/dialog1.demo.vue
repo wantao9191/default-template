@@ -17,6 +17,3 @@ export default {
   },
 };
 </script>
-<demo hi="frank">
-第一个例子
-</demo>

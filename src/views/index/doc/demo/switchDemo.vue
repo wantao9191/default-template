@@ -190,10 +190,8 @@
   </div>
 </template>
 <script lang="ts">
-import Switch from "../lib/switch.vue";
 import { ref, reactive } from "vue";
 export default {
-  components: { tgSwitch: Switch },
   setup() {
     const switchData1 = reactive({
       checked: true,

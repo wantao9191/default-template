@@ -1,16 +1,100 @@
 <template>
-  <div class="m-aside shadow">侧边</div>
+  <div class="m-aside shadow">
+    <ul>
+      <li v-for="(m, i) in menus" :key="i" @click="onClick(m)" :class="{ active: $route.path == m.path }">
+        <div class="label label-flex">
+          <span>
+            <tg-icon icon="tg-disc" size="18"></tg-icon>
+            {{ m.label }}
+          </span>
+          <tg-icon :icon="`tg-arrow-${m.slider ? 'forward' : 'down'}`"></tg-icon>
+        </div>
+        <div class="menu-child" v-if="m.children && m.slider">
+          <ul>
+            <li v-for="(c, n) in m.children" :key="n" @click.stop="onClick(c)"
+              :class="{ active: $route.path == c.path }">
+              <span class="label">{{ c.label }}</span>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 <script>
+import { reactive } from "vue";
+import { useRouter,useRoute } from "vue-router";
 export default {
-  setup() {},
+  setup() {
+    const router = useRouter();
+    const route = useRoute()
+    console.log(route.path)
+    const menus = reactive([
+      {
+        label: "组件",
+        icon: 'dict',
+        slider: false,
+        children: [
+          { label: "Icon 图标", path: "/doc/icon" },
+          { label: "Dialog 模态框", path: "/doc/dialog" },
+          { label: "Switch 开关", path: "/doc/switch" },
+          { label: "Button 按钮", path: "/doc/button" },
+        ],
+      },
+    ]);
+    
+    const onClick = (e) => {
+      if (e.path) { router.replace(e.path); } else {
+        e.slider = !e.slider
+      }
+
+    };
+    return { menus, onClick };
+  },
 };
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .m-aside {
   background: #fff;
   width: 200px;
-  height: calc(100% - 2px) ;
+  height: calc(100% - 2px);
   margin-top: 2px;
+
+  ul {
+    li {
+      user-select: none;
+      cursor: pointer;
+      color: #666;
+      margin-top: 4px;
+      font-size: 14px;
+
+      &.active {
+        // background: #333;
+        border-right: 3px solid #1890ff;
+        background: #f0faff;
+      }
+
+      >.label {
+        display: block;
+        padding: 12px 12px 12px 24px;
+
+        &:hover {
+          color: #1890ff;
+        }
+      }
+
+      .label-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .menu-child {
+        .label {
+          padding-left: 3em;
+        }
+      }
+    }
+  }
 }
 </style>

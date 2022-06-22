@@ -43,7 +43,7 @@ export default {
   },
 };
 </script>
-<style lang="less">
+<style lang="scss">
 .wt-dialog-overlay {
   position: fixed;
   left: 0;

@@ -17,7 +17,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="scss">
 #app-view {
   height: 100%;
   background: #f5f7f9;

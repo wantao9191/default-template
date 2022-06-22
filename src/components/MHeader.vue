@@ -14,7 +14,7 @@ export default {
   setup() {},
 };
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .m-header {
   display: flex;
   justify-content: space-between;
@@ -22,6 +22,8 @@ export default {
   padding: 0 24px;
   height: 50px;
   background: #fff;
+  position:relative;
+  z-index:1;
   .logo {
     cursor: pointer;
     img {
@@ -34,7 +36,7 @@ export default {
       margin-left: 12px;
       font-size: 20px;
       font-family: emoji;
-      color: #666;
+      color: #1890ff;
     }
   }
   .nav {

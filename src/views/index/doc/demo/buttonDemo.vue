@@ -179,6 +179,7 @@
         <tg-button>正常</tg-button>
         <tg-button type="primary" disabled>禁用</tg-button>
         <tg-button type="danger" :disabled="true">禁用</tg-button>
+        <tg-button type="success" :disabled="true">禁用</tg-button>
       </div>
       <div class="demo-desc">
         <span class="desc-title">禁用按钮</span>
@@ -255,10 +256,8 @@
   </div>
 </template>
 <script lang='ts'>
-import Button from "../lib/button.vue";
 import { reactive } from "vue";
 export default {
-  components: { tgButton: Button },
   setup() {
     const buttonData1 = reactive({ visible: false, txt: "显示" });
     const toggleDemoCode1 = () => {

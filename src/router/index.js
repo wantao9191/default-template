@@ -16,7 +16,25 @@ const routes = [
     {
         path: '/doc',
         name: 'doc',
-        component: () => import('@/views/index/doc/index.vue')
+        component: () => import('@/views/index/doc/index.vue'),
+        children: [
+            {
+                path: 'icon', name: 'icon',
+                component: () => import('@/views/index/doc/demo/iconDemo.vue'),
+            },
+            {
+                path: 'dialog', name: 'dialog',
+                component: () => import('@/views/index/doc/demo/dialogDemo/index.vue'),
+            },
+            {
+                path: 'switch', name: 'switch',
+                component: () => import('@/views/index/doc/demo/switchDemo.vue'),
+            },
+            {
+                path: 'button', name: 'button',
+                component: () => import('@/views/index/doc/demo/buttonDemo.vue'),
+            }
+        ]
     },
     {
         path: '/login',
