@@ -11,7 +11,8 @@
         <h3>代码演示</h3>
         <div class="demo-block">
             <div class="demo-component">
-                <tg-input v-model:value="inputData.value" size="small" />
+                {{inputData.value}}
+                <tg-input v-model:value="inputData.value" size="small" clearable />
             </div>
             <div class="demo-desc">
                 <span class="desc-title">基本用法</span>
@@ -45,7 +46,7 @@ export default {
     components:{MCode},
     setup() {
         const inputData = reactive({
-            value:'1111',
+            value:'',
             code:'',
             visible:false
         })
