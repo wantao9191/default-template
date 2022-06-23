@@ -24,7 +24,7 @@ export default {
   > main {
     height: calc(100% - 50px);
     .router-view {
-      height: 100%;
+      min-height: 100%;
     }
   }
 }

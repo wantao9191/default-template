@@ -26,16 +26,12 @@ export default {
 
   >.router-main {
     width: calc(100vw - 200px);
-    height: 100%;
     overflow-y: auto;
     border-radius: 4px;
-
     >.router-view {
       background: #fff;
       margin: 12px;
       padding: 12px;
-
-
     }
   }
 

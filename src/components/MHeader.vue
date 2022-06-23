@@ -5,7 +5,8 @@
       <span>TG Design</span>
     </div>
     <div class="nav">
-      <a href="javaScript:;">指南</a><a href="javaScript:;">组件</a>
+      <tg-button theme="text" type="default">指南</tg-button>
+      <tg-button theme="text" type="default">组件</tg-button>
     </div>
   </div>
 </template>

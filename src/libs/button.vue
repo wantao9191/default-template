@@ -52,7 +52,7 @@ $grey: #ddd;
   border-radius: $radius;
   box-shadow: 0 1px 0 fade-out(black, 0.95);
   transition: background 250ms;
-  vertical-align: bottom;
+  vertical-align: baseline;
 
   &+& {
     margin-left: 8px;
@@ -95,6 +95,11 @@ $grey: #ddd;
     &:hover,
     &:focus {
       background: darken(white, 5%);
+    }
+    &.tg-default-button {
+      &:hover {
+        color: $primary;
+      }
     }
   }
 

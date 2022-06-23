@@ -15,6 +15,9 @@
     > .demo-block {
       box-shadow: 0 2px 8px #ddd;
       margin: 16px 0;
+      &:last-child{
+        margin-bottom: 0;
+      }
       > .demo-component {
         padding: 24px;
         > .component-item {

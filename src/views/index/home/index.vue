@@ -8,11 +8,11 @@
       <div class="btns">
         <a href="/#/doc">
           <tg-icon icon="tg-paper-plane" size="21" style="margin-right:4px"></tg-icon>
-          开始使用
+          <span>开始使用</span>
         </a>
         <a href="https://github.com/wantao9191/default-template" class="default">
           <tg-icon icon="tg-rocket" size="21" style="margin-right:4px"></tg-icon>
-          GtiHub
+          <span>GtiHub</span>
         </a>
       </div>
       <div class="intros">
@@ -26,7 +26,7 @@
         </div>
         <div class="intro-item">
           <h3>高效</h3>
-          <p>样式、功能无需操心，CV操作，自在自由！</p>
+          <p>样式、功能无需操心，C&V操作，自在自由！</p>
         </div>
       </div>
     </div>
@@ -55,6 +55,7 @@ export default {
     max-width: 1080px;
     text-align: center;
     padding-top: 160px;
+
     h3 {
       font-size: #999;
     }
@@ -90,16 +91,23 @@ export default {
           color: #333;
           border: 1px solid #ddd;
         }
+
+        span {
+          vertical-align: baseline;
+        }
       }
     }
 
     .intros {
       display: flex;
       justify-content: space-around;
-margin-top: 100px;
+      margin-top: 100px;
+
       .intro-item {
         flex: 1;
-
+        >h3 {
+          color: $primary;
+        }
         >p {
           font-size: 13px;
           margin-top: 12px;
