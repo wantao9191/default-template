@@ -6,8 +6,28 @@
       <h3>基于 Vue.js 3 的个人级 UI 组件库和前端解决方案，
         为无数开发者服务</h3>
       <div class="btns">
-        <a href="javaScript:;">开始使用</a>
-        <a href="javaScript:;">GtiHub</a>
+        <a href="/#/doc">
+          <tg-icon icon="tg-paper-plane" size="21" style="margin-right:4px"></tg-icon>
+          开始使用
+        </a>
+        <a href="https://github.com/wantao9191/default-template" class="default">
+          <tg-icon icon="tg-rocket" size="21" style="margin-right:4px"></tg-icon>
+          GtiHub
+        </a>
+      </div>
+      <div class="intros">
+        <div class="intro-item">
+          <h3>易用</h3>
+          <p>已经会了Vue？即刻阅读指南开始构建应用！</p>
+        </div>
+        <div class="intro-item">
+          <h3>灵活</h3>
+          <p>按需加载，全部加载，由你掌控！</p>
+        </div>
+        <div class="intro-item">
+          <h3>高效</h3>
+          <p>样式、功能无需操心，CV操作，自在自由！</p>
+        </div>
       </div>
     </div>
   </div>
@@ -34,10 +54,9 @@ export default {
     width: 80%;
     max-width: 1080px;
     text-align: center;
-
+    padding-top: 160px;
     h3 {
       font-size: #999;
-      margin-top: 24px;
     }
 
     >.title {
@@ -54,7 +73,7 @@ export default {
     }
 
     .btns {
-      margin-top: 48px;
+      margin-top: 96px;
 
       a {
         height: 40px;
@@ -65,7 +84,28 @@ export default {
         color: #fff;
         border-radius: 4px;
         margin: 0 8px;
+
+        &.default {
+          background: #fff;
+          color: #333;
+          border: 1px solid #ddd;
+        }
       }
+    }
+
+    .intros {
+      display: flex;
+      justify-content: space-around;
+margin-top: 100px;
+      .intro-item {
+        flex: 1;
+
+        >p {
+          font-size: 13px;
+          margin-top: 12px;
+        }
+      }
+
     }
   }
 }

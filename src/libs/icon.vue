@@ -1,5 +1,6 @@
 <template>
-    <i class="iconfont" :class="`icon-${icon}`" :style="{ 'font-size': size + 'px' }"></i>
+        <i class="iconfont" :class="`icon-${icon}`" :style="{ 'font-size': size + 'px' }"></i>
+        <slot></slot>
 </template>
 <script>
 export default {
@@ -14,7 +15,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 i {
-    vertical-align: middle;
+    vertical-align: bottom;
     color: inherit;
 }
 </style>
