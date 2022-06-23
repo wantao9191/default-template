@@ -33,7 +33,12 @@ const routes = [
             {
                 path: 'button', name: 'button',
                 component: () => import('@/views/index/doc/demo/buttonDemo.vue'),
-            }
+            },
+            {
+                path: 'input', name: 'input',
+                component: () => import('@/views/index/doc/demo/inputDemo.vue'),
+            },
+
         ]
     },
     {

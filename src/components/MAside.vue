@@ -39,6 +39,7 @@ export default {
           { label: "Dialog 模态框", path: "/doc/dialog" },
           { label: "Switch 开关", path: "/doc/switch" },
           { label: "Button 按钮", path: "/doc/button" },
+          { label: "Input 输入框", path: "/doc/input" },
         ],
       },
     ]);
