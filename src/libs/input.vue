@@ -1,12 +1,18 @@
 <template>
   <div class="tg-input" :class="`tg-input-${size}`">
+    <span class="prefixIcon" v-if="prefixIcon">
+      <tg-icon :icon="`tg-${prefixIcon}`"></tg-icon>
+    </span>
     <input
       :type="intputType"
       v-model="inputValue"
       @input="onInput"
       :disabled="disabled"
       :placeholder="placeholder"
-      :class="{ 'tg-input-suffix': clearable || type === 'password' }"
+      :class="{
+        'tg-input-suffix': clearable || type === 'password' || suffixIcon,
+        'tg-input-prefix': prefixIcon,
+      }"
     />
     <span
       class="clearable"
@@ -25,6 +31,9 @@
         size="18"
       ></tg-icon>
     </span>
+    <span class="clearable" v-if="suffixIcon">
+      <tg-icon :icon="`tg-${suffixIcon}`"></tg-icon>
+    </span>
   </div>
 </template>
 <script>
@@ -38,6 +47,8 @@ export default {
     placeholder: { type: String, default: "请输入" },
     clearable: { type: Boolean, default: false },
     showPassword: { type: Boolean, default: false },
+    suffixIcon: { type: String, default: "" },
+    prefixIcon: { type: String, default: "" },
   },
   setup(props, context) {
     const inputValue = ref(props.value);
@@ -105,6 +116,15 @@ export default {
   .clearable {
     position: absolute;
     right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-weight: bolder;
+    cursor: pointer;
+  }
+  .prefixIcon {
+    position: absolute;
+    left: 6px;
     top: 50%;
     transform: translateY(-50%);
     color: #999;
