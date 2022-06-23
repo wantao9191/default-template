@@ -15,7 +15,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 i {
-    vertical-align: bottom;
+    // vertical-align: middle;
     color: inherit;
 }
 </style>
