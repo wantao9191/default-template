@@ -47,9 +47,9 @@ export default {
     ]);
     
     const onClick = (e) => {
-      // if (e.path) { router.replace(e.path); } else {
-      //   e.slider = !e.slider
-      // }
+      if (e.path) { router.replace(e.path); } else {
+        // e.slider = !e.slider
+      }
 
     };
     return { menus, onClick };
