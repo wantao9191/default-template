@@ -38,7 +38,10 @@ const routes = [
                 path: 'input', name: 'input',
                 component: () => import('@/views/index/doc/demo/inputDemo.vue'),
             },
-
+            {
+                path: 'radio', name: 'radio',
+                component: () => import('@/views/index/doc/demo/radioDemo.vue'),
+            },
         ]
     },
     {

@@ -40,6 +40,7 @@ export default {
           { label: "Switch 开关", path: "/doc/switch" },
           { label: "Button 按钮", path: "/doc/button" },
           { label: "Input 输入框", path: "/doc/input" },
+          { label: "Radio 单选框", path: "/doc/radio" },
         ],
       },
     ]);
