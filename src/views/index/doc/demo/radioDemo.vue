@@ -68,6 +68,45 @@
         </a>
     </div>
     </div>
+    <!-- 不同尺寸 -->
+    <div class="demo-block">
+        <div class="demo-component">
+            <tg-radio-group v-model:value="radioData2.value" size="mini">
+                <tg-radio value="选项一"></tg-radio>
+                <tg-radio value="选项二"></tg-radio>
+            </tg-radio-group>
+            <br>
+            <tg-radio-group v-model:value="radioData2.value" size="small" style="margin:12px 0">
+                <tg-radio value="选项一"></tg-radio>
+                <tg-radio value="选项二"></tg-radio>
+            </tg-radio-group>
+            <br>    
+            <tg-radio-group v-model:value="radioData2.value" size="large">
+                <tg-radio value="选项一"></tg-radio>
+                <tg-radio value="选项二"></tg-radio>
+            </tg-radio-group>
+        </div>
+        <div class="demo-desc">
+            <span class="desc-title">不同尺寸</span>
+            <div class="desc-text"><code>size</code> 属性可以用来控制单选框的大小</div>
+        </div>
+        <div class="demo-code" v-show="radioData2.visible">
+            <code class="code-bg">
+          <div class="code-text">
+             传入 <code>disbaled</code> <code>Boolean</code>的属性控制单选框状态
+        </div>
+        <m-code :value="radioData2.code"></m-code>
+        </code>
+    </div>
+    <div class="demo-btns">
+        <a href="javaScript:;">
+            <tg-icon icon="tg-copy"></tg-icon>
+        </a>
+        <a href="javaScript:;" @click="toggleDemoCode2">
+            <tg-icon icon="tg-code" size="21"></tg-icon>
+        </a>
+    </div>
+    </div>
     </div>
 </template>
 <script>
@@ -84,7 +123,7 @@ export default {
         const toggleDemoCode = () => {
             radioData.visible = !radioData.visible;
         };
-const radioData1= reactive({
+        const radioData1 = reactive({
             value: '选项一',
             code: '<tg-radio-group v-model:value="radio" disabled>,2&<tg-radio label="选项一" value="1"></tg-radio>,2&<tg-radio label="选项二" value="2"></tg-radio>,</tg-radio-group>',
             visible: false,
@@ -92,7 +131,15 @@ const radioData1= reactive({
         const toggleDemoCode1 = () => {
             radioData1.visible = !radioData1.visible;
         };
-        return { radioData, toggleDemoCode,radioData1 ,toggleDemoCode1}
+        const radioData2 = reactive({
+            value: '选项一',
+            code: '<tg-radio-group v-model:value="radio" size="mini">,2&<tg-radio label="选项一" value="1"></tg-radio>,2&<tg-radio label="选项二" value="2"></tg-radio>,</tg-radio-group>,<tg-radio-group v-model:value="radio" size="small">,2&<tg-radio label="选项一" value="1"></tg-radio>,2&<tg-radio label="选项二" value="2"></tg-radio>,</tg-radio-group>,<tg-radio-group v-model:value="radio" size="large">,2&<tg-radio label="选项一" value="1"></tg-radio>,2&<tg-radio label="选项二" value="2"></tg-radio>,</tg-radio-group>',
+            visible: false,
+        });
+        const toggleDemoCode2 = () => {
+            radioData2.visible = !radioData2.visible;
+        };
+        return { radioData, toggleDemoCode, radioData1, toggleDemoCode1,radioData2 ,toggleDemoCode2}
     }
 }
 </script>

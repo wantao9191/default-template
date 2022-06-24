@@ -1,11 +1,11 @@
 <template>
-    <div class="tg-radio" :class="[`tg-radio-${icon}`, disabled]" @click="onClick">
+    <div class="tg-radio" :class="[`tg-radio-${icon}`, disabled,`tg-radio-${options.size}`]" @click="onClick">
         <tg-icon class="radio-icon" :icon="`tg-radio-button-${icon}`"></tg-icon>
         <span>{{ label || value }}</span>
     </div>
 </template>
 <script setup>
-import { computed, inject, reactive } from "vue";
+import { computed, inject, reactive, ref } from "vue";
 const props = defineProps({
     value: { type: [String, Number], default: '' },
     label: { type: [String, Number], default: '' },
@@ -22,10 +22,8 @@ const disabled = computed(() => options.disabled ? 'tg-radio-disabled' : '')
 </script>
 <style lang="scss" scoped>
 .tg-radio {
-    cursor: pointer;
-
-    
-
+    cursor: pointer;    
+    font-size: 14px;
     &+& {
         margin-left: 8px;
     }
@@ -49,6 +47,12 @@ const disabled = computed(() => options.disabled ? 'tg-radio-disabled' : '')
         .radio-icon {
             color: #888;
         }
+    }
+    &.tg-radio-mini {
+        font-size: 12px;
+    }
+    &.tg-radio-large {
+        font-size: 16px;
     }
 }
 </style>
