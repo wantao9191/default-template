@@ -41,7 +41,6 @@ export default {
     prefixIcon: { type: String, default: "" },
   },
   setup(props, { emit, slots }) {
-    console.log({ ...slots })
     const inputValue = ref(props.value);
     const intputType = ref(props.type);
     const onInput = () => {

@@ -163,6 +163,47 @@
     </a>
   </div>
   </div>
+  <!-- 不同尺寸 -->
+  <div class="demo-block">
+    <div class="demo-component">
+      <tg-input v-model:value="inputData5.value1" size="mini" prefixIcon="desktop" />
+      <tg-input v-model:value="inputData5.value2"  style="margin:12px 0" clearable>
+        <template v-slot:suffixIcon>
+          <tg-icon icon="tg-search"></tg-icon>
+        </template>
+      </tg-input>
+      <tg-input v-model:value="inputData5.value3" size="large">
+        <template v-slot:prefixIcon>
+          <tg-icon icon="tg-mail-unread"></tg-icon>
+        </template>
+        <template v-slot:suffixIcon>
+          <tg-icon icon="tg-search"></tg-icon>
+        </template>
+      </tg-input>
+    </div>
+    <div class="demo-desc">
+      <span class="desc-title">不同尺寸的输入框</span>
+      <div class="desc-text">使用 <code>size</code> 属性改变输入框大小。 除了默认大小外，还有另外两个选项：<code>large</code> , <code>small</code> 。</div>
+    </div>
+    <div class="demo-code" v-show="inputData5.visible">
+      <code class="code-bg">
+          <div class="code-text">
+            通过 <code>prefixIcon</code>和
+      <code>suffixIcon</code> 属性增加图标。另外，<code>prefix</code> 和
+      <code>suffix</code> 命名的插槽也能正常工作。
+    </div>
+    <m-code :value="inputData5.code"></m-code>
+    </code>
+  </div>
+  <div class="demo-btns">
+    <a href="javaScript:;">
+      <tg-icon icon="tg-copy"></tg-icon>
+    </a>
+    <a href="javaScript:;" @click="toggleDemoCode5">
+      <tg-icon icon="tg-code" size="21"></tg-icon>
+    </a>
+  </div>
+  </div>
   </div>
 </template>
 <script>
@@ -205,11 +246,19 @@ export default {
     };
     const inputData4 = reactive({
       value: "",
-      code: '<tg-input v-model:value="input" prefixIcon="desktop" />,<tg-input ,2&v-model:value="input" ,2&size="small" ,2&suffixIcon="search" ,/>,<tg-input ,2&v-model:value="input" ,2&size="small" ,2&prefixIcon="mail-unread" ,2&suffixIcon="search" ,/>',
+      code: '<tg-input v-model:value="input" prefixIcon="desktop" />,<tg-input ,2&v-model:value="input",2&suffixIcon="search" ,/>,<tg-input ,2&v-model:value="input",2&prefixIcon="mail-unread" ,2&suffixIcon="search" ,/>',
       visible: false,
     });
     const toggleDemoCode4 = () => {
       inputData4.visible = !inputData4.visible;
+    };
+    const inputData5 = reactive({
+      value: "",
+      code: '<tg-input v-model:value="input" prefixIcon="desktop" size="mini" />,<tg-input ,2&v-model:value="input" ,2&size="small" ,2&suffixIcon="search" ,/>,<tg-input ,2&v-model:value="input" ,2&size="large" ,2&prefixIcon="mail-unread" ,2&suffixIcon="search" ,/>',
+      visible: false,
+    });
+    const toggleDemoCode5 = () => {
+      inputData5.visible = !inputData5.visible;
     };
     const onBlur = e => {
       console.log('blur', e)
@@ -228,6 +277,8 @@ export default {
       inputData3,
       inputData4,
       toggleDemoCode4,
+      inputData5,
+      toggleDemoCode5,
       onChange,
       onBlur
     };
