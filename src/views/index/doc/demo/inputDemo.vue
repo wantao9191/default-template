@@ -24,155 +24,145 @@
           <div class="code-text">
             绑定
             <code>v-model:value</code> 到一个 <code>String</code> 类型的变量。
-          </div>
-          <m-code :value="inputData.code"></m-code>
-        </code>
       </div>
-      <div class="demo-btns">
-        <a href="javaScript:;">
-          <tg-icon icon="tg-copy"></tg-icon>
-        </a>
-        <a href="javaScript:;" @click="toggleDemoCode">
-          <tg-icon icon="tg-code" size="21"></tg-icon>
-        </a>
+      <m-code :value="inputData.code"></m-code>
+      </code>
+    </div>
+    <div class="demo-btns">
+      <a href="javaScript:;">
+        <tg-icon icon="tg-copy"></tg-icon>
+      </a>
+      <a href="javaScript:;" @click="toggleDemoCode">
+        <tg-icon icon="tg-code" size="21"></tg-icon>
+      </a>
+    </div>
+  </div>
+  <!-- 一键清空 -->
+  <div class="demo-block">
+    <div class="demo-component">
+      <tg-input v-model:value="inputData1.value" size="small" clearable />
+    </div>
+    <div class="demo-desc">
+      <span class="desc-title">一键清空</span>
+      <div class="desc-text">
+        使用 <code>clearable</code> 属性即可得到一个可一键清空的输入框
       </div>
     </div>
-    <!-- 一键清空 -->
-    <div class="demo-block">
-      <div class="demo-component">
-        <tg-input v-model:value="inputData1.value" size="small" clearable />
-      </div>
-      <div class="demo-desc">
-        <span class="desc-title">一键清空</span>
-        <div class="desc-text">
-          使用 <code>clearable</code> 属性即可得到一个可一键清空的输入框
-        </div>
-      </div>
-      <div class="demo-code" v-show="inputData1.visible">
-        <code class="code-bg">
+    <div class="demo-code" v-show="inputData1.visible">
+      <code class="code-bg">
           <div class="code-text">
             传入 <code>clearable</code> <code>Boolean</code>的属性控制清空按键
-          </div>
-          <m-code :value="inputData1.code"></m-code>
-        </code>
-      </div>
-      <div class="demo-btns">
-        <a href="javaScript:;">
-          <tg-icon icon="tg-copy"></tg-icon>
-        </a>
-        <a href="javaScript:;" @click="toggleDemoCode1">
-          <tg-icon icon="tg-code" size="21"></tg-icon>
-        </a>
+    </div>
+    <m-code :value="inputData1.code"></m-code>
+    </code>
+  </div>
+  <div class="demo-btns">
+    <a href="javaScript:;">
+      <tg-icon icon="tg-copy"></tg-icon>
+    </a>
+    <a href="javaScript:;" @click="toggleDemoCode1">
+      <tg-icon icon="tg-code" size="21"></tg-icon>
+    </a>
+  </div>
+  </div>
+  <!-- 禁用状态 -->
+  <div class="demo-block">
+    <div class="demo-component">
+      <tg-input v-model:value="inputData2.value" size="small" disabled />
+    </div>
+    <div class="demo-desc">
+      <span class="desc-title">禁用状态</span>
+      <div class="desc-text">
+        使用 <code>disabled</code> 属性即可得到一个被禁用的输入框
       </div>
     </div>
-    <!-- 禁用状态 -->
-    <div class="demo-block">
-      <div class="demo-component">
-        <tg-input v-model:value="inputData2.value" size="small" disabled />
-      </div>
-      <div class="demo-desc">
-        <span class="desc-title">禁用状态</span>
-        <div class="desc-text">
-          使用 <code>disabled</code> 属性即可得到一个被禁用的输入框
-        </div>
-      </div>
-      <div class="demo-code" v-show="inputData2.visible">
-        <code class="code-bg">
+    <div class="demo-code" v-show="inputData2.visible">
+      <code class="code-bg">
           <div class="code-text">
             传入 <code>disbaled</code> <code>Boolean</code>的属性控制输入框状态
-          </div>
-          <m-code :value="inputData2.code"></m-code>
-        </code>
-      </div>
-      <div class="demo-btns">
-        <a href="javaScript:;">
-          <tg-icon icon="tg-copy"></tg-icon>
-        </a>
-        <a href="javaScript:;" @click="toggleDemoCode2">
-          <tg-icon icon="tg-code" size="21"></tg-icon>
-        </a>
+    </div>
+    <m-code :value="inputData2.code"></m-code>
+    </code>
+  </div>
+  <div class="demo-btns">
+    <a href="javaScript:;">
+      <tg-icon icon="tg-copy"></tg-icon>
+    </a>
+    <a href="javaScript:;" @click="toggleDemoCode2">
+      <tg-icon icon="tg-code" size="21"></tg-icon>
+    </a>
+  </div>
+  </div>
+  <!-- 密码框 -->
+  <div class="demo-block">
+    <div class="demo-component">
+      <tg-input v-model:value="inputData3.value" size="small" type="password" show-password />
+    </div>
+    <div class="demo-desc">
+      <span class="desc-title">密码框</span>
+      <div class="desc-text">
+        更改 <code>type</code> 属性即可得到一个密码框，使用
+        <code>show-password</code> 属性即可得到一个可切换显示隐藏的密码框
       </div>
     </div>
-    <!-- 密码框 -->
-    <div class="demo-block">
-      <div class="demo-component">
-        <tg-input
-          v-model:value="inputData3.value"
-          size="small"
-          type="password"
-          show-password
-        />
-      </div>
-      <div class="demo-desc">
-        <span class="desc-title">密码框</span>
-        <div class="desc-text">
-          更改 <code>type</code> 属性即可得到一个密码框，使用
-          <code>show-password</code> 属性即可得到一个可切换显示隐藏的密码框
-        </div>
-      </div>
-      <div class="demo-code" v-show="inputData3.visible">
-        <code class="code-bg">
+    <div class="demo-code" v-show="inputData3.visible">
+      <code class="code-bg">
           <div class="code-text">
             传入 <code>type="password"</code> 控制输入框类型
-          </div>
-          <m-code :value="inputData3.code"></m-code>
-        </code>
-      </div>
-      <div class="demo-btns">
-        <a href="javaScript:;">
-          <tg-icon icon="tg-copy"></tg-icon>
-        </a>
-        <a href="javaScript:;" @click="toggleDemoCode3">
-          <tg-icon icon="tg-code" size="21"></tg-icon>
-        </a>
-      </div>
     </div>
-    <!-- 带图标的 -->
-    <div class="demo-block">
-      <div class="demo-component">
-        <tg-input
-          v-model:value="inputData4.value1"
-          size="small"
-          prefixIcon="desktop"
-        />
-        <tg-input
-          v-model:value="inputData4.value2"
-          size="small"
-          suffixIcon="search"
-          style="margin:12px 0"
-        />
-        <tg-input
-          v-model:value="inputData4.value3"
-          size="small"
-          prefixIcon="mail-unread"
-          suffixIcon="search"
-          @blur="onBlur"
-          @change="onChange"
-        />
-      </div>
-      <div class="demo-desc">
-        <span class="desc-title">带图标的输入框</span>
-        <div class="desc-text">带有图标标记输入类型</div>
-      </div>
-      <div class="demo-code" v-show="inputData4.visible">
-        <code class="code-bg">
+    <m-code :value="inputData3.code"></m-code>
+    </code>
+  </div>
+  <div class="demo-btns">
+    <a href="javaScript:;">
+      <tg-icon icon="tg-copy"></tg-icon>
+    </a>
+    <a href="javaScript:;" @click="toggleDemoCode3">
+      <tg-icon icon="tg-code" size="21"></tg-icon>
+    </a>
+  </div>
+  </div>
+  <!-- 带图标的 -->
+  <div class="demo-block">
+    <div class="demo-component">
+      <tg-input v-model:value="inputData4.value1" size="small" prefixIcon="desktop" />
+      <tg-input v-model:value="inputData4.value2" size="small" style="margin:12px 0" clearable>
+        <template v-slot:suffixIcon>
+          <tg-icon icon="tg-search"></tg-icon>
+        </template>
+      </tg-input>
+      <tg-input v-model:value="inputData4.value3" size="small">
+        <template v-slot:prefixIcon>
+          <tg-icon icon="tg-mail-unread"></tg-icon>
+        </template>
+        <template v-slot:suffixIcon>
+          <tg-icon icon="tg-search"></tg-icon>
+        </template>
+      </tg-input>
+    </div>
+    <div class="demo-desc">
+      <span class="desc-title">带图标的输入框</span>
+      <div class="desc-text">带有图标标记输入类型</div>
+    </div>
+    <div class="demo-code" v-show="inputData4.visible">
+      <code class="code-bg">
           <div class="code-text">
             通过 <code>prefixIcon</code>和
-            <code>suffixIcon</code> 属性增加图标。另外，<code>prefix</code> 和
-            <code>suffix</code> 命名的插槽也能正常工作。
-          </div>
-          <m-code :value="inputData4.code"></m-code>
-        </code>
-      </div>
-      <div class="demo-btns">
-        <a href="javaScript:;">
-          <tg-icon icon="tg-copy"></tg-icon>
-        </a>
-        <a href="javaScript:;" @click="toggleDemoCode4">
-          <tg-icon icon="tg-code" size="21"></tg-icon>
-        </a>
-      </div>
+      <code>suffixIcon</code> 属性增加图标。另外，<code>prefix</code> 和
+      <code>suffix</code> 命名的插槽也能正常工作。
     </div>
+    <m-code :value="inputData4.code"></m-code>
+    </code>
+  </div>
+  <div class="demo-btns">
+    <a href="javaScript:;">
+      <tg-icon icon="tg-copy"></tg-icon>
+    </a>
+    <a href="javaScript:;" @click="toggleDemoCode4">
+      <tg-icon icon="tg-code" size="21"></tg-icon>
+    </a>
+  </div>
+  </div>
   </div>
 </template>
 <script>
@@ -221,10 +211,10 @@ export default {
     const toggleDemoCode4 = () => {
       inputData4.visible = !inputData4.visible;
     };
-    const onBlur = e=>{
-      console.log('blur',e)
+    const onBlur = e => {
+      console.log('blur', e)
     }
-    const onChange = e=>{
+    const onChange = e => {
       console.log(e)
     }
     return {

@@ -1,47 +1,33 @@
 <template>
   <div class="tg-input" :class="`tg-input-${size}`">
-    <span class="prefixIcon" v-if="prefixIcon">
+    <span class="prefixIcon" v-if="prefixIcon && type === 'text'">
       <tg-icon :icon="`tg-${prefixIcon}`"></tg-icon>
     </span>
-    <input
-      :type="intputType"
-      v-model="inputValue"
-      @input="onInput"
-      :disabled="disabled"
-      :placeholder="placeholder"
+    <span class="prefixIcon" v-if="!prefixIcon && type === 'text'">
+      <slot name="prefixIcon"></slot>
+    </span>
+    <input :type="intputType" v-model="inputValue" @input="onInput" :disabled="disabled" :placeholder="placeholder"
       :class="{
-        'tg-input-suffix': clearable || type === 'password' || suffixIcon,
-        'tg-input-prefix': prefixIcon,
-      }"
-      @focus="onFocus"
-      @blur="onBlur"
-      @keyup.enter="onEnter"
-    />
-    <span
-      class="clearable"
-      v-show="clearable && inputValue && type == 'text'"
-      @click="onClear"
-      :class="{hasSlots:type === 'password' || suffixIcon}"
-    >
+        'tg-input-suffix': tgInputSuffix,
+        'tg-input-prefix': tgInputPrefix,
+      }" @focus="onFocus" @blur="onBlur" @keyup.enter="onEnter" />
+    <span class="clearable" v-show="clearable && inputValue && type == 'text'" @click="onClear"
+      :class="{ hasSlots}">
       <tg-icon icon="tg-close-circle-out" size="18"></tg-icon>
     </span>
-    <span
-      class="clearable"
-      v-show="showPassword && inputValue && type === 'password'"
-      @click="onToggle"
-    >
-      <tg-icon
-        :icon="intputType == 'text' ? 'tg-eye-off' : 'tg-eye'"
-        size="18"
-      ></tg-icon>
+    <span class="clearable" v-show="showPassword && inputValue && type === 'password'" @click="onToggle">
+      <tg-icon :icon="intputType == 'text' ? 'tg-eye-off' : 'tg-eye'" size="18"></tg-icon>
     </span>
-    <span class="clearable" v-if="suffixIcon">
+    <span class="clearable" v-if="suffixIcon && type === 'text'">
       <tg-icon :icon="`tg-${suffixIcon}`"></tg-icon>
+    </span>
+    <span class="clearable" v-if="!suffixIcon && type === 'text'">
+      <slot name="suffixIcon"></slot>
     </span>
   </div>
 </template>
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 export default {
   props: {
     type: { type: String, default: "text" },
@@ -54,7 +40,8 @@ export default {
     suffixIcon: { type: String, default: "" },
     prefixIcon: { type: String, default: "" },
   },
-  setup(props, {emit}) {
+  setup(props, { emit, slots }) {
+    console.log({ ...slots })
     const inputValue = ref(props.value);
     const intputType = ref(props.type);
     const onInput = () => {
@@ -63,22 +50,27 @@ export default {
     const onClear = () => {
       inputValue.value = "";
       emit("update:value", inputValue.value);
-      emit('change',inputValue.value)
+      emit('change', inputValue.value)
     };
     const onToggle = () => {
       intputType.value = intputType.value === "text" ? "password" : "text";
     };
-    const onFocus = e=>{
-      emit('focus',e)
+    const onFocus = e => {
+      emit('focus', e)
     }
-    const onBlur = e=>{
-      emit('blur',e)
-      emit('change',inputValue.value)
+    const onBlur = e => {
+      emit('blur', e)
+      emit('change', inputValue.value)
     }
-    const onEnter =()=>{
-      emit('change',inputValue.value)
+    const onEnter = () => {
+      emit('change', inputValue.value)
     }
-    return { intputType, inputValue, onInput, onClear, onToggle,onFocus,onBlur,onEnter };
+    return {
+      intputType, inputValue, onInput, onClear, onToggle, onFocus, onBlur, onEnter,
+      tgInputSuffix: computed(() => props.clearable || props.type === 'password' || props.suffixIcon||slots.suffixIcon),
+      tgInputPrefix:computed(()=>props.prefixIcon||slots.prefixIcon),
+      hasSlots:computed(()=>props.type === 'password' || props.suffixIcon||slots.suffixIcon)
+    };
   },
 };
 </script>
@@ -87,24 +79,30 @@ export default {
   border: 1px solid #ddd;
   border-radius: 4px;
   position: relative;
+
   input {
     border: none;
     width: 100%;
     border-radius: 4px;
     font-size: 13px;
+
     &:focus {
       outline: 1px solid $primary;
     }
+
     &[type="password"]::-ms-reveal {
       display: none;
     }
+
     &:disabled {
       cursor: not-allowed;
       user-select: none;
     }
+
     &.tg-input-suffix {
       padding-right: 28px !important;
     }
+
     &.tg-input-prefix {
       padding-left: 28px !important;
     }
@@ -136,10 +134,12 @@ export default {
     color: #999;
     font-weight: bolder;
     cursor: pointer;
+
     &.hasSlots {
       right: 24px;
     }
   }
+
   .prefixIcon {
     position: absolute;
     left: 6px;
