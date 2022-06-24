@@ -7,9 +7,9 @@
             <tg-icon icon="tg-disc" size="18"></tg-icon>
             {{ m.label }}
           </span>
-          <tg-icon :icon="`tg-arrow-${m.slider ? 'forward' : 'down'}`"></tg-icon>
+          <!-- <tg-icon :icon="`tg-arrow-${m.slider ? 'forward' : 'down'}`"></tg-icon> -->
         </div>
-        <div class="menu-child" v-if="m.children && m.slider">
+        <div class="menu-child" >
           <ul>
             <li v-for="(c, n) in m.children" :key="n" @click.stop="onClick(c)"
               :class="{ active: $route.path == c.path }">
@@ -41,14 +41,15 @@ export default {
           { label: "Button 按钮", path: "/doc/button" },
           { label: "Input 输入框", path: "/doc/input" },
           { label: "Radio 单选框", path: "/doc/radio" },
+          { label: "Checkbox 多选框", path: "/doc/checkbox" },
         ],
       },
     ]);
     
     const onClick = (e) => {
-      if (e.path) { router.replace(e.path); } else {
-        e.slider = !e.slider
-      }
+      // if (e.path) { router.replace(e.path); } else {
+      //   e.slider = !e.slider
+      // }
 
     };
     return { menus, onClick };
