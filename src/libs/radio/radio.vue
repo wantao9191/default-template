@@ -1,5 +1,5 @@
 <template>
-    <div class="tg-radio" :class="[`tg-radio-${icon}`]" @click="onClick">
+    <div class="tg-radio" :class="[`tg-radio-${icon}`, disabled]" @click="onClick">
         <tg-icon class="radio-icon" :icon="`tg-radio-button-${icon}`"></tg-icon>
         <span>{{ label || value }}</span>
     </div>
@@ -13,16 +13,18 @@ const props = defineProps({
 const options = reactive(inject('options'))
 const update = inject('update')
 const onClick = () => {
+    if (options.disabled) return
     options.data = props.value || props.label
     update(props.value || props.label)
 }
 const icon = computed(() => options.data && options.data === props.value || !props.value && options.data && options.data === props.label ? 'on' : 'off')
-
+const disabled = computed(() => options.disabled ? 'tg-radio-disabled' : '')
 </script>
 <style lang="scss" scoped>
 .tg-radio {
-    display: inline-block;
     cursor: pointer;
+
+    
 
     &+& {
         margin-left: 8px;
@@ -38,6 +40,14 @@ const icon = computed(() => options.data && options.data === props.value || !pro
 
         .radio-icon {
             color: inherit;
+        }
+    }
+    &.tg-radio-disabled {
+        cursor: not-allowed;
+        color: #888;
+
+        .radio-icon {
+            color: #888;
         }
     }
 }

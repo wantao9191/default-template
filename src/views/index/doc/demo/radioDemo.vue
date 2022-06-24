@@ -13,8 +13,8 @@
         <div class="demo-block">
             <div class="demo-component">
                 <tg-radio-group v-model:value="radioData.value">
-                    <tg-radio label="选项一" value="1"></tg-radio>
-                    <tg-radio label="选项二" value="2"></tg-radio>
+                    <tg-radio value="选项一"></tg-radio>
+                    <tg-radio value="选项二"></tg-radio>
                 </tg-radio-group>
             </div>
             <div class="demo-desc">
@@ -24,7 +24,8 @@
             <div class="demo-code" v-show="radioData.visible">
                 <code class="code-bg">
           <div class="code-text">
-            要使用 <code>Radio</code>  组件，只需要设置 <code>v-model:value</code> 绑定变量， 选中意味着变量的值为相应 <code>Radio Value</code> 属性的值，<code>value</code> 可以是 <code>String</code> 、<code>Number</code>。
+            要使用 <code>Radio</code> 组件，只需要设置 <code>v-model:value</code> 绑定变量， 选中意味着变量的值为相应 <code>Radio Value</code>
+                属性的值，<code>value</code> 可以是 <code>String</code> 、<code>Number</code>。
             </div>
             <m-code :value="radioData.code"></m-code>
             </code>
@@ -38,6 +39,35 @@
             </a>
         </div>
     </div>
+    <!-- 禁用状态 -->
+    <div class="demo-block">
+        <div class="demo-component">
+            <tg-radio-group v-model:value="radioData1.value" disabled>
+                <tg-radio value="选项一"></tg-radio>
+                <tg-radio value="选项二"></tg-radio>
+            </tg-radio-group>
+        </div>
+        <div class="demo-desc">
+            <span class="desc-title">禁用状态</span>
+            <div class="desc-text"><code>disabled</code> 属性可以用来控制单选框的禁用状态</div>
+        </div>
+        <div class="demo-code" v-show="radioData1.visible">
+            <code class="code-bg">
+          <div class="code-text">
+             传入 <code>disbaled</code> <code>Boolean</code>的属性控制单选框状态
+        </div>
+        <m-code :value="radioData1.code"></m-code>
+        </code>
+    </div>
+    <div class="demo-btns">
+        <a href="javaScript:;">
+            <tg-icon icon="tg-copy"></tg-icon>
+        </a>
+        <a href="javaScript:;" @click="toggleDemoCode1">
+            <tg-icon icon="tg-code" size="21"></tg-icon>
+        </a>
+    </div>
+    </div>
     </div>
 </template>
 <script>
@@ -47,15 +77,22 @@ export default {
     components: { MCode },
     setup() {
         const radioData = reactive({
-            value: '1',
+            value: '选项一',
             code: '<tg-radio-group v-model:value="radio">,2&<tg-radio label="选项一" value="1"></tg-radio>,2&<tg-radio label="选项二" value="2"></tg-radio>,</tg-radio-group>',
             visible: false,
         });
         const toggleDemoCode = () => {
             radioData.visible = !radioData.visible;
         };
-
-        return { radioData, toggleDemoCode }
+const radioData1= reactive({
+            value: '选项一',
+            code: '<tg-radio-group v-model:value="radio" disabled>,2&<tg-radio label="选项一" value="1"></tg-radio>,2&<tg-radio label="选项二" value="2"></tg-radio>,</tg-radio-group>',
+            visible: false,
+        });
+        const toggleDemoCode1 = () => {
+            radioData1.visible = !radioData1.visible;
+        };
+        return { radioData, toggleDemoCode,radioData1 ,toggleDemoCode1}
     }
 }
 </script>
