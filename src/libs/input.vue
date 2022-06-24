@@ -13,11 +13,15 @@
         'tg-input-suffix': clearable || type === 'password' || suffixIcon,
         'tg-input-prefix': prefixIcon,
       }"
+      @focus="onFocus"
+      @blur="onBlur"
+      @keyup.enter="onEnter"
     />
     <span
       class="clearable"
       v-show="clearable && inputValue && type == 'text'"
       @click="onClear"
+      :class="{hasSlots:type === 'password' || suffixIcon}"
     >
       <tg-icon icon="tg-close-circle-out" size="18"></tg-icon>
     </span>
@@ -50,20 +54,31 @@ export default {
     suffixIcon: { type: String, default: "" },
     prefixIcon: { type: String, default: "" },
   },
-  setup(props, context) {
+  setup(props, {emit}) {
     const inputValue = ref(props.value);
     const intputType = ref(props.type);
     const onInput = () => {
-      context.emit("update:value", inputValue.value);
+      emit("update:value", inputValue.value);
     };
     const onClear = () => {
       inputValue.value = "";
-      context.emit("update:value", inputValue.value);
+      emit("update:value", inputValue.value);
+      emit('change',inputValue.value)
     };
     const onToggle = () => {
       intputType.value = intputType.value === "text" ? "password" : "text";
     };
-    return { intputType, inputValue, onInput, onClear, onToggle };
+    const onFocus = e=>{
+      emit('focus',e)
+    }
+    const onBlur = e=>{
+      emit('blur',e)
+      emit('change',inputValue.value)
+    }
+    const onEnter =()=>{
+      emit('change',inputValue.value)
+    }
+    return { intputType, inputValue, onInput, onClear, onToggle,onFocus,onBlur,onEnter };
   },
 };
 </script>
@@ -121,6 +136,9 @@ export default {
     color: #999;
     font-weight: bolder;
     cursor: pointer;
+    &.hasSlots {
+      right: 24px;
+    }
   }
   .prefixIcon {
     position: absolute;
@@ -130,6 +148,7 @@ export default {
     color: #999;
     font-weight: bolder;
     cursor: pointer;
+
   }
 }
 </style>

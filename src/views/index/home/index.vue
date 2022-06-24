@@ -75,7 +75,6 @@ export default {
 
     .btns {
       margin-top: 96px;
-
       a {
         height: 40px;
         line-height: 40px;
@@ -85,7 +84,6 @@ export default {
         color: #fff;
         border-radius: 4px;
         margin: 0 8px;
-
         &.default {
           background: #fff;
           color: #333;
@@ -93,7 +91,7 @@ export default {
         }
 
         span {
-          vertical-align: baseline;
+          vertical-align: top;
         }
       }
     }

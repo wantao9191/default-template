@@ -99,7 +99,6 @@
         <tg-input
           v-model:value="inputData3.value"
           size="small"
-          prefixIcon="desktop"
           type="password"
           show-password
         />
@@ -139,13 +138,16 @@
         <tg-input
           v-model:value="inputData4.value2"
           size="small"
-          suffixIcon="desktop"
+          suffixIcon="search"
+          style="margin:12px 0"
         />
         <tg-input
           v-model:value="inputData4.value3"
           size="small"
-          prefixIcon="desktop"
-          suffixIcon="desktop"
+          prefixIcon="mail-unread"
+          suffixIcon="search"
+          @blur="onBlur"
+          @change="onChange"
         />
       </div>
       <div class="demo-desc">
@@ -213,12 +215,18 @@ export default {
     };
     const inputData4 = reactive({
       value: "",
-      code: '<tg-input v-model:value="input"></tg-input>',
+      code: '<tg-input v-model:value="input" prefixIcon="desktop" />,<tg-input ,2&v-model:value="input" ,2&size="small" ,2&suffixIcon="search" ,/>,<tg-input ,2&v-model:value="input" ,2&size="small" ,2&prefixIcon="mail-unread" ,2&suffixIcon="search" ,/>',
       visible: false,
     });
     const toggleDemoCode4 = () => {
       inputData4.visible = !inputData4.visible;
     };
+    const onBlur = e=>{
+      console.log('blur',e)
+    }
+    const onChange = e=>{
+      console.log(e)
+    }
     return {
       toggleDemoCode1,
       inputData,
@@ -230,6 +238,8 @@ export default {
       inputData3,
       inputData4,
       toggleDemoCode4,
+      onChange,
+      onBlur
     };
   },
 };
