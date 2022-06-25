@@ -6,11 +6,11 @@
     <span class="prefixIcon" v-if="!prefixIcon && type === 'text'">
       <slot name="prefixIcon"></slot>
     </span>
-    <input :type="intputType" v-model="inputValue" @input="onInput" :disabled="disabled" :placeholder="placeholder"
+    <input :type="intputType" :readonly="readonly" v-model="inputValue" @input="onInput" :disabled="disabled" :placeholder="placeholder"
       :class="{
         'tg-input-suffix': tgInputSuffix,
         'tg-input-prefix': tgInputPrefix,
-      }" @focus="onFocus" @blur="onBlur" @keyup.enter="onEnter" />
+      }"  @focus="onFocus" @blur="onBlur" @keyup.enter="onEnter" />
     <span class="clearable" v-show="clearable && inputValue && type == 'text'" @click="onClear"
       :class="{ hasSlots}">
       <tg-icon icon="tg-close-circle-out" size="18"></tg-icon>
@@ -27,7 +27,7 @@
   </div>
 </template>
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, toRef } from "vue";
 export default {
   props: {
     type: { type: String, default: "text" },
@@ -39,9 +39,10 @@ export default {
     showPassword: { type: Boolean, default: false },
     suffixIcon: { type: String, default: "" },
     prefixIcon: { type: String, default: "" },
+    readonly:{type: Boolean, default: false}
   },
   setup(props, { emit, slots }) {
-    const inputValue = ref(props.value);
+    const inputValue = toRef(props,'value');
     const intputType = ref(props.type);
     const onInput = () => {
       emit("update:value", inputValue.value);

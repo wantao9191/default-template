@@ -42,6 +42,7 @@ export default {
           { label: "Input 输入框", path: "/doc/input" },
           { label: "Radio 单选框", path: "/doc/radio" },
           { label: "Checkbox 多选框", path: "/doc/checkbox" },
+          { label: "Select 下拉框", path: "/doc/select" },
         ],
       },
     ]);

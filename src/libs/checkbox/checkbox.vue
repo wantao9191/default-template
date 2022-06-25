@@ -1,5 +1,6 @@
 <template>
-    <div class="tg-checkbox" :class="[`tg-checkbox${icon}`, disabledComputed, `tg-checkbox-${options && options.size||size}`]"
+    <div class="tg-checkbox"
+        :class="[`tg-checkbox${icon}`, disabledComputed, `tg-checkbox-${options && options.size || size}`]"
         @click="onClick">
         <tg-icon class="checkbox-icon" :icon="`tg${icon}`" size="18"></tg-icon>
         <span class="tg-checkbox-label">{{ label || value }}</span>
@@ -11,16 +12,16 @@ const props = defineProps({
     value: { type: [String, Number, Boolean], default: '' },
     label: { type: [String, Number], default: '' },
     disabled: { type: Boolean, default: false },
-    size:{type:String,default:'small'}
+    size: { type: String, default: 'small' }
 })
-let options = inject('options',null)
-if(options) options = reactive(options)
-const update = inject('update',()=>{})
-const emits = defineEmits(['update:value','change'])
+let options = inject('options', null)
+// if(options) options = reactive(options)
+const update = inject('update', () => { })
+const emits = defineEmits(['update:value', 'change'])
 const onClick = () => {
     if (!options) {
         emits('update:value', !props.value)
-        emits('change',!props.value)
+        emits('change', !props.value)
         return
     }
     if (options.disabled || props.disabled) return
@@ -33,10 +34,10 @@ const onClick = () => {
     }
     update(options.data)
 }
-const icon = computed(() => { 
-    if(options) {
-       return options.data && options.data.includes(props.value)||!props.value && options.data && options.data.includes(props.label)? '-square' : '-square-outline'
-    }else {
+const icon = computed(() => {
+    if (options) {
+        return options.data && options.data.includes(props.value) || !props.value && options.data && options.data.includes(props.label) ? '-square' : '-square-outline'
+    } else {
         return props.value ? '-square' : '-square-outline'
     }
 })
@@ -47,6 +48,7 @@ const disabledComputed = computed(() => options && options.disabled || props.dis
     cursor: pointer;
     font-size: 14px;
     display: inline-flex;
+
     &+& {
         margin-left: 8px;
     }

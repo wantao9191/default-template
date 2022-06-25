@@ -12,7 +12,14 @@
         <!-- 基本用法 -->
         <div class="demo-block">
             <div class="demo-component">
-                <tg-checkbox v-model:value="radioData3.value" label="选项一" ></tg-checkbox>
+                <tg-checkbox v-model:value="radioData3.value" label="选项1" ></tg-checkbox>
+                <tg-checkbox v-model:value="radioData3.value1" label="选项2" ></tg-checkbox>
+                <br>
+                <tg-checkbox v-model:value="radioData3.value2" label="选项3" style="margin: 12px 0;" ></tg-checkbox>
+                <tg-checkbox v-model:value="radioData3.value3" label="选项4" ></tg-checkbox>
+                <br>
+                <tg-checkbox v-model:value="radioData3.value4" label="选项5" ></tg-checkbox>
+                <tg-checkbox v-model:value="radioData3.value5" label="选项6" ></tg-checkbox>
             </div>
             <div class="demo-desc">
                 <span class="desc-title">基本用法</span>
@@ -169,6 +176,11 @@ export default {
         };
         const radioData3 = reactive({
             value: false,
+            value1: false,
+            value2: false,
+            value3: false,
+            value4: false,
+            value5: false,
             code: '',
             visible: false,
         })

@@ -7,6 +7,8 @@ import Radio from './radio/radio.vue'
 import RadioGroup from './radio/radioGroup.vue'
 import Checkbox from './checkbox/checkbox.vue'
 import CheckboxGroup from './checkbox/checkboxGroup.vue'
+import Select from './select/select.vue'
+import Option from './select/option.vue'
 function libs(Vue) {
     Vue.component('tg-dialog', Dialog)
     Vue.component('tg-button', Button)
@@ -17,5 +19,7 @@ function libs(Vue) {
     Vue.component('tg-radio', Radio)
     Vue.component('tg-checkbox-group', CheckboxGroup)
     Vue.component('tg-checkbox', Checkbox)
+    Vue.component('tg-select', Select)
+    Vue.component('tg-option', Option)
 }
 export default libs

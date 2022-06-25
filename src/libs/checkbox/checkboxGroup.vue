@@ -16,7 +16,7 @@ const onUpdate = e => {
     emit('update:value', e)
     emit('change', e)
 }
-provide('options', { data: value.value, disabled: props.disabled, size: props.size })
+provide('options', { data:props.value, disabled: props.disabled, size: props.size })
 provide('update', onUpdate)
 </script>
 <style lang="scss" scoped>
