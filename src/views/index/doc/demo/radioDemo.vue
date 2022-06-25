@@ -46,6 +46,11 @@
                 <tg-radio value="选项一"></tg-radio>
                 <tg-radio value="选项二"></tg-radio>
             </tg-radio-group>
+            <br>
+            <tg-radio-group v-model:value="radioData1.value"  style="margin-top:12px">
+                <tg-radio value="选项一" disabled></tg-radio>
+                <tg-radio value="选项二" disabled></tg-radio>
+            </tg-radio-group>
         </div>
         <div class="demo-desc">
             <span class="desc-title">禁用状态</span>
@@ -125,7 +130,7 @@ export default {
         };
         const radioData1 = reactive({
             value: '选项一',
-            code: '<tg-radio-group v-model:value="radio" disabled>,2&<tg-radio label="选项一" value="1"></tg-radio>,2&<tg-radio label="选项二" value="2"></tg-radio>,</tg-radio-group>',
+            code: '<tg-radio-group v-model:value="radio" disabled>,2&<tg-radio label="选项一" value="1"></tg-radio>,2&<tg-radio label="选项二" value="2"></tg-radio>,</tg-radio-group>,<tg-radio-group v-model:value="radio">,2&<tg-radio label="选项一" value="1" disabled></tg-radio>,2&<tg-radio label="选项二" value="2" disabled></tg-radio>,</tg-radio-group>',
             visible: false,
         });
         const toggleDemoCode1 = () => {
