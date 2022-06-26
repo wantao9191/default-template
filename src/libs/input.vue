@@ -10,7 +10,7 @@
       :placeholder="placeholder" :class="{
         'tg-input-suffix': tgInputSuffix,
         'tg-input-prefix': tgInputPrefix,
-      }" @focus="onFocus" @blur="onBlur" @keyup.enter="onEnter" />
+      }" @focus="onFocus" @blur="onBlur" @keyup.enter="onEnter"  ref="input"/>
     <span class="clearable" v-show="clearable && inputModel && type == 'text'" @click="onClear" :class="{ hasSlots }">
       <tg-icon icon="tg-close-circle-out" size="18"></tg-icon>
     </span>
@@ -40,6 +40,7 @@ const props = defineProps({
   readonly: { type: Boolean, default: false }
 })
 const slots = useSlots()
+const input = ref('')
 const emit = defineEmits(["update:value", 'change', 'focus', 'blur','input'])
 const propsValue = ref(props.value)
 const inputModel = computed({
@@ -71,9 +72,13 @@ const onBlur = e => {
 const onEnter = () => {
   emit('change', propsValue.value)
 }
+const blur = ()=>{
+  input.value.blur()
+}
 const tgInputSuffix = computed(() => props.clearable || props.type === 'password' || props.suffixIcon || slots.suffixIcon)
 const tgInputPrefix = computed(() => props.prefixIcon || slots.prefixIcon)
 const hasSlots = computed(() => props.type === 'password' || props.suffixIcon || slots.suffixIcon)
+defineExpose({blur})
 </script>
 <style lang="scss" scoped>
 .tg-input {

@@ -13,6 +13,8 @@
     <!-- 基本用法 -->
     <div class="demo-block">
       <div class="demo-component">
+        {{inputData.value}}
+        <br>
         <tg-date-picker v-model:value="inputData.value" size="small" />
       </div>
       <div class="demo-desc">

@@ -1,14 +1,14 @@
 <template>
     <div class="tg-date-picker">
-        <tg-input class="tg-select-input" v-model:value="propValue" :placeholder="placeholder" :size="size"
-            @focus="onFocus" :disabled="disabled" @blur="onBlur" readonly prefixIcon='calendar'>
+        <tg-input class="tg-date-input" v-model:value="propValue" :placeholder="placeholder" :size="size"
+            @focus="onFocus" :disabled="disabled" @blur="onBlur" prefixIcon='calendar' ref="inputRef">
             <template #suffixIcon>
                 <tg-icon :icon="icon" class="arrow" @click="onToggle"></tg-icon>
-                <tg-icon icon="tg-close-circle-out" class="clear" v-if="clearable" @click="onClear"></tg-icon>
+                <tg-icon icon="tg-close-circle-out" class="clear" @click="onClear"></tg-icon>
             </template>
         </tg-input>
-        <div class="tg-picker-dropdown shadow" v-if="visible" @mousedown.prevent>
-            <div class="picker-tools">
+        <div class="tg-picker-dropdown shadow" v-if="visible">
+            <div class="picker-tools"  @mousedown.prevent>
                 <span class="tool-methods">
                     <tg-icon icon="tg-arrow-round-back" size="20" class="arrow-round"></tg-icon>
                     <tg-icon icon="tg-arrow-back" size="20" class="arrow-round"></tg-icon>
@@ -27,7 +27,10 @@
                     <div class="picker-header">
                         <span>{{ w.label }}</span>
                     </div>
-                    <div class="picker-day" v-for="(d, n) in w.days" :key="n">{{ d.day }}</div>
+                    <div class="picker-day" :class="{ 'out-day': d.month != month }" v-for="(d, n) in w.days" :key="n"  @mousedown.prevent
+                        @click="onDayClick(d)">
+                        <span :class="{ active: propValue === `${d.year}-${d.month}-${d.day}` }">{{ d.day }}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,31 +46,37 @@ const props = defineProps({
     clearable: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
 })
-const visible = ref(true)
+const inputRef = ref('')
+const emit = defineEmits(['update:value', 'change'])
+const visible = ref(false)
 const propValue = ref(props.value)
 const date = new Date()
 const year = ref(date.getFullYear())
 const month = ref(date.getMonth() + 1)
 const day = date.getDate()
 const days = new Date(year.value, month.value, 0).getDate()
-const weeks = reactive(new datePicker({day:days,year:year.value,month:month.value}).calendar)
-const update = (e) => {
-    emit('update:value', e)
-    emit('change', 'e')
-}
+const weeks = reactive(new datePicker({ day: days, year: year.value, month: month.value }).calendar)
 const onFocus = () => {
     visible.value = true
 }
 const onClear = () => {
     emit('update:value', '')
     emit('change', '')
+    propValue.value = ''
 }
 const onBlur = () => {
-    // visible.value = false
+    visible.value = false
 }
 const onToggle = () => {
     if (props.disabled) return
     visible.value = !visible.value
+}
+const onDayClick = d => {
+    propValue.value = `${d.year}-${d.month}-${d.day}`
+    emit('update:value', propValue.value)
+    emit('change', propValue.value)
+    inputRef.value.blur()
+    console.log(inputRef)
 }
 const icon = computed(() => visible.value ? 'tg-arrow-up' : 'tg-arrow-down')
 </script>
@@ -80,15 +89,13 @@ const icon = computed(() => visible.value ? 'tg-arrow-up' : 'tg-arrow-down')
         display: none;
     }
 
-    &.hasClear {
-        .tg-select-input:hover {
-            .arrow {
-                display: none;
-            }
+    .tg-date-input:hover {
+        .arrow {
+            display: none;
+        }
 
-            .clear {
-                display: inline;
-            }
+        .clear {
+            display: inline;
         }
     }
 
@@ -130,15 +137,33 @@ const icon = computed(() => visible.value ? 'tg-arrow-up' : 'tg-arrow-down')
                 font-size: 13px;
 
                 .picker-header {
-                    padding: 6px;
+                    padding: 12px 6px;
+                    border-bottom: 1px solid #ddd;
+                    margin-bottom: 6px;
                 }
 
                 .picker-day {
-                    padding:12px 6px;
+                    height: 40px;
+                    line-height: 40px;
                     display: block;
                     cursor: pointer;
-                    &:hover{
+
+                    &:hover {
                         color: $primary;
+                    }
+
+                    &.out-day {
+                        color: #888;
+                    }
+
+                    .active {
+                        background: $primary;
+                        color: #fff;
+                        display: inline-block;
+                        width: 24px;
+                        height: 24px;
+                        line-height: 24px;
+                        border-radius: 50%;
                     }
                 }
             }
