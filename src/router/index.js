@@ -50,6 +50,10 @@ const routes = [
                 path: 'select', name: 'select',
                 component: () => import('@/views/index/doc/demo/selectDemo.vue'),
             },
+            {
+                path: 'datePicker', name: 'datePicker',
+                component: () => import('@/views/index/doc/demo/datePickerDemo.vue'),
+            },
         ]
     },
     {

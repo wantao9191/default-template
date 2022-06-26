@@ -43,6 +43,7 @@ export default {
           { label: "Radio 单选框", path: "/doc/radio" },
           { label: "Checkbox 多选框", path: "/doc/checkbox" },
           { label: "Select 下拉框", path: "/doc/select" },
+          { label: "DatePicker 时间选择器", path: "/doc/datePicker" },
         ],
       },
     ]);
