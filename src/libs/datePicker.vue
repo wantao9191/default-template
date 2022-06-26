@@ -8,7 +8,7 @@
             </template>
         </tg-input>
         <div class="tg-picker-dropdown shadow" v-if="visible">
-            <div class="picker-tools"  @mousedown.prevent>
+            <div class="picker-tools" @mousedown.prevent>
                 <span class="tool-methods">
                     <tg-icon icon="tg-arrow-round-back" size="20" class="arrow-round"></tg-icon>
                     <tg-icon icon="tg-arrow-back" size="20" class="arrow-round"></tg-icon>
@@ -27,8 +27,8 @@
                     <div class="picker-header">
                         <span>{{ w.label }}</span>
                     </div>
-                    <div class="picker-day" :class="{ 'out-day': d.month != month }" v-for="(d, n) in w.days" :key="n"  @mousedown.prevent
-                        @click="onDayClick(d)">
+                    <div class="picker-day" :class="{ 'out-day': d.month != month }" v-for="(d, n) in w.days" :key="n"
+                        @mousedown.prevent @click="onDayClick(d)">
                         <span :class="{ active: propValue === `${d.year}-${d.month}-${d.day}` }">{{ d.day }}</span>
                     </div>
                 </div>
@@ -43,8 +43,8 @@ const props = defineProps({
     value: { type: String, default: '' },
     placeholder: { type: String, default: '请选择' },
     size: { type: String, default: 'small' },
-    clearable: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
+    format: { type: String, default: 'YYYY-MM-DD' }
 })
 const inputRef = ref('')
 const emit = defineEmits(['update:value', 'change'])
@@ -55,7 +55,7 @@ const year = ref(date.getFullYear())
 const month = ref(date.getMonth() + 1)
 const day = date.getDate()
 const days = new Date(year.value, month.value, 0).getDate()
-const weeks = reactive(new datePicker({ day: days, year: year.value, month: month.value }).calendar)
+const weeks = reactive(new datePicker({ day: days, year: year.value, month: month.value,format:props.format }).calendar)
 const onFocus = () => {
     visible.value = true
 }
@@ -72,7 +72,7 @@ const onToggle = () => {
     visible.value = !visible.value
 }
 const onDayClick = d => {
-    propValue.value = `${d.year}-${d.month}-${d.day}`
+    propValue.value = d.value
     emit('update:value', propValue.value)
     emit('change', propValue.value)
     inputRef.value.blur()
