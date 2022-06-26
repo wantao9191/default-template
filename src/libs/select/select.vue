@@ -119,7 +119,8 @@ const icon = computed(() => visible.value ? 'tg-arrow-up' : 'tg-arrow-down')
         border: 1px solid #ddd;
         border-radius: 4px;
         padding: 6px 0;
-
+        max-height: 140px;
+        overflow-y: auto;
         .tg-nodata {
             font-size: 13px;
             color: #666;
