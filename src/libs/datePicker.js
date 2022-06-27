@@ -53,7 +53,6 @@ class datePicker {
             'YYYY-M': () => `${time.year}-${time.month}`
         }
         const actiton = acts[format] || acts['YYYY-MM-DD']
-        console.log(actiton)
         return actiton.call()
     }
 }

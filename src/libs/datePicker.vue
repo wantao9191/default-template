@@ -92,16 +92,17 @@
         </div>
     </div>
 </template>
-<script setup>
+<script lang="ts" setup>
 import { ref, computed, reactive, toRef, watch, } from "vue"
 import datePicker from './datePicker.js'
+import {formatTime} from './moment.js';
 const props = defineProps({
     value: { type: String, default: '' },
     type: { type: String, default: 'date' },
     placeholder: { type: String, default: '请选择' },
     size: { type: String, default: 'small' },
     disabled: { type: Boolean, default: false },
-    format: { type: String, default: 'YYYY-MM-DD' },
+    format: { type: String, default: 'yyyy-M-d h:mm:ss' },
     readonly: { type: Boolean, default: false }
 })
 const inputRef = ref('')
@@ -112,7 +113,6 @@ const propValueComputed = computed({
     set: (param) => param
 })
 const propType = ref(props.type)
-// () => props.value ? new Date(props.value) : new Date()
 const date = ref(new Date())
 const year = ref(date.value.getFullYear())
 const month = ref(date.value.getMonth() + 1)

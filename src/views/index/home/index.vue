@@ -6,9 +6,9 @@
       <h3>基于 Vue.js 3 的个人级 UI 组件库和前端解决方案，
         为无数开发者服务</h3>
       <div class="btns">
-        <a href="/#/doc">
+        <a href="javaScrip:;" @click="jump">
           <tg-icon icon="tg-paper-plane" size="21" style="margin-right:4px"></tg-icon>
-          <span>开始使用</span>
+          <span >开始使用</span>
         </a>
         <a href="https://github.com/wantao9191/default-template" class="default">
           <tg-icon icon="tg-rocket" size="21" style="margin-right:4px"></tg-icon>
@@ -32,12 +32,12 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-  setup() {
-    const onClick = () => { };
-    return { onClick };
-  },
+<script setup>
+import { useRouter } from "vue-router";
+
+const router = useRouter()
+const jump = () => {
+  router.push('/doc')
 };
 </script>
 <style lang="scss" scoped>
@@ -75,6 +75,7 @@ export default {
 
     .btns {
       margin-top: 96px;
+
       a {
         height: 40px;
         line-height: 40px;
@@ -84,6 +85,7 @@ export default {
         color: #fff;
         border-radius: 4px;
         margin: 0 8px;
+
         &.default {
           background: #fff;
           color: #333;
@@ -103,9 +105,11 @@ export default {
 
       .intro-item {
         flex: 1;
+
         >h3 {
           color: $primary;
         }
+
         >p {
           font-size: 13px;
           margin-top: 12px;
