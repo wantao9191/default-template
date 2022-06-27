@@ -15,7 +15,7 @@
       <div class="demo-component">
         {{inputData.value}}
         <br>
-        <tg-date-picker v-model:value="inputData.value" size="small" format="YYYY-dd-mm" />
+        <tg-date-picker v-model:value="inputData.value" size="small" format="timesTemp" />
       </div>
       <div class="demo-desc">
         <span class="desc-title">基本用法</span>

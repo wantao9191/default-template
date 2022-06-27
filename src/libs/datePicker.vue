@@ -8,28 +8,83 @@
             </template>
         </tg-input>
         <div class="tg-picker-dropdown shadow" v-if="visible">
-            <div class="picker-tools" @mousedown.prevent>
-                <span class="tool-methods">
-                    <tg-icon icon="tg-arrow-round-back" size="20" class="arrow-round"></tg-icon>
-                    <tg-icon icon="tg-arrow-back" size="20" class="arrow-round"></tg-icon>
-                </span>
-                <div class="tools-name">
-                    <span>{{ year }}年</span>
-                    <span>{{ month }}月</span>
-                </div>
-                <span class="tool-methods">
-                    <tg-icon icon="tg-arrow-forward" size="20" class="arrow-round"></tg-icon>
-                    <tg-icon icon="tg-arrow-round-forw" size="20" class="arrow-round"></tg-icon>
-                </span>
-            </div>
-            <div class="picker-content">
-                <div class="picker-item" v-for="(w, i) in weeks" :key="i">
-                    <div class="picker-header">
-                        <span>{{ w.label }}</span>
+            <div class="picker-wrap" v-if="propType === 'date'">
+                <div class="picker-tools" @mousedown.prevent>
+                    <span class="tool-methods">
+                        <tg-icon icon="tg-arrow-round-back" size="20" class="arrow-round" @click="prev('year')">
+                        </tg-icon>
+                        <tg-icon icon="tg-arrow-back" class="arrow-round" @click="prev('month')"></tg-icon>
+                    </span>
+                    <div class="tools-name">
+                        <span @click="toggleType('year')">{{ year }}年</span>
+                        <span @click="toggleType('month')">{{ month < 10 ? '0' + month : month }}月</span>
                     </div>
-                    <div class="picker-day" :class="{ 'out-day': d.month != month }" v-for="(d, n) in w.days" :key="n"
-                        @mousedown.prevent @click="onDayClick(d)">
-                        <span :class="{ active: propValue === `${d.year}-${d.month}-${d.day}` }">{{ d.day }}</span>
+                    <span class="tool-methods">
+                        <tg-icon icon="tg-arrow-forward" class="arrow-round" @click="next('month')"></tg-icon>
+                        <tg-icon icon="tg-arrow-round-forw" size="20" class="arrow-round" @click="next('year')">
+                        </tg-icon>
+                    </span>
+                </div>
+                <div class="picker-content" @mousedown.prevent>
+                    <div class="picker-item" v-for="(w, i) in weeks" :key="i">
+                        <div class="picker-header">
+                            <span>{{ w.label }}</span>
+                        </div>
+                        <div class="picker-day" :class="{ 'out-day': d.month != month }" v-for="(d, n) in w.days"
+                            :key="n" @click="onDayClick(d)">
+                            <span :class="{
+                                active: propValue === d.value,
+                                'is-check': d.day === today.day && today.year === d.year && today.month === d.month
+                            }">
+                                {{ d.day }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="month-wrap" v-if="propType === 'month'" @mousedown.prevent>
+                <div class="picker-tools">
+                    <span class="tool-methods">
+                        <tg-icon icon="tg-arrow-round-back" size="20" class="arrow-round" @click="prev('year')">
+                        </tg-icon>
+                    </span>
+                    <div class="tools-name">
+                        <span @click="toggleType('year')">{{ year }}年</span>
+                    </div>
+                    <span class="tool-methods">
+                        <tg-icon icon="tg-arrow-round-forw" size="20" class="arrow-round" @click="next('year')">
+                        </tg-icon>
+                    </span>
+                </div>
+                <div class="month-content">
+                    <div v-for="m in 12" class="month-item" :key="m" @click="onMonthClick(m)">
+                        <span :class="{
+                            active: month === m && today.selectYear == year,
+                            'is-check': today.year === year && today.month === m
+                        }">{{ m }}月</span>
+                    </div>
+                </div>
+            </div>
+            <div class="month-wrap" v-if="propType === 'year'" @mousedown.prevent>
+                <div class="picker-tools">
+                    <span class="tool-methods">
+                        <tg-icon icon="tg-arrow-round-back" size="20" class="arrow-round" @click="prev('year')">
+                        </tg-icon>
+                    </span>
+                    <div class="tools-name">
+                        <span>{{ years.label }}</span>
+                    </div>
+                    <span class="tool-methods">
+                        <tg-icon icon="tg-arrow-round-forw" size="20" class="arrow-round" @click="next('year')">
+                        </tg-icon>
+                    </span>
+                </div>
+                <div class="month-content">
+                    <div v-for="m in years.arrs" class="month-item" :key="m" @click="onYearClick(m)">
+                        <span :class="{
+                            active: today.selectYear == m,
+                            'is-check': today.year === m
+                        }">{{ m }}年</span>
                     </div>
                 </div>
             </div>
@@ -41,6 +96,7 @@ import { ref, computed, reactive, } from "vue"
 import datePicker from './datePicker.js'
 const props = defineProps({
     value: { type: String, default: '' },
+    type: { type: String, default: 'date' },
     placeholder: { type: String, default: '请选择' },
     size: { type: String, default: 'small' },
     disabled: { type: Boolean, default: false },
@@ -50,12 +106,22 @@ const inputRef = ref('')
 const emit = defineEmits(['update:value', 'change'])
 const visible = ref(false)
 const propValue = ref(props.value)
-const date = new Date()
-const year = ref(date.getFullYear())
-const month = ref(date.getMonth() + 1)
-const day = date.getDate()
-const days = new Date(year.value, month.value, 0).getDate()
-const weeks = reactive(new datePicker({ day: days, year: year.value, month: month.value,format:props.format }).calendar)
+const propType = ref(props.type)
+const date = computed(() => propValue.value ? new Date(propValue.value) : new Date())
+const year = ref(date.value.getFullYear())
+const month = ref(date.value.getMonth() + 1)
+const today = reactive({
+    year: date.value.getFullYear(),
+    month: date.value.getMonth() + 1,
+    day: date.value.getDate(),
+    selectYear: ''
+})
+
+const reset = () => {
+    year.value = date.value.getFullYear()
+    month.value = date.value.getMonth() + 1
+    propType.value = props.type
+}
 const onFocus = () => {
     visible.value = true
 }
@@ -63,22 +129,91 @@ const onClear = () => {
     emit('update:value', '')
     emit('change', '')
     propValue.value = ''
+    reset()
 }
 const onBlur = () => {
     visible.value = false
+    reset()
 }
 const onToggle = () => {
     if (props.disabled) return
     visible.value = !visible.value
 }
-const onDayClick = d => {
+const onDayClick = (d, close = true) => {
     propValue.value = d.value
+    today.selectYear = year.value
     emit('update:value', propValue.value)
     emit('change', propValue.value)
-    inputRef.value.blur()
-    console.log(inputRef)
+    if (close) inputRef.value.blur()
 }
+const onMonthClick = (m, close = true) => {
+    month.value = m
+    if (close) propType.value = 'date'
+    onDayClick({ value: timeFormat({ year: year.value, month: month.value, day: 1 }, props.format) }, false)
+}
+const onYearClick = m => {
+    year.value = m
+    propType.value = 'month'
+    onMonthClick(month.value, false)
+}
+const prev = (type) => {
+    if (type === 'month') {
+        if (month.value > 1) {
+            month.value--
+        } else {
+            year.value--
+            month.value = 12
+        }
+    }
+    else {
+        if (propType.value === 'year') {
+            year.value = year.value - year.value % 1000 % 10 - 1
+        } else {
+            year.value--
+        }
+
+    }
+}
+const next = type => {
+    if (type === 'month') {
+        if (month.value < 12) {
+            month.value++
+        } else {
+            month.value = 1
+            year.value++
+        }
+    } else {
+        if (propType.value === 'year') {
+            year.value = year.value - year.value % 1000 % 10 + 10
+        } else {
+            year.value++
+        }
+
+    }
+}
+const toggleType = type => {
+    propType.value = type
+}
+console.log(year.value - year.value % 1000 % 10)
 const icon = computed(() => visible.value ? 'tg-arrow-up' : 'tg-arrow-down')
+const weeks = computed(() => reactive(new datePicker({ year: year.value, month: month.value, format: props.format }).calendar))
+const years = computed(() => {
+    let arrs = []
+    let min = year.value - year.value % 1000 % 10
+    let max = min + 9
+    for (let i = min; i < max + 1; i++) {
+        arrs.push(i)
+    }
+    return { label: `${min}-${max}`, arrs }
+})
+function timeFormat(time, format = 'YYYY-MM-DD') {
+    const acts = {
+        'YYYY-MM-DD': () => `${time.year}-${time.month < 10 ? '0' + time.month : time.month}-${time.day < 10 ? '0' + time.day : time.day}`,
+        'YYYY-M-D': () => `${time.year}-${time.month}-${time.day}`,
+    }
+    const actiton = acts[format] || acts['YYYY-MM-DD']
+    return actiton.call()
+}
 </script>
 <style lang="scss" scoped>
 .tg-date-picker {
@@ -110,6 +245,82 @@ const icon = computed(() => visible.value ? 'tg-arrow-up' : 'tg-arrow-down')
         border-radius: 4px;
         padding: 6px 0;
 
+        .picker-wrap {
+            height: 320px;
+
+            .picker-content {
+                display: flex;
+
+                .picker-item {
+                    flex: 1;
+                    text-align: center;
+                    font-size: 13px;
+
+                    .picker-header {
+                        padding: 6px;
+                        border-bottom: 1px solid #ddd;
+                        margin-bottom: 6px;
+                    }
+
+                    .picker-day {
+                        height: 40px;
+                        line-height: 40px;
+                        display: block;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: $primary;
+                        }
+
+                        &.out-day {
+                            color: #888;
+                        }
+
+                        .active {
+                            background: $primary;
+                            color: #fff;
+                            display: inline-block;
+                            width: 24px;
+                            height: 24px;
+                            line-height: 24px;
+                            border-radius: 50%;
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+        .month-wrap {
+
+            .month-content {
+                display: flex;
+                flex-wrap: wrap;
+
+                >.month-item {
+                    width: 25%;
+                    text-align: center;
+                    padding: 24px 0;
+                    cursor: pointer;
+                    font-size: 13px;
+
+                    >span {
+                        &:hover {
+                            color: $primary;
+                        }
+
+                        &.active {
+                            font-weight: bold;
+                            color: $primary;
+                        }
+                    }
+
+                }
+            }
+
+        }
+
         .picker-tools {
             padding: 6px 12px;
             display: flex;
@@ -128,48 +339,9 @@ const icon = computed(() => visible.value ? 'tg-arrow-up' : 'tg-arrow-down')
             }
         }
 
-        .picker-content {
-            display: flex;
-
-            .picker-item {
-                flex: 1;
-                text-align: center;
-                font-size: 13px;
-
-                .picker-header {
-                    padding: 12px 6px;
-                    border-bottom: 1px solid #ddd;
-                    margin-bottom: 6px;
-                }
-
-                .picker-day {
-                    height: 40px;
-                    line-height: 40px;
-                    display: block;
-                    cursor: pointer;
-
-                    &:hover {
-                        color: $primary;
-                    }
-
-                    &.out-day {
-                        color: #888;
-                    }
-
-                    .active {
-                        background: $primary;
-                        color: #fff;
-                        display: inline-block;
-                        width: 24px;
-                        height: 24px;
-                        line-height: 24px;
-                        border-radius: 50%;
-                    }
-                }
-            }
-
+        .is-check {
+            color: $primary;
         }
-
     }
 }
 </style>

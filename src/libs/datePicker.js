@@ -1,5 +1,6 @@
 class datePicker {
-    constructor({ year, month, day, format }) {
+    constructor({ year, month, format }) {
+        const day = new Date(year, month, 0).getDate()
         this.options = { year, month, day, format }
         this.init()
     }
@@ -20,8 +21,10 @@ class datePicker {
         const firstDay = new Date(`${year}-${month}-1`).getDay()
         if (firstDay > 0) {
             for (let i = 0; i < firstDay; i++) {
-                let weekDay = new Date(`${year}-${preMonth}-${preMonthDays - i}`).getDay()
-                let keys = { day: preMonthDays - i, month: preMonth, year }
+                let stateYear = preMonth > 0 ? year : year - 1
+                let stateMonth = preMonth > 0 ? preMonth : 12
+                let weekDay = new Date(`${stateYear}-${stateMonth}-${preMonthDays - i}`).getDay()
+                let keys = { day: preMonthDays - i, month: stateMonth, year:stateYear }
                 weeks[weekDay].days.unshift({ ...keys, value: this.timeFormat(keys, format) })
             }
         }
@@ -33,8 +36,10 @@ class datePicker {
         const lastDay = new Date(`${year}-${month}-${day}`).getDay()
         if (lastDay < 6) {
             for (let i = 1; i < 7 - lastDay; i++) {
-                let weekDay = new Date(`${year}-${nextMonth}-${i}`).getDay()
-                let keys = { day: i, month: nextMonth, year }
+                let stateMonth =nextMonth<13?nextMonth : 1
+                let stateYear = nextMonth<13 ?year:year+1
+                let weekDay = new Date(`${stateYear}-${stateMonth}-${i}`).getDay()
+                let keys = { day: i, month: stateMonth, year:stateYear }
                 weeks[weekDay].days.push({ ...keys, value: this.timeFormat(keys, format) })
             }
         }
@@ -42,8 +47,8 @@ class datePicker {
     }
     timeFormat(time, format = 'YYYY-MM-DD') {
         const acts = {
-            'YYYY-MM-DD': () => `${time.year}-${time.month < 10 ? '0' + time.month : time.month}-${time.day< 10 ? '0' + time.day : time.day}`,
-            'YYYY-M-D': () => `${time.year}-${time.month}-${time.day}`
+            'YYYY-MM-DD': () => `${time.year}-${time.month < 10 ? '0' + time.month : time.month}-${time.day < 10 ? '0' + time.day : time.day}`,
+            'YYYY-M-D': () => `${time.year}-${time.month}-${time.day}`,
         }
         const actiton = acts[format] || acts['YYYY-MM-DD']
         return actiton.call()
