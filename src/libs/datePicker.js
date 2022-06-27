@@ -24,7 +24,7 @@ class datePicker {
                 let stateYear = preMonth > 0 ? year : year - 1
                 let stateMonth = preMonth > 0 ? preMonth : 12
                 let weekDay = new Date(`${stateYear}-${stateMonth}-${preMonthDays - i}`).getDay()
-                let keys = { day: preMonthDays - i, month: stateMonth, year:stateYear }
+                let keys = { day: preMonthDays - i, month: stateMonth, year: stateYear }
                 weeks[weekDay].days.unshift({ ...keys, value: this.timeFormat(keys, format) })
             }
         }
@@ -36,10 +36,10 @@ class datePicker {
         const lastDay = new Date(`${year}-${month}-${day}`).getDay()
         if (lastDay < 6) {
             for (let i = 1; i < 7 - lastDay; i++) {
-                let stateMonth =nextMonth<13?nextMonth : 1
-                let stateYear = nextMonth<13 ?year:year+1
+                let stateMonth = nextMonth < 13 ? nextMonth : 1
+                let stateYear = nextMonth < 13 ? year : year + 1
                 let weekDay = new Date(`${stateYear}-${stateMonth}-${i}`).getDay()
-                let keys = { day: i, month: stateMonth, year:stateYear }
+                let keys = { day: i, month: stateMonth, year: stateYear }
                 weeks[weekDay].days.push({ ...keys, value: this.timeFormat(keys, format) })
             }
         }
@@ -49,8 +49,11 @@ class datePicker {
         const acts = {
             'YYYY-MM-DD': () => `${time.year}-${time.month < 10 ? '0' + time.month : time.month}-${time.day < 10 ? '0' + time.day : time.day}`,
             'YYYY-M-D': () => `${time.year}-${time.month}-${time.day}`,
+            'YYYY-MM': () => `${time.year}-${time.month < 10 ? '0' + time.month : time.month}`,
+            'YYYY-M': () => `${time.year}-${time.month}`
         }
         const actiton = acts[format] || acts['YYYY-MM-DD']
+        console.log(actiton)
         return actiton.call()
     }
 }

@@ -1,7 +1,8 @@
 <template>
     <div class="tg-date-picker">
-        <tg-input class="tg-date-input" v-model:value="propValue" :placeholder="placeholder" :size="size"
-            @focus="onFocus" :disabled="disabled" @blur="onBlur" prefixIcon='calendar' ref="inputRef">
+        <tg-input class="tg-date-input" v-model:value="propValueComputed" :placeholder="placeholder" :size="size"
+            @focus="onFocus" :disabled="disabled" :readonly="readonly" @blur="onBlur" prefixIcon='calendar'
+            ref="inputRef">
             <template #suffixIcon>
                 <tg-icon :icon="icon" class="arrow" @click="onToggle"></tg-icon>
                 <tg-icon icon="tg-close-circle-out" class="clear" @click="onClear"></tg-icon>
@@ -33,7 +34,7 @@
                         <div class="picker-day" :class="{ 'out-day': d.month != month }" v-for="(d, n) in w.days"
                             :key="n" @click="onDayClick(d)">
                             <span :class="{
-                                active: propValue === d.value,
+                                active: propValueComputed === d.value,
                                 'is-check': d.day === today.day && today.year === d.year && today.month === d.month
                             }">
                                 {{ d.day }}
@@ -92,7 +93,7 @@
     </div>
 </template>
 <script setup>
-import { ref, computed, reactive, } from "vue"
+import { ref, computed, reactive, toRef, watch, } from "vue"
 import datePicker from './datePicker.js'
 const props = defineProps({
     value: { type: String, default: '' },
@@ -100,14 +101,19 @@ const props = defineProps({
     placeholder: { type: String, default: '请选择' },
     size: { type: String, default: 'small' },
     disabled: { type: Boolean, default: false },
-    format: { type: String, default: 'YYYY-MM-DD' }
+    format: { type: String, default: 'YYYY-MM-DD' },
+    readonly: { type: Boolean, default: false }
 })
 const inputRef = ref('')
 const emit = defineEmits(['update:value', 'change'])
 const visible = ref(false)
-const propValue = ref(props.value)
+const propValueComputed = computed({
+    get: () => props.value,
+    set: (param) => param
+})
 const propType = ref(props.type)
-const date = computed(() => propValue.value ? new Date(propValue.value) : new Date())
+// () => props.value ? new Date(props.value) : new Date()
+const date = ref(new Date())
 const year = ref(date.value.getFullYear())
 const month = ref(date.value.getMonth() + 1)
 const today = reactive({
@@ -116,7 +122,13 @@ const today = reactive({
     day: date.value.getDate(),
     selectYear: ''
 })
-
+watch(propValueComputed, (newDate, b) => {
+    if (newDate) {
+        date.value = new Date(newDate)
+        year.value = date.value.getFullYear()
+        month.value = date.value.getMonth() + 1
+    }
+})
 const reset = () => {
     year.value = date.value.getFullYear()
     month.value = date.value.getMonth() + 1
@@ -128,7 +140,7 @@ const onFocus = () => {
 const onClear = () => {
     emit('update:value', '')
     emit('change', '')
-    propValue.value = ''
+    // props.value = ''
     reset()
 }
 const onBlur = () => {
@@ -140,21 +152,35 @@ const onToggle = () => {
     visible.value = !visible.value
 }
 const onDayClick = (d, close = true) => {
-    propValue.value = d.value
+    // props.value = d.value
     today.selectYear = year.value
-    emit('update:value', propValue.value)
-    emit('change', propValue.value)
+    emit('update:value', d.value)
+    emit('change', d.value)
     if (close) inputRef.value.blur()
 }
 const onMonthClick = (m, close = true) => {
     month.value = m
+    if (props.type === 'month') {
+        onDayClick({
+            value: timeFormat({ year: year.value, month: month.value },
+                ['YYYY-MM', 'YYYY-M'].includes(props.format) ? props.format : 'YYYY-MM')
+        },
+            close)
+        return
+    }
     if (close) propType.value = 'date'
     onDayClick({ value: timeFormat({ year: year.value, month: month.value, day: 1 }, props.format) }, false)
+
 }
 const onYearClick = m => {
     year.value = m
-    propType.value = 'month'
-    onMonthClick(month.value, false)
+    if (props.type === 'year') {
+        onDayClick({ value: String(m) })
+    } else {
+        propType.value = 'month'
+        onMonthClick(month.value, false)
+    }
+
 }
 const prev = (type) => {
     if (type === 'month') {
@@ -194,7 +220,6 @@ const next = type => {
 const toggleType = type => {
     propType.value = type
 }
-console.log(year.value - year.value % 1000 % 10)
 const icon = computed(() => visible.value ? 'tg-arrow-up' : 'tg-arrow-down')
 const weeks = computed(() => reactive(new datePicker({ year: year.value, month: month.value, format: props.format }).calendar))
 const years = computed(() => {
@@ -210,6 +235,8 @@ function timeFormat(time, format = 'YYYY-MM-DD') {
     const acts = {
         'YYYY-MM-DD': () => `${time.year}-${time.month < 10 ? '0' + time.month : time.month}-${time.day < 10 ? '0' + time.day : time.day}`,
         'YYYY-M-D': () => `${time.year}-${time.month}-${time.day}`,
+        'YYYY-MM': () => `${time.year}-${time.month < 10 ? '0' + time.month : time.month}`,
+        'YYYY-M': () => `${time.year}-${time.month}`
     }
     const actiton = acts[format] || acts['YYYY-MM-DD']
     return actiton.call()
