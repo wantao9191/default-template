@@ -164,7 +164,7 @@ const onMonthClick = (m, close = true) => {
         onDayClick({
             value: timeFormat({ year: year.value, month: month.value },
                 ['YYYY-MM', 'YYYY-M'].includes(props.format) ? props.format : 'YYYY-MM')
-        },close)
+        }, close)
         return
     }
     if (close) propType.value = 'date'
