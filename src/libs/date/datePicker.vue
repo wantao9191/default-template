@@ -121,7 +121,6 @@ const bindValue = computed({
         } else {
             return ''
         }
-
     },
     set: param => param
 })
@@ -129,7 +128,11 @@ const propType = ref(props.type)
 const visible = ref(false)
 const inputRef = ref('')
 const reset = () => {
-
+    const date = new Date(value.value)
+    console.log(value.value)
+    calendar.value.year = date.getFullYear()
+    calendar.value.month = date.getMonth() + 1
+    propType.value = props.type
 }
 const onFocus = () => {
     visible.value = true
@@ -171,12 +174,12 @@ const onNext = type => {
     const date = dateValue ? new Date(dateValue) : new Date()
     if (type === 'year') {
         if (propType.value === 'year') {
-            let max = calendar.value.year - calendar.value.year % 1000 % 10+10
+            let max = calendar.value.year - calendar.value.year % 1000 % 10 + 10
             value.updateValue = date.setFullYear(max)
         } else {
             value.updateValue = date.setFullYear(date.getFullYear() + 1)
         }
-        
+
     } else {
         value.updateValue = date.setMonth(date.getMonth() + 1)
     }
@@ -226,6 +229,7 @@ const calendar = computed(() => {
 })
 const years = computed(() => {
     let yaerValue = calendar.value.year
+    console.log(111111)
     let arrs = []
     let min = yaerValue - yaerValue % 1000 % 10
     let max = min + 9
