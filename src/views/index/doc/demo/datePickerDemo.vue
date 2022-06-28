@@ -13,7 +13,7 @@
     <!-- 基本用法 -->
     <div class="demo-block">
       <div class="demo-component">
-        <tg-date-picker v-model:value="inputData.value" size="small" type="date" />
+        <tg-date-picker v-model:value="inputData.value" size="small" type="year" format="YYYY-M" />
       </div>
       <div class="demo-desc">
         <span class="desc-title">基本用法</span>
@@ -217,6 +217,12 @@ export default {
       code: '<tg-date-picker v-model:value="input"></tg-date-picker>',
       visible: false,
     });
+    setTimeout(() => {
+      inputData.value = '2033-4-3'
+    }, 1000);
+    setTimeout(() => {
+      inputData.value = '2010-4-3'
+    }, 2000);
     const toggleDemoCode = () => {
       inputData.visible = !inputData.visible;
     };

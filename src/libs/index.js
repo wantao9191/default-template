@@ -9,7 +9,7 @@ import Checkbox from './checkbox/checkbox.vue'
 import CheckboxGroup from './checkbox/checkboxGroup.vue'
 import Select from './select/select.vue'
 import Option from './select/option.vue'
-import DatePicker from './datePicker.vue'
+import DatePicker from './date/datePicker.vue'
 function libs(Vue) {
     Vue.component('tg-dialog', Dialog)
     Vue.component('tg-button', Button)

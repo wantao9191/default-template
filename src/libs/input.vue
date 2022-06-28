@@ -29,7 +29,7 @@
 import { ref, computed, toRef, useSlots } from "vue";
 const props = defineProps({
   type: { type: String, default: "text" },
-  value: { type: String, default: "" },
+  value: { type: [String,Number], default: "" },
   size: { type: String, default: "small" },
   disabled: { type: Boolean, default: false },
   placeholder: { type: String, default: "请输入" },
