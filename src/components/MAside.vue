@@ -9,7 +9,7 @@
           </span>
           <!-- <tg-icon :icon="`tg-arrow-${m.slider ? 'forward' : 'down'}`"></tg-icon> -->
         </div>
-        <div class="menu-child" >
+        <div class="menu-child">
           <ul>
             <li v-for="(c, n) in m.children" :key="n" @click.stop="onClick(c)"
               :class="{ active: $route.path == c.path }">
@@ -23,12 +23,10 @@
 </template>
 <script>
 import { reactive } from "vue";
-import { useRouter,useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 export default {
   setup() {
     const router = useRouter();
-    const route = useRoute()
-    console.log(route.path)
     const menus = reactive([
       {
         label: "组件",
@@ -47,10 +45,10 @@ export default {
         ],
       },
     ]);
-    
     const onClick = (e) => {
-      if (e.path) { router.replace(e.path); } else {
-        // e.slider = !e.slider
+      if (e.path) {
+        router.replace(e.path);
+      } else {
       }
 
     };

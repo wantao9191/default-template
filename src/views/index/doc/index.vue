@@ -3,16 +3,24 @@
     <m-aside></m-aside>
     <main class="router-main">
       <router-view class="router-view"></router-view>
+      <m-nav :key="routerkey"></m-nav>
     </main>
   </main>
 </template>
 <script>
 import MAside from "@/components/MAside.vue";
+import MNav from "@/components/MNav.vue";
+import { ref } from 'vue';
+import { onBeforeRouteUpdate } from 'vue-router';
 export default {
-  components: { MAside },
-  setup() {
+  components: { MAside,MNav },
+  setup() {    
+    const routerkey = ref('')
+    onBeforeRouteUpdate((to)=>{
+      routerkey.value = to.path
+    })
     const onClick = () => { };
-    return { onClick };
+    return { onClick,routerkey };
   },
 };
 </script>
@@ -32,7 +40,9 @@ export default {
       background: #fff;
       margin: 12px;
       padding: 12px;
+      width: calc(100% - 200px);
     }
+
   }
 
 }
