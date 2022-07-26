@@ -98,7 +98,7 @@
         <div class="demo-code" v-show="radioData2.visible">
             <code class="code-bg">
           <div class="code-text">
-             传入 <code>disbaled</code> <code>Boolean</code>的属性控制单选框状态
+             传入 <code>size</code> <code>String</code>的属性控制单选框状态
         </div>
         <m-code :value="radioData2.code"></m-code>
         </code>

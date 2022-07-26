@@ -65,14 +65,14 @@
   </div>
   </div> -->
   <!-- 禁用状态 -->
-  <!-- <div class="demo-block">
+  <div class="demo-block">
     <div class="demo-component">
       <tg-date-picker v-model:value="inputData2.value" size="small" disabled />
     </div>
     <div class="demo-desc">
       <span class="desc-title">禁用状态</span>
       <div class="desc-text">
-        使用 <code>disabled</code> 属性即可得到一个被禁用的输入框
+        使用 <code>disabled</code> 属性即可得到一个被禁用的时间选择器
       </div>
     </div>
     <div class="demo-code" v-show="inputData2.visible">
@@ -91,23 +91,27 @@
       <tg-icon icon="tg-code" size="21"></tg-icon>
     </a>
   </div>
-  </div> -->
-  <!-- 密码框 -->
-  <!-- <div class="demo-block">
+  </div>
+  <!-- 不同类型 -->
+  <div class="demo-block">
     <div class="demo-component">
-      <tg-date-picker v-model:value="inputData3.value" size="small" type="password" show-password />
+      <tg-date-picker v-model:value="inputData3.value" size="small" type="date" />
+      <br>
+      <tg-date-picker v-model:value="inputData3.value" size="small" type="month" style="margin-top:12px" />
+      <br>
+      <tg-date-picker v-model:value="inputData3.value" size="small" type="year" style="margin-top:12px" />
     </div>
     <div class="demo-desc">
-      <span class="desc-title">密码框</span>
+      <span class="desc-title">不同类型</span>
       <div class="desc-text">
-        更改 <code>type</code> 属性即可得到一个密码框，使用
-        <code>show-password</code> 属性即可得到一个可切换显示隐藏的密码框
+        更改 <code>type</code> 属性即可得到不同的时间选择器
+
       </div>
     </div>
     <div class="demo-code" v-show="inputData3.visible">
       <code class="code-bg">
           <div class="code-text">
-            传入 <code>type="password"</code> 控制输入框类型
+            传入type <code>date</code> 、 <code>month</code> 、 <code>year</code> 控制时间选择器其类型
     </div>
     <m-code :value="inputData3.code"></m-code>
     </code>
@@ -120,7 +124,7 @@
       <tg-icon icon="tg-code" size="21"></tg-icon>
     </a>
   </div>
-  </div> -->
+  </div>
   <!-- 带图标的 -->
   <!-- <div class="demo-block">
     <div class="demo-component">
@@ -172,16 +176,17 @@
       <tg-date-picker v-model:value="inputData5.value3" size="large" style="margin-top:12px"></tg-date-picker>
     </div>
     <div class="demo-desc">
-      <span class="desc-title">不同尺寸的输入框</span>
-      <div class="desc-text">使用 <code>size</code> 属性改变输入框大小。 除了默认大小外，还有另外两个选项：<code>large</code> , <code>small</code> 。
+      <span class="desc-title">不同尺寸的时间选择器</span>
+      <div class="desc-text">使用 <code>size</code> 属性改变时间选择器大小。 除了默认大小外，还有另外两个选项：<code>large</code> , <code>small</code>
+        。
       </div>
     </div>
     <div class="demo-code" v-show="inputData5.visible">
       <code class="code-bg">
           <div class="code-text">
-            通过 <code>prefixIcon</code>和
-      <code>suffixIcon</code> 属性增加图标。另外，<code>prefix</code> 和
-      <code>suffix</code> 命名的插槽也能正常工作。
+            通过 <code>size</code>和
+      <code>String</code> 属性控制时间选择器尺寸
+
     </div>
     <m-code :value="inputData5.code"></m-code>
     </code>
@@ -229,7 +234,7 @@ export default {
     };
     const inputData3 = reactive({
       value: "",
-      code: '<tg-date-picker v-model:value="input" type="password"></tg-date-picker>',
+      code: '<tg-date-picker v-model:value="input" type="date"></tg-date-picker>,<tg-date-picker v-model:value="input" type="month"></tg-date-picker>,<tg-date-picker v-model:value="input" type="year"></tg-date-picker>',
       visible: false,
     });
     const toggleDemoCode3 = () => {
@@ -245,7 +250,7 @@ export default {
     };
     const inputData5 = reactive({
       value: "",
-      code: '<tg-date-picker v-model:value="input" prefixIcon="desktop" size="mini" />,<tg-date-picker ,2&v-model:value="input" ,2&size="small" ,2&suffixIcon="search" ,/>,<tg-date-picker ,2&v-model:value="input" ,2&size="large" ,2&prefixIcon="mail-unread" ,2&suffixIcon="search" ,/>',
+      code: '<tg-date-picker v-model:value="input" size="mini" />,<tg-date-picker v-model:value="input" size="small" />,<tg-date-picker v-model:value="input" size="large" />',
       visible: false,
     });
     const toggleDemoCode5 = () => {

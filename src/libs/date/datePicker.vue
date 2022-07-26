@@ -1,5 +1,5 @@
 <template>
-    <div class="tg-date-picker">
+    <div class="tg-date-picker" :class="{'tg-date-disabled':disabled}">
         <tg-input class="tg-date-input" v-model:value="bindValue" :placeholder="placeholder" :size="size"
             @focus="onFocus" :disabled="disabled" :readonly="readonly" @blur="onBlur" prefixIcon='calendar'
             ref="inputRef">
@@ -258,6 +258,17 @@ const icon = computed(() => visible.value ? 'tg-arrow-up' : 'tg-arrow-down')
         .clear {
             display: inline;
         }
+    }
+    &.tg-date-disabled {
+       .tg-date-input:hover {
+        .arrow {
+            display: inline;
+        }
+
+        .clear {
+            display: none;
+        }
+    } 
     }
 
     .tg-picker-dropdown {
