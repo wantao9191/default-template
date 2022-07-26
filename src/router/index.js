@@ -17,6 +17,7 @@ const routes = [
         path: '/doc',
         name: 'doc',
         component: () => import('@/views/index/doc/index.vue'),
+        redirect: '/doc/icon',
         children: [
             {
                 path: 'icon', name: 'icon',

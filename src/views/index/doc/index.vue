@@ -18,6 +18,7 @@ export default {
     const routerkey = ref('')
     onBeforeRouteUpdate((to)=>{
       routerkey.value = to.path
+      document.querySelector('.router-main').scrollTop = 0
     })
     const onClick = () => { };
     return { onClick,routerkey };
