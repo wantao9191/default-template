@@ -52,7 +52,6 @@ init()
     top: 52px;
     z-index: 1000;
     width: 200px;
-
     .m-nav {
         display: flex;
         flex-direction: column;

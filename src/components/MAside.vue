@@ -69,7 +69,7 @@ export default {
       cursor: pointer;
       color: #666;
       margin-top: 4px;
-      font-size: 14px;
+      font-size: 13px;
 
       &.active {
         // background: #333;

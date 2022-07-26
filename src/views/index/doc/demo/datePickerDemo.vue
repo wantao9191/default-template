@@ -2,18 +2,17 @@
   <div class="demo icon-demo">
     <h2>DatePicker 输入框</h2>
     <p>
-      基本表单组件，支持 input 和
-      textarea，并在原生控件基础上进行了功能扩展，可以组合使用。
+      基本表单组件，日期时间选择器来自日期选择器和时间选择器的组合。
     </p>
     <h3>何时使用</h3>
     <ul>
-      <li>在表单输入时使用，通过鼠标或键盘输入字符。</li>
+      <li>在同一个选择器里选择日期和时间</li>
     </ul>
     <h3>代码演示</h3>
     <!-- 基本用法 -->
     <div class="demo-block">
       <div class="demo-component">
-        <tg-date-picker v-model:value="inputData.value" size="small" type="year" format="YYYY-M" />
+        <tg-date-picker v-model:value="inputData.value" size="small" />
       </div>
       <div class="demo-desc">
         <span class="desc-title">基本用法</span>
@@ -164,26 +163,18 @@
   </div>
   </div> -->
   <!-- 不同尺寸 -->
-  <!-- <div class="demo-block">
+  <div class="demo-block">
     <div class="demo-component">
-      <tg-date-picker v-model:value="inputData5.value1" size="mini" prefixIcon="desktop" />
-      <tg-date-picker v-model:value="inputData5.value2"  style="margin:12px 0" clearable>
-        <template v-slot:suffixIcon>
-          <tg-icon icon="tg-search"></tg-icon>
-        </template>
-      </tg-date-picker>
-      <tg-date-picker v-model:value="inputData5.value3" size="large">
-        <template v-slot:prefixIcon>
-          <tg-icon icon="tg-mail-unread"></tg-icon>
-        </template>
-        <template v-slot:suffixIcon>
-          <tg-icon icon="tg-search"></tg-icon>
-        </template>
-      </tg-date-picker>
+      <tg-date-picker v-model:value="inputData5.value1" size="mini" />
+      <br>
+      <tg-date-picker v-model:value="inputData5.value2" style="margin-top:12px"> </tg-date-picker>
+      <br>
+      <tg-date-picker v-model:value="inputData5.value3" size="large" style="margin-top:12px"></tg-date-picker>
     </div>
     <div class="demo-desc">
       <span class="desc-title">不同尺寸的输入框</span>
-      <div class="desc-text">使用 <code>size</code> 属性改变输入框大小。 除了默认大小外，还有另外两个选项：<code>large</code> , <code>small</code> 。</div>
+      <div class="desc-text">使用 <code>size</code> 属性改变输入框大小。 除了默认大小外，还有另外两个选项：<code>large</code> , <code>small</code> 。
+      </div>
     </div>
     <div class="demo-code" v-show="inputData5.visible">
       <code class="code-bg">
@@ -203,7 +194,7 @@
       <tg-icon icon="tg-code" size="21"></tg-icon>
     </a>
   </div>
-  </div> -->
+  </div>
   </div>
 </template>
 <script>
@@ -217,12 +208,6 @@ export default {
       code: '<tg-date-picker v-model:value="input"></tg-date-picker>',
       visible: false,
     });
-    setTimeout(() => {
-      inputData.value = '2033-4-3'
-    }, 1000);
-    setTimeout(() => {
-      inputData.value = '2010-4-3'
-    }, 2000);
     const toggleDemoCode = () => {
       inputData.visible = !inputData.visible;
     };
