@@ -30,7 +30,6 @@ const init = () => {
                 if (top > 0 && top < 200) {
                     active.value = n.innerText
                     activeTop.value = i*22
-                    console.log(i)
                 }
             }
 

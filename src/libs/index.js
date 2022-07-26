@@ -10,6 +10,7 @@ import CheckboxGroup from './checkbox/checkboxGroup.vue'
 import Select from './select/select.vue'
 import Option from './select/option.vue'
 import DatePicker from './date/datePicker.vue'
+import ToolTip from './tooltip.vue'
 function libs(Vue) {
     Vue.component('tg-dialog', Dialog)
     Vue.component('tg-button', Button)
@@ -23,5 +24,6 @@ function libs(Vue) {
     Vue.component('tg-select', Select)
     Vue.component('tg-option', Option)
     Vue.component('tg-date-picker', DatePicker)
+    Vue.component('tg-tooltip',ToolTip)
 }
 export default libs

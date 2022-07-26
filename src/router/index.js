@@ -55,6 +55,10 @@ const routes = [
                 path: 'datePicker', name: 'datePicker',
                 component: () => import('@/views/index/doc/demo/datePickerDemo.vue'),
             },
+            {
+                path: 'tooltip', name: 'tooltip',
+                component: () => import('@/views/index/doc/demo/tooltipDemo.vue'),
+            },
         ]
     },
     {
