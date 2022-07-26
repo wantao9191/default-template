@@ -13,19 +13,19 @@
         <div class="demo-block">
             <div class="demo-component">
                 <tg-tooltip placement="top" content="tooptip top" theme="dark" style="margin-right:12px">
-                    <template #content>tooptip top slot</template>
+                    <template #content>tooptip top <br> slot</template>
                     <tg-button size="mini">tooptip top</tg-button>
                 </tg-tooltip>
                 <tg-tooltip placement="right" content="tooptip right" theme="dark" style="margin-right:12px">
-                    <template #content>tooptip right slot</template>
+                    <template #content>tooptip right <br> slot</template>
                     <tg-button size="mini">tooptip right</tg-button>
                 </tg-tooltip>
                 <tg-tooltip placement="bottom" content="tooptip bottom" theme="dark" style="margin-right:12px">
-                    <template #content>tooptip bottom slot</template>
+                    <template #content>tooptip bottom <br> slot</template>
                     <tg-button size="mini">tooptip bottom</tg-button>
                 </tg-tooltip>
                 <tg-tooltip placement="left" content="tooptip left" theme="dark">
-                    <template #content>tooptip left slot</template>
+                    <template #content>tooptip left <br> slot</template>
                     <tg-button size="mini">tooptip left</tg-button>
                 </tg-tooltip>
             </div>
@@ -130,16 +130,15 @@
             </tg-tooltip>
         </div>
         <div class="demo-desc">
-            <span class="desc-title">密码框</span>
+            <span class="desc-title">触发方式</span>
             <div class="desc-text">
-                更改 <code>type</code> 属性即可得到一个密码框，使用
-                <code>show-password</code> 属性即可得到一个可切换显示隐藏的密码框
+                改变 <code>tooltip</code> 的触发方式，更加灵活
             </div>
         </div>
         <div class="demo-code" v-show="inputData3.visible">
             <code class="code-bg">
           <div class="code-text">
-            传入 <code>type="password"</code> 控制输入框类型
+            传入 <code>trigger</code> <code>click</code> <code>hover</code> 控制触发方式
         </div>
         <m-code :value="inputData3.code"></m-code>
         </code>

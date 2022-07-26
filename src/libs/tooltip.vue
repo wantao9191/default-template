@@ -36,20 +36,17 @@ document.body.onclick = e=>{
 $bg: rgba(0, 0, 0, .8);
 
 .tg-tooltip {
-    display: inline-block;
+    display: inline-flex;
     position: relative;
-
     >.tg-tooltip-flow {
         position: absolute;
         white-space: nowrap;
         padding: 6px 12px;
-
         background: $bg;
         color: #fff;
         border-radius: 6px;
         font-size: 14px;
         z-index: 9999;
-
         >.tg-tooltip-flow-wrap {
             position: relative;
 
@@ -71,9 +68,9 @@ $bg: rgba(0, 0, 0, .8);
 
     &.tg-tooltip-top {
         >.tg-tooltip-flow {
-            top: calc(-100% - 16px);
+            top: 0;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, calc(-100% - 12px) );
 
             .arrow {
                 bottom: -12px;
@@ -92,6 +89,8 @@ $bg: rgba(0, 0, 0, .8);
     &.tg-tooltip-right {
         >.tg-tooltip-flow {
             left: calc(100% + 16px);
+            top: 50%;
+            transform: translateY(-50%);
 
             .arrow {
                 left: -18px;
@@ -132,7 +131,8 @@ $bg: rgba(0, 0, 0, .8);
     &.tg-tooltip-left {
         >.tg-tooltip-flow {
             right: calc(100% + 16px);
-
+            top: 50%;
+            transform: translateY(-50%);
             .arrow {
                 right: -18px;
                 top: 50%;
@@ -162,7 +162,8 @@ $bg: rgba(0, 0, 0, .8);
         >.tg-tooltip-flow {
             background: #fff;
             color: #333;
-            border: 1px solid #ddd;
+            // border: 1px solid #ddd;
+            box-shadow: 0px 0px 6px rgba(0, 0, 0, .12);
         }
 
         &.tg-tooltip-top {
@@ -171,8 +172,8 @@ $bg: rgba(0, 0, 0, .8);
                     border-top: 6px solid #fff;
 
                     &.arrow-light {
-                        border-top-color: #333;
-                        z-index: 0
+                        border-top-color: #666;
+                        z-index: -1
                     }
                 }
             }
