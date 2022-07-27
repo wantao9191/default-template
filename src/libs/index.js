@@ -11,6 +11,7 @@ import Select from './select/select.vue'
 import Option from './select/option.vue'
 import DatePicker from './date/datePicker.vue'
 import ToolTip from './tooltip.vue'
+import { messageBox } from "./messageBox/messageBox.js";
 function libs(Vue) {
     Vue.component('tg-dialog', Dialog)
     Vue.component('tg-button', Button)
@@ -26,4 +27,4 @@ function libs(Vue) {
     Vue.component('tg-date-picker', DatePicker)
     Vue.component('tg-tooltip',ToolTip)
 }
-export default libs
+export {libs,messageBox} 

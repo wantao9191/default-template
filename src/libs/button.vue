@@ -1,33 +1,30 @@
 <template>
-  <button class="tg-button" :class="classes" :disabled="disabled">
+  <button class="tg-button" :class="classes" :disabled="disabled || loading">
     <span class="tg-loadingIndicator" v-if="loading"></span>
     <slot />
   </button>
 </template>
-<script lang='ts'>
+<script lang='ts' setup>
 import { computed } from "vue";
-export default {
-  props: {
-    theme: { type: String, default: "button" },
-    size: { type: String, default: "normal" },
-    type: { type: String, default: "" },
-    disabled: Boolean,
-    loading: Boolean,
-    round: Boolean,
-  },
-  setup(props) {
-    const { theme, size, type, round } = props;
-    const classes = computed(() => {
-      return {
-        [`tg-theme-${theme}`]: theme,
-        [`tg-${size}-button`]: size,
-        [`tg-${type}-button`]: type,
-        "tg-round-button": round,
-      };
-    });
-    return { classes };
-  },
-};
+
+const props = defineProps({
+  theme: { type: String, default: "button" },
+  size: { type: String, default: "normal" },
+  type: { type: String, default: "" },
+  disabled: Boolean,
+  loading: Boolean,
+  round: Boolean,
+});
+
+const { theme, size, type, round } = props;
+const classes = computed(() => {
+  return {
+    [`tg-theme-${theme}`]: theme,
+    [`tg-${size}-button`]: size,
+    [`tg-${type}-button`]: type,
+    "tg-round-button": round,
+  };
+});
 </script>
 <style lang="scss" scoped>
 $h: 28px;
@@ -96,6 +93,7 @@ $grey: #ddd;
     &:focus {
       background: darken(white, 5%);
     }
+
     &.tg-default-button {
       &:hover {
         color: $primary;
@@ -204,7 +202,9 @@ $grey: #ddd;
       opacity: .6;
 
       &:hover {
-        background: $primary;
+        background: #fff;
+        border-color: #fff;
+        color: inherit;
       }
     }
   }

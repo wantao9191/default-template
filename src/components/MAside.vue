@@ -43,6 +43,7 @@ export default {
           { label: "Select 下拉框", path: "/doc/select" },
           { label: "DatePicker 时间选择器", path: "/doc/datePicker" },
           { label: "tooltip 文字提示", path: "/doc/tooltip" },
+          { label: "messageBox 弹框", path: "/doc/messageBox" },
         ],
       },
     ]);

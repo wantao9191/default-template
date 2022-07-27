@@ -45,11 +45,11 @@ $bg: rgba(0, 0, 0, .8);
         background: $bg;
         color: #fff;
         border-radius: 6px;
-        font-size: 14px;
+        
         z-index: 9999;
         >.tg-tooltip-flow-wrap {
             position: relative;
-
+font-size: 12px;
         }
     }
 

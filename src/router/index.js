@@ -59,6 +59,10 @@ const routes = [
                 path: 'tooltip', name: 'tooltip',
                 component: () => import('@/views/index/doc/demo/tooltipDemo.vue'),
             },
+            {
+                path: 'messageBox', name: 'messageBox',
+                component: () => import('@/views/index/doc/demo/messageBoxDemo.vue'),
+            },
         ]
     },
     {

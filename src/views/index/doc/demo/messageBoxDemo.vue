@@ -12,22 +12,7 @@
         <!-- 基本用法 -->
         <div class="demo-block">
             <div class="demo-component">
-                <tg-tooltip placement="top" content="tooptip top" theme="dark" style="margin-right:12px">
-                    <template #content>tooptip top <br> slot</template>
-                    <tg-button size="mini">tooptip top</tg-button>
-                </tg-tooltip>
-                <tg-tooltip placement="right" content="tooptip right" theme="dark" style="margin-right:12px">
-                    <template #content>tooptip right <br> slot</template>
-                    <tg-button size="mini">tooptip right</tg-button>
-                </tg-tooltip>
-                <tg-tooltip placement="bottom" content="tooptip bottom" theme="dark" style="margin-right:12px">
-                    <template #content>tooptip bottom <br> slot</template>
-                    <tg-button size="mini">tooptip bottom</tg-button>
-                </tg-tooltip>
-                <tg-tooltip placement="left" content="tooptip left" theme="dark">
-                    <template #content>tooptip left <br> slot</template>
-                    <tg-button size="mini">tooptip left</tg-button>
-                </tg-tooltip>
+                <tg-button size="mini" theme="link" @click="openMessageBox">点击打开message box</tg-button>
             </div>
             <div class="demo-desc">
                 <span class="desc-title">基本用法</span>
@@ -170,55 +155,51 @@
     </div>
     </div>
 </template>
-<script>
+<script setup>
 import { reactive } from "vue";
 import MCode from "@/components/MCode.vue";
-export default {
-    components: { MCode },
-    setup() {
-        const inputData = reactive({
-            value: "",
-            code: '<tg-tooltip placement="top" content="tooptip top">,2&<tg-button size="mini">tooptip top</tg-button>,</tg-tooltip>,<tg-tooltip placement="right" content="tooptip right">,2&<tg-button size="mini">tooptip right</tg-button>,</tg-tooltip>,<tg-tooltip placement="bottom" content="tooptip bottom">,2&<tg-button size="mini">tooptip bottom</tg-button>,</tg-tooltip>,<tg-tooltip placement="left" content="tooptip left">,2&<tg-button size="mini">tooptip left</tg-button>,</tg-tooltip>',
-            visible: false,
-        });
-        const toggleDemoCode = () => {
-            inputData.visible = !inputData.visible;
-        };
-        const inputData1 = reactive({
-            value: "",
-            code: '<tg-tooltip placement="top">,2&<template #content>tooptip top</template>,2&<tg-button size="mini">tooptip top</tg-button>,</tg-tooltip>',
-            visible: false,
-        });
-        const toggleDemoCode1 = () => {
-            inputData1.visible = !inputData1.visible;
-        };
-        const inputData2 = reactive({
-            value: "",
-            code: '<tg-tooltip placement="top" content="tooptip top" theme="dark">,2&<tg-button size="mini">Dark</tg-button>,</tg-tooltip>,<tg-tooltip placement="top" content="tooptip top" theme="light">,2&<tg-button size="mini">Light</tg-button>,</tg-tooltip>',
-            visible: false,
-        });
-        const toggleDemoCode2 = () => {
-            inputData2.visible = !inputData2.visible;
-        };
-        const inputData3 = reactive({
-            value: "",
-            code: '<tg-tooltip placement="top" content="tooptip top" trigger="hover">,2&<tg-button size="mini">Hover</tg-button>,</tg-tooltip>,<tg-tooltip placement="top" content="tooptip top" trigger="click">,2&<tg-button size="mini">Click</tg-button>,</tg-tooltip>',
-            visible: false,
-        });
-        const toggleDemoCode3 = () => {
-            inputData3.visible = !inputData3.visible;
-        };
-        return {
-            toggleDemoCode1,
-            inputData,
-            toggleDemoCode,
-            inputData1,
-            inputData2,
-            toggleDemoCode2,
-            toggleDemoCode3,
-            inputData3
-        };
-    },
+import { messageBox } from "@/libs";
+const openMessageBox = ()=>{
+    messageBox.alert('这是一段内容','标题名称',{
+        cancelButtonText:'放弃',
+        confirmButtonText:'保存',
+        beforeClose:(action,instance,done)=>{
+            console.log(instance)
+            // done()
+        }
+    })
+}
+const inputData = reactive({
+    value: "",
+    code: '<tg-tooltip placement="top" content="tooptip top">,2&<tg-button size="mini">tooptip top</tg-button>,</tg-tooltip>,<tg-tooltip placement="right" content="tooptip right">,2&<tg-button size="mini">tooptip right</tg-button>,</tg-tooltip>,<tg-tooltip placement="bottom" content="tooptip bottom">,2&<tg-button size="mini">tooptip bottom</tg-button>,</tg-tooltip>,<tg-tooltip placement="left" content="tooptip left">,2&<tg-button size="mini">tooptip left</tg-button>,</tg-tooltip>',
+    visible: false,
+});
+const toggleDemoCode = () => {
+    inputData.visible = !inputData.visible;
+};
+const inputData1 = reactive({
+    value: "",
+    code: '<tg-tooltip placement="top">,2&<template #content>tooptip top</template>,2&<tg-button size="mini">tooptip top</tg-button>,</tg-tooltip>',
+    visible: false,
+});
+const toggleDemoCode1 = () => {
+    inputData1.visible = !inputData1.visible;
+};
+const inputData2 = reactive({
+    value: "",
+    code: '<tg-tooltip placement="top" content="tooptip top" theme="dark">,2&<tg-button size="mini">Dark</tg-button>,</tg-tooltip>,<tg-tooltip placement="top" content="tooptip top" theme="light">,2&<tg-button size="mini">Light</tg-button>,</tg-tooltip>',
+    visible: false,
+});
+const toggleDemoCode2 = () => {
+    inputData2.visible = !inputData2.visible;
+};
+const inputData3 = reactive({
+    value: "",
+    code: '<tg-tooltip placement="top" content="tooptip top" trigger="hover">,2&<tg-button size="mini">Hover</tg-button>,</tg-tooltip>,<tg-tooltip placement="top" content="tooptip top" trigger="click">,2&<tg-button size="mini">Click</tg-button>,</tg-tooltip>',
+    visible: false,
+});
+const toggleDemoCode3 = () => {
+    inputData3.visible = !inputData3.visible;
 };
 </script>
 <style lang="scss" scoped>
