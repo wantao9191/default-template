@@ -71,17 +71,10 @@
         </a>
     </div>
     </div>
-    <!-- 主题 -->
+    <!-- 提交内容 -->
     <div class="demo-block">
         <div class="demo-component">
-            <tg-tooltip placement="top" content="tooptip top" theme="dark" style="margin-right:12px">
-                <template #content>tooptip left slot</template>
-                <tg-button size="mini">Dark</tg-button>
-            </tg-tooltip>
-            <tg-tooltip placement="top" content="tooptip top" theme="light">
-                <template #content>tooptip left slot</template>
-                <tg-button size="mini">Light</tg-button>
-            </tg-tooltip>
+            <tg-button size="mini" theme="link" @click="openpromptBox">点击打开prompt box</tg-button>
         </div>
         <div class="demo-desc">
             <span class="desc-title">主题</span>
@@ -167,7 +160,17 @@ const openMessageBox = () => {
     })
 }
 const openConfirmBox = () => {
-    messageBox.confirm('这是一段内容', '提示').then(() => { }).catch(() =>{})
+    messageBox.confirm('这是一段内容', '提示').then(() => { }).catch(() => { })
+}
+const openpromptBox = () => {
+    messageBox.prompt('请输入邮箱', '提示',
+        {
+            inputValue: '', inputPlaceholder: '请输入邮箱啊',
+            inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+            errorMessage: '请输入邮箱'
+        }).then(({ value }) => {
+            console.log(value)
+        }).catch(() => { })
 }
 const inputData = reactive({
     value: "",

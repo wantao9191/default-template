@@ -250,15 +250,25 @@ $grey: #ddd;
     animation: tg-spin 1s infinite linear;
   }
 
+  &.tg-theme-button {
+    >.tg-loadingIndicator {
+      border-color: #fff #fff #fff transparent;
+    }
+  }
+
   &.tg-normal-button {
     &[disabled] {
-      &:hover{
+
+      &:hover {
         background: #fff;
         color: inherit;
         border-color: #fff;
       }
     }
 
+    >.tg-loadingIndicator {
+      border-color: $primary $primary $primary transparent;
+    }
   }
 
 }

@@ -27,6 +27,7 @@
 </template>
 <script setup>
 import { ref, computed, toRef, useSlots } from "vue";
+import tgIcon from "./icon.vue";
 const props = defineProps({
   type: { type: String, default: "text" },
   value: { type: [String,Number], default: "" },
