@@ -202,9 +202,8 @@ $grey: #ddd;
       opacity: .6;
 
       &:hover {
-        background: #fff;
-        border-color: #fff;
-        color: inherit;
+        background: $primary;
+        border-color: $primary;
       }
     }
   }
@@ -250,6 +249,18 @@ $grey: #ddd;
     border-width: 2px;
     animation: tg-spin 1s infinite linear;
   }
+
+  &.tg-normal-button {
+    &[disabled] {
+      &:hover{
+        background: #fff;
+        color: inherit;
+        border-color: #fff;
+      }
+    }
+
+  }
+
 }
 
 @keyframes tg-spin {

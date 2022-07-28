@@ -1,12 +1,12 @@
 <template>
     <div class="demo icon-demo">
-        <h2>tooltip 文字提示</h2>
+        <h2>messageBox 消息弹窗</h2>
         <p>
-            常用于展示鼠标 hover 时的提示信息。
+            模拟系统的消息提示框而实现的一套模态对话框组件，用于消息提示、确认消息和提交内容。
         </p>
         <h3>何时使用</h3>
         <ul>
-            <li>网页文本鼠标hover后展示详细信息</li>
+            <li>业务过程，提示，确认等操作。</li>
         </ul>
         <h3>代码演示</h3>
         <!-- 基本用法 -->
@@ -16,13 +16,12 @@
             </div>
             <div class="demo-desc">
                 <span class="desc-title">基本用法</span>
-                <div class="desc-text">最简单的用法</div>
+                <div class="desc-text">打开一个消息弹窗</div>
             </div>
             <div class="demo-code" v-show="inputData.visible">
                 <code class="code-bg">
           <div class="code-text">
-            传入
-            <code>placement</code> <code>String</code> 类型的变量，控制 <code>tooltip</code>位置
+            通过 <code>alert</code>方法打开提示弹窗，当用户进行操作时会被触发，该对话框中断用户操作，直到用户确认知晓后才可关闭。
             </div>
             <m-code :value="inputData.code"></m-code>
             </code>
@@ -40,24 +39,21 @@
             </a>
         </div>
     </div>
-    <!-- 插槽 -->
+    <!-- 确认弹窗 -->
     <div class="demo-block">
         <div class="demo-component">
-            <tg-tooltip placement="top" content="tooptip top" theme="dark">
-                <template #content>tooptip <br> top</template>
-                <tg-button size="mini">tooptip top</tg-button>
-            </tg-tooltip>
+            <tg-button size="mini" theme="link" @click="openConfirmBox">点击打开confirm box</tg-button>
         </div>
         <div class="demo-desc">
-            <span class="desc-title">更多文字提示</span>
+            <span class="desc-title">确认弹窗</span>
             <div class="desc-text">
-                展示多行文本或者是设置文本内容的格式。
+                打开一个确认弹窗
             </div>
         </div>
         <div class="demo-code" v-show="inputData1.visible">
             <code class="code-bg">
           <div class="code-text">
-            使用具名插槽slot <code>content</code> 替代 <code>tooltip</code> 中的 <code>content</code> 属性
+            通过 <code>confirm</code>方法打开确认弹窗，提示用户确认其已经触发的动作，并询问是否进行此操作时会用到此对话框。
         </div>
         <m-code :value="inputData1.code"></m-code>
         </code>
@@ -159,19 +155,23 @@
 import { reactive } from "vue";
 import MCode from "@/components/MCode.vue";
 import { messageBox } from "@/libs";
-const openMessageBox = ()=>{
-    messageBox.alert('这是一段内容','标题名称',{
-        cancelButtonText:'放弃',
-        confirmButtonText:'保存',
-        beforeClose:(action,instance,done)=>{
-            console.log(instance)
-            // done()
+const openMessageBox = () => {
+    messageBox.alert('这是一段内容', '提示', {
+        beforeClose: (action, instance, done) => {
+            if (action === 'confirm') {
+                instance.confirmLoading = true
+            } else {
+                done()
+            }
         }
     })
 }
+const openConfirmBox = () => {
+    messageBox.confirm('这是一段内容', '提示').then(() => { }).catch(() =>{})
+}
 const inputData = reactive({
     value: "",
-    code: '<tg-tooltip placement="top" content="tooptip top">,2&<tg-button size="mini">tooptip top</tg-button>,</tg-tooltip>,<tg-tooltip placement="right" content="tooptip right">,2&<tg-button size="mini">tooptip right</tg-button>,</tg-tooltip>,<tg-tooltip placement="bottom" content="tooptip bottom">,2&<tg-button size="mini">tooptip bottom</tg-button>,</tg-tooltip>,<tg-tooltip placement="left" content="tooptip left">,2&<tg-button size="mini">tooptip left</tg-button>,</tg-tooltip>',
+    code: 'import { messageBox，message } from "tg-ui";,<script setup>,2&messageBox.alert("这是一段内容"，"提示").then(()=>{,4&,6&message.success("确认了弹窗") ,2&}),<script>',
     visible: false,
 });
 const toggleDemoCode = () => {
@@ -179,7 +179,7 @@ const toggleDemoCode = () => {
 };
 const inputData1 = reactive({
     value: "",
-    code: '<tg-tooltip placement="top">,2&<template #content>tooptip top</template>,2&<tg-button size="mini">tooptip top</tg-button>,</tg-tooltip>',
+    code: 'import { messageBox，message } from "tg-ui";,<script setup>,2&messageBox.confirm("这是一段内容"，"提示").then(()=>{,4&,6&message.success("确认了弹窗") ,2&}).catch(()=>{,6&message.error("取消了弹窗"),2&}),<script>',
     visible: false,
 });
 const toggleDemoCode1 = () => {

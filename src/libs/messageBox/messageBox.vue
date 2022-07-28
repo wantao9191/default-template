@@ -7,15 +7,18 @@
             </header>
             <main>{{ props.content }}</main>
             <footer>
-                <tg-button size="mini" @click="cancel" :loading="props.cancelLoading">{{ props.cancelButtonText }}
+                <tg-button size="mini" @click="cancel" :loading="props.cancelLoading" v-if="props.type!='alert'">{{
+                        props.cancelButtonText
+                }}
                 </tg-button>
-                <tg-button size="mini" type="primary" @click="confirm" :loadin="props.confirmLoading">
-                 {{props.confirmLoading}}   {{ props.confirmButtonText }}</tg-button>
+                <tg-button size="mini" type="primary" @click="confirm" :loading="props.confirmLoading">
+                    {{ props.confirmButtonText }}</tg-button>
             </footer>
         </div>
     </div>
 </template>
 <script setup>
+import { ref } from "vue";
 import tgButton from "../button.vue";
 import tgIcon from "../icon.vue";
 const props = defineProps({
@@ -23,9 +26,12 @@ const props = defineProps({
     content: { type: String, default: '' },
     cancelButtonText: { type: String, default: '取消' },
     confirmButtonText: { type: String, default: '确认' },
+    type:String,
     cancelLoading: Boolean,
     confirmLoading: Boolean
 })
+const loading = ref(false)
+
 const emits = defineEmits(['confirm', 'cancel', 'close'])
 const confirm = () => {
     emits('confirm')
@@ -36,6 +42,7 @@ const close = () => {
 const cancel = () => {
     emits('cancel')
 }
+defineExpose({ loading, confirm })
 </script>
 <style lang="scss" scoped>
 .tg-messagebox-box {

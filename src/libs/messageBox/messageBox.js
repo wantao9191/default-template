@@ -1,20 +1,11 @@
-import { createApp, h } from 'vue'
+import { createApp, h, reactive } from 'vue'
 import MessageBox from './messageBox.vue'
+
 const createMessage = ({ title, content, confirmButtonText, cancelButtonText, instance, type, beforeClose }) => {
     const dom = document.createElement('div')
-    const ins = {
+    const ins = reactive({
         cancelLoading: false,
-        confirmLoading: false
-    }
-    const proxyIns = new Proxy(ins,{
-        get:(target,attr)=>{
-            console.log(target,attr)
-            return  target[attr]
-            
-        },
-        set:(target,attr,value)=>{
-            console.log(target,attr,value)
-        }
+        confirmLoading: false,
     })
     const remove = () => {
         dom.remove()
@@ -29,27 +20,26 @@ const createMessage = ({ title, content, confirmButtonText, cancelButtonText, in
     const confirmApp = ({ ...arg }) => createApp({
         render() {
             return h(MessageBox, {
-                title, content, type, confirmButtonText, cancelButtonText,
-                onConfirm: () => { beforeClose ? beforeClose('confirm', proxyIns, close) : close(arg.resolve) },
-                onCancel: () => { beforeClose ? beforeClose('cancel', proxyIns, close) : close(arg.reject) },
-                onClose: () => { beforeClose ? beforeClose('close', null, close) : close(arg.reject) }
+                title, content, type, confirmButtonText, cancelButtonText, cancelLoading: ins.cancelLoading, confirmLoading: ins.confirmLoading,
+                onConfirm: () => { beforeClose ? beforeClose('confirm', ins, close) : close(arg.resolve) },
+                onCancel: () => { beforeClose ? beforeClose('cancel', ins, close) : close(arg.reject) },
+                onClose: () => { beforeClose ? beforeClose('close', ins, close) : close(arg.reject) }
             })
         }
     })
-   
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            ins.confirmLoading = true
-        }, 1000);
         instance = confirmApp({ resolve, reject })
         instance.mount(dom)
         document.body.append(dom)
     })
 }
 const alert = (content, title, options) => {
-    return createMessage({ content, title, ...options })
+    return createMessage({ content, title,type:'alert', ...options })
+}
+const confirm = (content, title, options) => {
+    return createMessage({ content, title,type:'confirm', ...options })
 }
 const messageBox = {
-    alert
+    alert,confirm
 }
 export { messageBox }
