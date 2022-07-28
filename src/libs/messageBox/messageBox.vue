@@ -1,6 +1,6 @@
 <template>
     <div class="tg-messagebox-box" @click="close">
-        <div class="tg-messagebox-wrap" @click.stop>
+        <div class="tg-messagebox-wrap" :class="[`tg-message-${props.align}`]" @click.stop>
             <header>
                 {{ props.title }}
                 <tg-icon icon="tg-close" class="close" size="24" @click="close"></tg-icon>
@@ -34,11 +34,12 @@ const props = defineProps({
     confirmButtonText: { type: String, default: '确认' },
     inputValue: { type: String, default: '' },
     inputPlaceholder: { type: String, default: '' },
+    align: { type: String, default: 'left' },
     type: String,
     errorMessage: String,
     isError: Boolean,
     cancelLoading: Boolean,
-    confirmLoading: Boolean
+    confirmLoading: Boolean,
 })
 const inputValue = ref(props.inputValue)
 const emits = defineEmits(['confirm', 'cancel', 'close', 'update:inputValue'])
@@ -73,7 +74,12 @@ const emitValue = value => {
         background: #fff;
         border-radius: 6px;
         width: 320px;
-
+        &.tg-message-center {
+            text-align: center;
+            footer {
+                text-align: center;
+            }
+        }
         header {
             padding: 12px;
             position: relative;

@@ -13,6 +13,7 @@ const createMessage = ({
     inputPattern,
     inputPlaceholder,
     errorMessage,
+    align
 }) => {
     const dom = document.createElement('div')
     const insObject = {
@@ -54,6 +55,7 @@ const createMessage = ({
                 inputValue,
                 inputPlaceholder,
                 errorMessage,
+                align,
                 'onUpdate:inputValue': value => ins.inputValue = value,
                 onConfirm: () => { beforeClose ? beforeClose('confirm', ins, close) : close('confirm', arg.resolve, ins.inputValue) },
                 onCancel: () => { beforeClose ? beforeClose('cancel', ins, close) : close('cancel', arg.reject) },

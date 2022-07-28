@@ -77,15 +77,18 @@
             <tg-button size="mini" theme="link" @click="openpromptBox">点击打开prompt box</tg-button>
         </div>
         <div class="demo-desc">
-            <span class="desc-title">主题</span>
+            <span class="desc-title">提交内容</span>
             <div class="desc-text">
-                使用 <code>theme</code> 属性控制 <code>tooltip</code> 颜色
+                当需要用户输入内容时，可以使用 Prompt 类型的消息框。
             </div>
         </div>
         <div class="demo-code" v-show="inputData2.visible">
             <code class="code-bg">
           <div class="code-text">
-            传入 <code>theme</code> <code>dark</code> <code>light</code> 改变主题
+           通过 <code>prompt</code>方法打开提交内容弹窗，
+            可以用 <code>inputPattern</code> 字段自己规定匹配模式， 用 <code>errorMessage</code> 来提示用户错误原因。 此外，可以用
+            <code>inputPlaceholder</code>
+            字段来定义输入框的占位符。
         </div>
         <m-code :value="inputData2.code"></m-code>
         </code>
@@ -103,28 +106,21 @@
         </a>
     </div>
     </div>
-    <!-- 触发方式 -->
+    <!-- 居中布局 -->
     <div class="demo-block">
         <div class="demo-component">
-            <tg-tooltip placement="top" content="tooptip top" theme="dark" style="margin-right:12px">
-                <template #content>tooptip left slot</template>
-                <tg-button size="mini">Hover</tg-button>
-            </tg-tooltip>
-            <tg-tooltip placement="top" content="tooptip top" trigger="click">
-                <template #content>tooptip left slot</template>
-                <tg-button size="mini">Click</tg-button>
-            </tg-tooltip>
+            <tg-button size="mini" theme="link" @click="openMessageBoxCenter">点击打开message box</tg-button>
         </div>
         <div class="demo-desc">
-            <span class="desc-title">触发方式</span>
+            <span class="desc-title">居中布局</span>
             <div class="desc-text">
-                改变 <code>tooltip</code> 的触发方式，更加灵活
+                消息弹框支持使用居中布局。
             </div>
         </div>
         <div class="demo-code" v-show="inputData3.visible">
             <code class="code-bg">
           <div class="code-text">
-            传入 <code>trigger</code> <code>click</code> <code>hover</code> 控制触发方式
+           将 <code>center</code> 属性设置为 <code>true</code> 可将内容居中显示。
         </div>
         <m-code :value="inputData3.code"></m-code>
         </code>
@@ -159,6 +155,13 @@ const openMessageBox = () => {
         }
     })
 }
+const openMessageBoxCenter = () => {
+    messageBox.alert('这是一段内容', '提示', {
+        align: 'center'
+    }).then(() => {
+
+    }).catch(() => { })
+}
 const openConfirmBox = () => {
     messageBox.confirm('这是一段内容', '提示').then(() => { }).catch(() => { })
 }
@@ -167,7 +170,7 @@ const openpromptBox = () => {
         {
             inputValue: '', inputPlaceholder: '请输入邮箱啊',
             inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-            errorMessage: '请输入邮箱'
+            errorMessage: '请输入邮箱',
         }).then(({ value }) => {
             console.log(value)
         }).catch(() => { })
@@ -190,7 +193,7 @@ const toggleDemoCode1 = () => {
 };
 const inputData2 = reactive({
     value: "",
-    code: '<tg-tooltip placement="top" content="tooptip top" theme="dark">,2&<tg-button size="mini">Dark</tg-button>,</tg-tooltip>,<tg-tooltip placement="top" content="tooptip top" theme="light">,2&<tg-button size="mini">Light</tg-button>,</tg-tooltip>',
+    code: 'import { messageBox，message } from "tg-ui";,<script setup>,2&messageBox.prompt("这是一段内容"，"提示",4&{,6&errorMessage:"请输入邮箱",6&inputPattern:/正则内容/,4&}).then(()=>{,4&,6&message.success("确认了弹窗"),2&}).catch(()=>{,6&message.error("取消了弹窗"),2&}),<script>',
     visible: false,
 });
 const toggleDemoCode2 = () => {
@@ -198,7 +201,7 @@ const toggleDemoCode2 = () => {
 };
 const inputData3 = reactive({
     value: "",
-    code: '<tg-tooltip placement="top" content="tooptip top" trigger="hover">,2&<tg-button size="mini">Hover</tg-button>,</tg-tooltip>,<tg-tooltip placement="top" content="tooptip top" trigger="click">,2&<tg-button size="mini">Click</tg-button>,</tg-tooltip>',
+    code: 'import { messageBox，message } from "tg-ui";,<script setup>,2&messageBox.alert("这是一段内容"，"提示",4&{,6&align:"center",4&}).then(()=>{,4&,6&message.success("确认了弹窗"),2&}).catch(()=>{,6&message.error("取消了弹窗"),2&}),<script>',
     visible: false,
 });
 const toggleDemoCode3 = () => {
