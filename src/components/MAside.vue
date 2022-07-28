@@ -43,7 +43,7 @@ export default {
           { label: "Select 下拉框", path: "/doc/select" },
           { label: "DatePicker 时间选择器", path: "/doc/datePicker" },
           { label: "tooltip 文字提示", path: "/doc/tooltip" },
-          { label: "messageBox 弹框", path: "/doc/messageBox" },
+          { label: "messageBox 提示弹框", path: "/doc/messageBox" },
         ],
       },
     ]);
@@ -75,8 +75,10 @@ export default {
 
       &.active {
         // background: #333;
-        border-right: 3px solid #1890ff;
+        border-right: 3px solid $primary;
         background: #f0faff;
+        font-weight: bold;
+        color: $primary;
       }
 
       >.label {
@@ -84,7 +86,7 @@ export default {
         padding: 12px 12px 12px 24px;
 
         &:hover {
-          color: #1890ff;
+          color: $primary;
         }
       }
 

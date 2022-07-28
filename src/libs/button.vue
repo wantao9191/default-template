@@ -200,10 +200,10 @@ $grey: #ddd;
     &[disabled] {
       cursor: not-allowed;
       opacity: .6;
-
       &:hover {
-        background: $primary;
+        background: $primary !important;
         border-color: $primary;
+        color: #fff !important;
       }
     }
   }
@@ -214,7 +214,8 @@ $grey: #ddd;
       opacity: .6;
 
       &:hover {
-        background: $danger;
+        background: $danger !important;
+        color: #fff !important;
       }
     }
   }
@@ -225,7 +226,8 @@ $grey: #ddd;
       opacity: .6;
 
       &:hover {
-        background: $success;
+        background: $success !important;
+        color: #fff !important;
       }
     }
   }
@@ -258,7 +260,6 @@ $grey: #ddd;
 
   &.tg-normal-button {
     &[disabled] {
-
       &:hover {
         background: #fff;
         color: inherit;
