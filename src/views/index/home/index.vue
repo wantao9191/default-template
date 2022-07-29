@@ -34,7 +34,7 @@
 </template>
 <script setup>
 import { useRouter } from "vue-router";
-
+document.title = '首页 | TG-Design'
 const router = useRouter()
 const jump = () => {
   router.push('/doc')

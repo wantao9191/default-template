@@ -7,26 +7,20 @@
     </main>
   </main>
 </template>
-<script>
+<script setup>
 import MAside from "@/components/MAside.vue";
 import MNav from "@/components/MNav.vue";
 import { ref } from 'vue';
 import { onBeforeRouteUpdate, useRoute } from 'vue-router';
-export default {
-  components: { MAside, MNav },
-  setup() {
-    const routerkey = ref('')
-    const route= useRoute()
-    onBeforeRouteUpdate((to) => {
-      routerkey.value = to.path
-      document.title = to.meta ?to.meta.title +'| TG-Design':'TG-Design'
-      document.querySelector('.router-main').scrollTop = 0
-    })
-    document.title = route.meta ?route.meta.title +'| TG-Design':'TG-Design'
-    const onClick = () => { };
-    return { onClick, routerkey };
-  },
-};
+
+const routerkey = ref(new Date().getTime())
+const route = useRoute()
+onBeforeRouteUpdate((to) => {
+  routerkey.value = to.path
+  document.title = to.meta ? to.meta.title + ' | TG-Design' : 'TG-Design'
+  document.querySelector('.router-main').scrollTop = 0
+})
+document.title = route.meta ? route.meta.title + ' | TG-Design' : 'TG-Design'
 </script>
 <style lang="scss">
 @import './demo/demo.scss';

@@ -42,8 +42,9 @@ export default {
           { label: "Checkbox 多选框", path: "/doc/checkbox" },
           { label: "Select 下拉框", path: "/doc/select" },
           { label: "DatePicker 时间选择器", path: "/doc/datePicker" },
-          { label: "tooltip 文字提示", path: "/doc/tooltip" },
-          { label: "messageBox 提示弹框", path: "/doc/messageBox" },
+          { label: "Tooltip 文字提示", path: "/doc/tooltip" },
+          { label: "MessageBox 提示弹框", path: "/doc/messageBox" },
+          { label: "Message 消息提示", path: "/doc/message" },
         ],
       },
     ]);

@@ -74,6 +74,11 @@ const routes = [
                 component: () => import('@/views/index/doc/demo/messageBoxDemo.vue'),
                 meta:{title:'MessageBox 提示弹框'}
             },
+            {
+                path: 'message', name: 'message',
+                component: () => import('@/views/index/doc/demo/messageDemo.vue'),
+                meta:{title:'Message 消息提示'}
+            },
         ]
     },
     {
