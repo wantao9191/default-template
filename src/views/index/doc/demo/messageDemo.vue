@@ -1,12 +1,12 @@
 <template>
     <div class="demo icon-demo">
-        <h2>messageBox 消息弹窗</h2>
+        <h2>message 消息弹窗</h2>
         <p>
-            模拟系统的消息提示框而实现的一套模态对话框组件，用于消息提示、确认消息和提交内容。
+           常用于主动操作后的反馈提示。
         </p>
         <h3>何时使用</h3>
         <ul>
-            <li>业务过程，提示，确认等操作。</li>
+            <li>操作后反馈用户，根据状态显示不同弹窗。</li>
         </ul>
         <h3>代码演示</h3>
         <!-- 基本用法 -->
@@ -16,7 +16,7 @@
             </div>
             <div class="demo-desc">
                 <span class="desc-title">基本用法</span>
-                <div class="desc-text">打开一个消息弹窗</div>
+                <div class="desc-text">从顶部弹出，3秒后消失。</div>
             </div>
             <div class="demo-code" v-show="inputData.visible">
                 <code class="code-bg">
@@ -145,7 +145,7 @@ import { reactive } from "vue";
 import MCode from "@/components/MCode.vue";
 import { message } from "@/libs";
 const openMessageBox = () => {
-    message({message:'这是一个消息弹窗'})
+    message({message:'这是一个消息弹窗',type:'error'})
 }
 const openMessageBoxCenter = () => {
     messageBox.alert('这是一段内容', '提示', {
