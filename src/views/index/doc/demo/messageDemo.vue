@@ -148,7 +148,7 @@ const openMessageBox = () => {
     message({ message: '这是一个消息弹窗' })
 }
 const openMessageBoxCenter = () => {
-    message({ message: '这是一个可关闭消息弹窗', showClose:true })
+    message({ message: '这是一个可关闭消息弹窗', showClose: true })
 }
 const openConfirmBox = (type) => {
     message({ message: '这是一个消息弹窗', type })
