@@ -12,11 +12,7 @@
         <!-- 基础用法 -->
         <div class="demo-block">
             <div class="demo-component">
-                <tg-icon icon="tg-appstore" size="32" class="demo-icon"></tg-icon>
-                <tg-icon icon="tg-alert" size="32" class="demo-icon"></tg-icon>
-                <tg-icon icon="tg-alarm" size="32" class="demo-icon"></tg-icon>
-                <tg-icon icon="tg-chatboxes" size="32" class="demo-icon"></tg-icon>
-                <tg-icon icon="tg-cloudy" size="32" class="demo-icon"></tg-icon>
+                <component :is="iconDemo1"></component>
             </div>
             <div class="demo-desc">
                 <span class="desc-title">基本用法</span>
@@ -32,7 +28,7 @@
                 <code>tg-icon</code>
                 的样式。
             </div>
-            <m-code :value="iconData.code"></m-code>
+            <pre v-html="demo1"></pre>
             </code>
         </div>
         <div class="demo-btns">
@@ -46,11 +42,7 @@
     </div>
     <div class="demo-block">
         <div class="demo-component">
-            <tg-icon icon="tg-appstore" size="24" class="demo-icon"></tg-icon>
-            <tg-icon icon="tg-alert" size="28" class="demo-icon"></tg-icon>
-            <tg-icon icon="tg-alarm" size="36" class="demo-icon"></tg-icon>
-            <tg-icon icon="tg-chatboxes" size="40" class="demo-icon"></tg-icon>
-            <tg-icon icon="tg-cloudy" size="48" class="demo-icon"></tg-icon>
+            <component :is="iconDemo2"></component>
         </div>
         <div class="demo-desc">
             <span class="desc-title">改变尺寸</span>
@@ -66,7 +58,7 @@
             <code>tg-icon</code>
             的尺寸。
         </div>
-        <m-code :value="iconData1.code"></m-code>
+        <pre v-html="demo2"></pre>
         </code>
     </div>
     <div class="demo-btns">
@@ -78,12 +70,12 @@
         </a>
     </div>
     </div>
-    <h3>全部图标</h3>
-    <ul>
-        <li>
-            点击下面的图标按钮可以直接复制组件代码
-        </li>
-    </ul>
+    <div class="demo-block">
+        <div class="demo-component" style="font-size: 12px;color:#888">点击下面的图标按钮可以直接复制组件代码</div>
+        <div class="demo-desc">
+            <span class="desc-title">全部图标</span>
+        </div>
+    </div>
     <div class="icons">
         <div class="icon-item" v-for="item in icons" :key="item.icon_id">
             <tg-icon :icon="item.name" size="32"></tg-icon>
@@ -92,34 +84,40 @@
     </div>
     </div>
 </template>
-<script>
+<script setup lang="ts">
 import { reactive } from "vue";
-import MCode from "@/components/MCode.vue";
 import json from '@/assets/icons/iconfont.json'
-export default {
-    components: { MCode },
-    setup() {
-        const icons = reactive(json.glyphs)
-        const iconData = reactive({
-            visible: false,
-            txt: "显示",
-            code: '<tg-icon icon="tg-appstore"></tg-icon>,<tg-icon icon="tg-alert"></tg-icon>,<tg-icon icon="tg-alarm"></tg-icon>,<tg-icon icon="tg-chatboxes"></tg-icon>,<tg-icon icon="tg-cloudy"></tg-icon>',
-        });
-        const toggleDemoCode = () => {
-            iconData.visible = !iconData.visible;
-            iconData.txt = iconData.visible ? "收起" : "显示";
-        };
-        const iconData1 = reactive({
-            visible: false,
-            txt: "显示",
-            code: '<tg-icon icon="tg-appstore" size="24"></tg-icon>,<tg-icon icon="tg-alert" size="28"></tg-icon>,<tg-icon icon="tg-alarm" size="36"></tg-icon>,<tg-icon icon="tg-chatboxes" size="40"></tg-icon>,<tg-icon icon="tg-cloudy" size="48"></tg-icon>',
-        });
-        const toggleDemoCode1 = () => {
-            iconData1.visible = !iconData1.visible;
-            iconData1.txt = iconData1.visible ? "收起" : "显示";
-        };
-        return { iconData, toggleDemoCode, toggleDemoCode1, iconData1, icons };
-    },
+import iconDemo1Raw from './icon1.demo.vue?raw'
+import iconDemo1 from './icon1.demo.vue'
+import iconDemo2Raw from './icon2.demo.vue?raw'
+import iconDemo2 from './icon2.demo.vue'
+const Prism = (window as any).Prism;
+const demo1 = Prism.highlight(
+    iconDemo1Raw,
+    Prism.languages.html,
+    "html"
+);
+const demo2 = Prism.highlight(
+    iconDemo2Raw,
+    Prism.languages.html,
+    "html"
+);
+const icons = reactive(json.glyphs)
+const iconData = reactive({
+    visible: false,
+    txt: "显示",
+});
+const toggleDemoCode = () => {
+    iconData.visible = !iconData.visible;
+    iconData.txt = iconData.visible ? "收起" : "显示";
+};
+const iconData1 = reactive({
+    visible: false,
+    txt: "显示",
+});
+const toggleDemoCode1 = () => {
+    iconData1.visible = !iconData1.visible;
+    iconData1.txt = iconData1.visible ? "收起" : "显示";
 };
 </script>
 <style lang="scss" scoped>

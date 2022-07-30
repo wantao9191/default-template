@@ -21,7 +21,7 @@ const routes = [
         children: [
             {
                 path: 'icon', name: 'icon',
-                component: () => import('@/views/index/doc/demo/iconDemo.vue'),
+                component: () => import('@/views/index/doc/demo/iconDemo/index.vue'),
                 meta:{title:'Icon 图标'}
             },
             {
@@ -31,12 +31,12 @@ const routes = [
             },
             {
                 path: 'switch', name: 'switch',
-                component: () => import('@/views/index/doc/demo/switchDemo.vue'),
+                component: () => import('@/views/index/doc/demo/switchDemo/index.vue'),
                 meta:{title:'Switch 开关'}
             },
             {
                 path: 'button', name: 'button',
-                component: () => import('@/views/index/doc/demo/buttonDemo.vue'),
+                component: () => import('@/views/index/doc/demo/buttonDemo/index.vue'),
                 meta:{title:'Button 按钮'}
             },
             {

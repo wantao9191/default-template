@@ -21,37 +21,30 @@
           <div class="code-text">
             通过
             <code>visible</code>
-            属性
-            <code>Boolean</code> 类型的变量，打开/关闭
-            <code>tg-dialog</code>
-            对话框。
-          </div>
-        </code>
-        <pre class="language-html" v-html="demo1"></pre>
+        属性
+        <code>Boolean</code> 类型的变量，打开/关闭
+        <code>tg-dialog</code>
+        对话框。
       </div>
-      <div class="demo-btns">
-        <a href="javaScript:;">copy</a>
-        <a href="javaScript:;" @click="demo1Visible =!demo1Visible">{{demo1Visible?'隐藏':'显示'}}</a>
-      </div>
+      </code>
+      <pre class="language-html" v-html="demo1"></pre>
+    </div>
+    <div class="demo-btns">
+      <a href="javaScript:;">copy</a>
+      <a href="javaScript:;" @click="demo1Visible = !demo1Visible">{{ demo1Visible ? '隐藏' : '显示' }}</a>
     </div>
   </div>
+  </div>
 </template>
-<script lang="ts">
+<script setup lang="ts">
+import dialogDemoRaw from "./dialog1.demo.vue?raw";
 import dialogDemo1 from "./dialog1.demo.vue";
-import { reactive, ref } from "vue";
-import "prismjs";
-export default {
-  setup() {
-    const Prism: any = (window as any).Prism;
-    const demo1 = reactive(dialogDemo1)
-    console.log()
-    // const demo1 = Prism.highlight(
-    //   dialogDemo1.__demo,
-    //   Prism.languages.html,
-    //   "html"
-    // );
-    const demo1Visible = ref(false)
-    return { demo1,dialogDemo1,demo1Visible };
-  },
-};
+import {  ref } from "vue";
+const Prism = (window as any).Prism;
+const demo1 = Prism.highlight(
+  dialogDemoRaw,
+  Prism.languages.html,
+  "html"
+);
+const demo1Visible = ref(false)
 </script>
