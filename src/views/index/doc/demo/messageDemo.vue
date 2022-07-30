@@ -158,7 +158,7 @@ const openpromptBox = () => {
 }
 const inputData = reactive({
     value: "",
-    code: 'import { messageBox，message } from "tg-ui";,<script setup>,2&messageBox.alert("这是一段内容"，"提示").then(()=>{,4&,6&message.success("确认了弹窗") ,2&}),<script>',
+    code: 'import { message } from "tg-ui";,<script setup>,2&message({message:"这是一段内容"}),<script>',
     visible: false,
 });
 const toggleDemoCode = () => {
@@ -166,7 +166,7 @@ const toggleDemoCode = () => {
 };
 const inputData1 = reactive({
     value: "",
-    code: 'import { messageBox，message } from "tg-ui";,<script setup>,2&messageBox.confirm("这是一段内容"，"提示").then(()=>{,4&,6&message.success("确认了弹窗") ,2&}).catch(()=>{,6&message.error("取消了弹窗"),2&}),<script>',
+    code: 'import { message } from "tg-ui";,<script setup>,2&message({,4&message:"这是一段内容",4&type:"message",2&}),2&message({,4&message:"这是一段内容",4&type:"success",2&}),2&message({,4&message:"这是一段内容",4&type:"warning",2&}),2&message({,4&message:"这是一段内容",4&type:"error",2&}),<script>',
     visible: false,
 });
 const toggleDemoCode1 = () => {
@@ -174,7 +174,7 @@ const toggleDemoCode1 = () => {
 };
 const inputData2 = reactive({
     value: "",
-    code: 'import { messageBox，message } from "tg-ui";,<script setup>,2&messageBox.prompt("这是一段内容"，"提示",4&{,6&errorMessage:"请输入邮箱",6&inputPattern:/正则内容/,4&}).then(()=>{,4&,6&message.success("确认了弹窗"),2&}).catch(()=>{,6&message.error("取消了弹窗"),2&}),<script>',
+    code: 'import { message } from "tg-ui";,<script setup>,2&message({,4&message:"这是一个居中消息弹窗",4&align:"center",2&}),<script>',
     visible: false,
 });
 const toggleDemoCode2 = () => {
@@ -182,7 +182,7 @@ const toggleDemoCode2 = () => {
 };
 const inputData3 = reactive({
     value: "",
-    code: 'import { messageBox，message } from "tg-ui";,<script setup>,2&messageBox.alert("这是一段内容"，"提示",4&{,6&align:"center",4&}).then(()=>{,4&,6&message.success("确认了弹窗"),2&}).catch(()=>{,6&message.error("取消了弹窗"),2&}),<script>',
+    code: 'import { message } from "tg-ui";,<script setup>,2&message({,4&message:"这是一个可关闭消息弹窗",4&showClose:true,2&}),<script>',
     visible: false,
 });
 const toggleDemoCode3 = () => {
