@@ -1,21 +1,29 @@
 <template>
     <div class="tg-message-box" :style="{ top: props.top + 'px' }">
-        <div class="tg-message-wrap in" :class="[`tg-message-${props.type}`]" @mouseover="mouseover"
-            @mouseout="mouseout">{{
+        <div class="tg-message-wrap in" :style="{ 'text-align': props.align }" :class="[`tg-message-${props.type}`]"
+            @mouseover="mouseover" @mouseout="mouseout">{{
                     props.message
-            }}</div>
+            }}
+            <a href="javaScript:;" @click="onClose" v-if="props.showClose">
+                <tg-icon icon="tg-close" size="20"></tg-icon>
+            </a>
+        </div>
     </div>
 </template>
 <script setup>
-import { onMounted, onUnmounted } from "vue"
+import { onMounted } from "vue"
+import tgIcon from '../icon.vue'
 const props = defineProps({
     message: String,
+    showClose: Boolean,
     type: { type: String, default: 'message' },
-    top: { type: Number, default: 0 }
+    top: { type: Number, default: 0 },
+    align: { type: String, default: 'left' }
 })
 const emits = defineEmits(['close'])
 let timer = null
 const off = () => {
+    if (props.showClose) return
     timer = setTimeout(() => {
         emits('close')
     }, 3000);
@@ -25,6 +33,9 @@ const mouseover = () => {
 }
 const mouseout = () => {
     off()
+}
+const onClose = ()=>{
+    emits('close')
 }
 onMounted(() => off())
 </script>
@@ -42,6 +53,13 @@ onMounted(() => off())
         min-width: 320px;
         border-radius: 6px;
         padding: 8px 12px;
+        position: relative;
+
+        >a {
+            color: inherit;
+            position: absolute;
+            right: 6px;
+        }
 
         &.tg-message-success {
             border: 1px solid #e1f3d8;

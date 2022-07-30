@@ -2,7 +2,7 @@
     <div class="demo icon-demo">
         <h2>message 消息弹窗</h2>
         <p>
-           常用于主动操作后的反馈提示。
+            常用于主动操作后的反馈提示。
         </p>
         <h3>何时使用</h3>
         <ul>
@@ -12,7 +12,7 @@
         <!-- 基本用法 -->
         <div class="demo-block">
             <div class="demo-component">
-                <tg-button size="mini" theme="link" @click="openMessageBox">点击打开message box</tg-button>
+                <tg-button size="mini" theme="link" @click="openMessageBox">open message</tg-button>
             </div>
             <div class="demo-desc">
                 <span class="desc-title">基本用法</span>
@@ -39,21 +39,24 @@
             </a>
         </div>
     </div>
-    <!-- 确认弹窗 -->
+    <!-- 不同状态 -->
     <div class="demo-block">
         <div class="demo-component">
-            <tg-button size="mini" theme="link" @click="openConfirmBox">点击打开confirm box</tg-button>
+            <tg-button size="mini" theme="link" @click="openConfirmBox('message')">message</tg-button>
+            <tg-button size="mini" theme="link" @click="openConfirmBox('success')">success</tg-button>
+            <tg-button size="mini" theme="link" @click="openConfirmBox('warning')">warning</tg-button>
+            <tg-button size="mini" theme="link" @click="openConfirmBox('error')">error</tg-button>
         </div>
         <div class="demo-desc">
-            <span class="desc-title">确认弹窗</span>
+            <span class="desc-title">不同状态</span>
             <div class="desc-text">
-                打开一个确认弹窗
+                用来显示「成功、警告、消息、错误」类的操作反馈。
             </div>
         </div>
         <div class="demo-code" v-show="inputData1.visible">
             <code class="code-bg">
           <div class="code-text">
-            通过 <code>confirm</code>方法打开确认弹窗，提示用户确认其已经触发的动作，并询问是否进行此操作时会用到此对话框。
+            通过 <code>type</code>参数选择不同状态弹窗，默认为message。
         </div>
         <m-code :value="inputData1.code"></m-code>
         </code>
@@ -71,24 +74,21 @@
         </a>
     </div>
     </div>
-    <!-- 提交内容 -->
+    <!-- 文字居中 -->
     <div class="demo-block">
         <div class="demo-component">
-            <tg-button size="mini" theme="link" @click="openpromptBox">点击打开prompt box</tg-button>
+            <tg-button size="mini" theme="link" @click="openpromptBox">open center message</tg-button>
         </div>
         <div class="demo-desc">
-            <span class="desc-title">提交内容</span>
+            <span class="desc-title">文字居中</span>
             <div class="desc-text">
-                当需要用户输入内容时，可以使用 Prompt 类型的消息框。
+                使消息弹窗文字居中
             </div>
         </div>
         <div class="demo-code" v-show="inputData2.visible">
             <code class="code-bg">
           <div class="code-text">
-           通过 <code>prompt</code>方法打开提交内容弹窗，
-            可以用 <code>inputPattern</code> 字段自己规定匹配模式， 用 <code>errorMessage</code> 来提示用户错误原因。 此外，可以用
-            <code>inputPlaceholder</code>
-            字段来定义输入框的占位符。
+           使用 <code>center</code> 属性让文字水平居中。
         </div>
         <m-code :value="inputData2.code"></m-code>
         </code>
@@ -106,13 +106,13 @@
         </a>
     </div>
     </div>
-    <!-- 居中布局 -->
+    <!-- 可关闭的消息提示 -->
     <div class="demo-block">
         <div class="demo-component">
-            <tg-button size="mini" theme="link" @click="openMessageBoxCenter">点击打开message box</tg-button>
+            <tg-button size="mini" theme="link" @click="openMessageBoxCenter">show close</tg-button>
         </div>
         <div class="demo-desc">
-            <span class="desc-title">居中布局</span>
+            <span class="desc-title">可关闭的消息提示</span>
             <div class="desc-text">
                 消息弹框支持使用居中布局。
             </div>
@@ -145,27 +145,16 @@ import { reactive } from "vue";
 import MCode from "@/components/MCode.vue";
 import { message } from "@/libs";
 const openMessageBox = () => {
-    message({message:'这是一个消息弹窗',type:'error'})
+    message({ message: '这是一个消息弹窗' })
 }
 const openMessageBoxCenter = () => {
-    messageBox.alert('这是一段内容', '提示', {
-        align: 'center'
-    }).then(() => {
-
-    }).catch(() => { })
+    message({ message: '这是一个可关闭消息弹窗', showClose:true })
 }
-const openConfirmBox = () => {
-    messageBox.confirm('这是一段内容', '提示').then(() => { }).catch(() => { })
+const openConfirmBox = (type) => {
+    message({ message: '这是一个消息弹窗', type })
 }
 const openpromptBox = () => {
-    messageBox.prompt('请输入邮箱', '提示',
-        {
-            inputValue: '', inputPlaceholder: '请输入邮箱啊',
-            inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-            errorMessage: '请输入邮箱',
-        }).then(({ value }) => {
-            console.log(value)
-        }).catch(() => { })
+    message({ message: '这是一个居中消息弹窗', align: 'center' })
 }
 const inputData = reactive({
     value: "",
