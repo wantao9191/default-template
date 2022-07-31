@@ -12,10 +12,7 @@
         <!-- 基本用法 -->
         <div class="demo-block">
             <div class="demo-component">
-                <tg-select v-model:value="selectData.value">
-                    <tg-option value="选项一"></tg-option>
-                    <tg-option value="选项二"></tg-option>
-                </tg-select>
+                <component :is="selectDemo1"></component>
             </div>
             <div class="demo-desc">
                 <span class="desc-title">基本用法</span>
@@ -29,7 +26,7 @@
             要使用 <code>Select</code> 组件，只需要设置 <code>v-model:value</code> 绑定变量， 选中变量的值为相应 <code>Select Value</code>
                 属性的值，<code>value</code> 可以是 <code>String</code> 、<code>Number</code>。
             </div>
-            <m-code :value="selectData.code"></m-code>
+            <pre v-html="demo1"></pre>
             </code>
         </div>
         <div class="demo-btns">
@@ -44,10 +41,7 @@
     <!-- 可清空选项 -->
     <div class="demo-block">
         <div class="demo-component">
-            <tg-select v-model:value="selectData3.value" clearable>
-                <tg-option value="选项一"></tg-option>
-                <tg-option value="选项二"></tg-option>
-            </tg-select>
+            <component :is="selectDemo2"></component>
         </div>
         <div class="demo-desc">
             <span class="desc-title">可清空选项</span>
@@ -58,7 +52,7 @@
           <div class="code-text">
             为 <code>tg-select</code> 增加 <code>clearable</code> 属性，则可将选择器清空。 需要注意的是， <code>clearable</code> 属性仅适用于单选。
         </div>
-        <m-code :value="selectData3.code"></m-code>
+        <pre v-html="demo2"></pre>
         </code>
     </div>
     <div class="demo-btns">
@@ -73,15 +67,7 @@
     <!-- 禁用状态 -->
     <div class="demo-block">
         <div class="demo-component">
-            <tg-select v-model:value="selectData1.value" disabled>
-                <tg-option value="选项一"></tg-option>
-                <tg-option value="选项二"></tg-option>
-            </tg-select>
-            <br>
-            <tg-select v-model:value="selectData1.value" style="margin-top:12px">
-                <tg-option value="选项一" disabled></tg-option>
-                <tg-option value="选项二" disabled></tg-option>
-            </tg-select>
+           <component :is="selectDemo3"></component>
         </div>
         <div class="demo-desc">
             <span class="desc-title">禁用状态</span>
@@ -92,7 +78,7 @@
           <div class="code-text">
              传入 <code>disbaled</code> <code>Boolean</code>的属性控制单选框状态
         </div>
-        <m-code :value="selectData1.code"></m-code>
+        <pre v-html="demo3"></pre>
         </code>
     </div>
     <div class="demo-btns">
@@ -107,20 +93,7 @@
     <!-- 不同尺寸 -->
     <div class="demo-block">
         <div class="demo-component">
-            <tg-select v-model:value="selectData2.value" size="mini">
-                <tg-option value="选项一"></tg-option>
-                <tg-option value="选项二"></tg-option>
-            </tg-select>
-            <br>
-            <tg-select v-model:value="selectData2.value" size="small" style="margin:12px 0">
-                <tg-option value="选项一"></tg-option>
-                <tg-option value="选项二"></tg-option>
-            </tg-select>
-            <br>
-            <tg-select v-model:value="selectData2.value" size="large">
-                <tg-option value="选项一"></tg-option>
-                <tg-option value="选项二"></tg-option>
-            </tg-select>
+            <component :is="selectDemo4"></component>
         </div>
         <div class="demo-desc">
             <span class="desc-title">不同尺寸</span>
@@ -131,7 +104,7 @@
           <div class="code-text">
              传入 <code>size</code> <code>String</code>的属性控制单选框状态
         </div>
-        <m-code :value="selectData2.code"></m-code>
+        <pre v-html="demo4"></pre>
         </code>
     </div>
     <div class="demo-btns">
@@ -146,11 +119,7 @@
     <!-- 筛选选项 -->
     <div class="demo-block">
         <div class="demo-component">
-            <tg-select v-model:value="selectData4.value" filterable>
-                <tg-option value="选项一"></tg-option>
-                <tg-option value="选项二"></tg-option>
-                
-            </tg-select>
+            <component :is="selectDemo5"></component>
         </div>
         <div class="demo-desc">
             <span class="desc-title">筛选选项</span>
@@ -162,7 +131,7 @@
             为 <code>tg-select</code> 添加 <code>filterable</code> 属性即可启用筛选功能。 默认情况下，<code>Select</code> 会找出所有
             <code>label</code> 属性包含输入值的选项。
         </div>
-        <m-code :value="selectData4.code"></m-code>
+        <pre v-html="demo5"></pre>
         </code>
     </div>
     <div class="demo-btns">
@@ -176,55 +145,74 @@
     </div>
     </div>
 </template>
-<script>
+<script setup lang="ts">
 import { reactive } from "vue";
-import MCode from '@/components/MCode.vue'
-export default {
-    components: { MCode },
-    setup() {
-        const selectData = reactive({
-            value: '',
-            code: '<tg-select v-model:value="selectValue">,2&<tg-option label="选项一" value="1"></tg-option>,2&<tg-option label="选项二" value="2"></tg-option>,</tg-select>',
-            visible: false,
-        });
-        const toggleDemoCode = () => {
-            selectData.visible = !selectData.visible;
-        };
-        const selectData1 = reactive({
-            value: '',
-            code: '<tg-select v-model:value="selectValue" disabled>,2&<tg-option label="选项一" value="1"></tg-option>,2&<tg-option label="选项二" value="2"></tg-option>,</tg-select>,<tg-select v-model:value="selectValue">,2&<tg-option label="选项一" value="1" disabled></tg-option>,2&<tg-option label="选项二" value="2" disabled></tg-option>,</tg-select>',
-            visible: false,
-        });
-        const toggleDemoCode1 = () => {
-            selectData1.visible = !selectData1.visible;
-        };
-        const selectData2 = reactive({
-            value: '',
-            code: '<tg-select v-model:value="selectValue" size="mini">,2&<tg-option label="选项一" value="1"></tg-option>,2&<tg-option label="选项二" value="2"></tg-option>,</tg-select>,<tg-select v-model:value="selectValue" size="small">,2&<tg-option label="选项一" value="1"></tg-option>,2&<tg-option label="选项二" value="2"></tg-option>,</tg-select>,<tg-select v-model:value="selectValue" size="large">,2&<tg-option label="选项一" value="1"></tg-option>,2&<tg-option label="选项二" value="2"></tg-option>,</tg-select>',
-            visible: false,
-        });
-        const toggleDemoCode2 = () => {
-            selectData2.visible = !selectData2.visible;
-        };
-        const selectData3 = reactive({
-            value: '',
-            code: '<tg-select v-model:value="selectValue" clearable>,2&<tg-option label="选项一" value="1"></tg-option>,2&<tg-option label="选项二" value="2"></tg-option>,</tg-select>',
-            visible: false,
-        });
-        const toggleDemoCode3 = () => {
-            selectData3.visible = !selectData3.visible;
-        };
-        const selectData4 = reactive({
-            value: '',
-            code: '<tg-select v-model:value="selectValue" filterable>,2&<tg-option label="选项一" value="1"></tg-option>,2&<tg-option label="选项二" value="2"></tg-option>,</tg-select>',
-            visible: false,
-        });
-        const toggleDemoCode4 = () => {
-            selectData4.visible = !selectData4.visible;
-        };
-        return { selectData, toggleDemoCode, selectData1, toggleDemoCode1, selectData2, toggleDemoCode2, selectData3, toggleDemoCode3, selectData4, toggleDemoCode4 }
-    }
-}
+import selectDemo1 from './select1.demo.vue'
+import selectDemoRaw1 from './select1.demo.vue?raw'
+import selectDemo2 from './select2.demo.vue'
+import selectDemoRaw2 from './select2.demo.vue?raw'
+import selectDemo3 from './select3.demo.vue'
+import selectDemoRaw3 from './select3.demo.vue?raw'
+import selectDemo4 from './select4.demo.vue'
+import selectDemoRaw4 from './select4.demo.vue?raw'
+import selectDemo5 from './select5.demo.vue'
+import selectDemoRaw5 from './select5.demo.vue?raw'
+const Prism = (window as any).Prism;
+const demo1 = Prism.highlight(
+    selectDemoRaw1,
+    Prism.languages.html,
+    "html"
+);
+const demo2 = Prism.highlight(
+    selectDemoRaw2,
+    Prism.languages.html,
+    "html"
+);
+const demo3 = Prism.highlight(
+    selectDemoRaw3,
+    Prism.languages.html,
+    "html"
+);
+const demo4 = Prism.highlight(
+    selectDemoRaw4,
+    Prism.languages.html,
+    "html"
+);
+const demo5 = Prism.highlight(
+    selectDemoRaw5,
+    Prism.languages.html,
+    "html"
+);
+const selectData = reactive({
+    visible: false,
+});
+const toggleDemoCode = () => {
+    selectData.visible = !selectData.visible;
+};
+const selectData1 = reactive({
+    visible: false,
+});
+const toggleDemoCode1 = () => {
+    selectData1.visible = !selectData1.visible;
+};
+const selectData2 = reactive({
+    visible: false,
+});
+const toggleDemoCode2 = () => {
+    selectData2.visible = !selectData2.visible;
+};
+const selectData3 = reactive({
+    visible: false,
+});
+const toggleDemoCode3 = () => {
+    selectData3.visible = !selectData3.visible;
+};
+const selectData4 = reactive({
+    visible: false,
+});
+const toggleDemoCode4 = () => {
+    selectData4.visible = !selectData4.visible;
+};
 </script>
 <style lang="scss" scoped>
 </style>

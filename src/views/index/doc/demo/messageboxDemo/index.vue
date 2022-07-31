@@ -12,7 +12,7 @@
         <!-- 基本用法 -->
         <div class="demo-block">
             <div class="demo-component">
-                <tg-button size="mini" theme="link" @click="openMessageBox">点击打开message box</tg-button>
+                <component :is="messageboxDemo1"></component>
             </div>
             <div class="demo-desc">
                 <span class="desc-title">基本用法</span>
@@ -23,7 +23,7 @@
           <div class="code-text">
             通过 <code>alert</code>方法打开提示弹窗，当用户进行操作时会被触发，该对话框中断用户操作，直到用户确认知晓后才可关闭。
             </div>
-            <m-code :value="inputData.code"></m-code>
+            <pre v-html="demo1"></pre>
             </code>
         </div>
         <div class="demo-btns">
@@ -42,7 +42,7 @@
     <!-- 确认弹窗 -->
     <div class="demo-block">
         <div class="demo-component">
-            <tg-button size="mini" theme="link" @click="openConfirmBox">点击打开confirm box</tg-button>
+            <component :is="messageboxDemo2"></component>
         </div>
         <div class="demo-desc">
             <span class="desc-title">确认弹窗</span>
@@ -55,7 +55,7 @@
           <div class="code-text">
             通过 <code>confirm</code>方法打开确认弹窗，提示用户确认其已经触发的动作，并询问是否进行此操作时会用到此对话框。
         </div>
-        <m-code :value="inputData1.code"></m-code>
+        <pre v-html="demo2"></pre>
         </code>
     </div>
     <div class="demo-btns">
@@ -74,7 +74,7 @@
     <!-- 提交内容 -->
     <div class="demo-block">
         <div class="demo-component">
-            <tg-button size="mini" theme="link" @click="openpromptBox">点击打开prompt box</tg-button>
+            <component :is="messageboxDemo3"></component>
         </div>
         <div class="demo-desc">
             <span class="desc-title">提交内容</span>
@@ -90,7 +90,7 @@
             <code>inputPlaceholder</code>
             字段来定义输入框的占位符。
         </div>
-        <m-code :value="inputData2.code"></m-code>
+        <pre v-html="demo3"></pre>
         </code>
     </div>
     <div class="demo-btns">
@@ -109,7 +109,7 @@
     <!-- 居中布局 -->
     <div class="demo-block">
         <div class="demo-component">
-            <tg-button size="mini" theme="link" @click="openMessageBoxCenter">点击打开message box</tg-button>
+            <component :is="messageboxDemo4"></component>
         </div>
         <div class="demo-desc">
             <span class="desc-title">居中布局</span>
@@ -122,7 +122,7 @@
           <div class="code-text">
            将 <code>center</code> 属性设置为 <code>true</code> 可将内容居中显示。
         </div>
-        <m-code :value="inputData3.code"></m-code>
+        <pre v-html="demo4"></pre>
         </code>
     </div>
     <div class="demo-btns">
@@ -140,41 +140,37 @@
     </div>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
+import messageboxDemo1 from './messagebox1.demo.vue'
+import messageboxDemoRaw1 from './messagebox1.demo.vue?raw'
+import messageboxDemo2 from './messagebox2.demo.vue'
+import messageboxDemoRaw2 from './messagebox2.demo.vue?raw'
+import messageboxDemo3 from './messagebox3.demo.vue'
+import messageboxDemoRaw3 from './messagebox3.demo.vue?raw'
+import messageboxDemo4 from './messagebox4.demo.vue'
+import messageboxDemoRaw4 from './messagebox4.demo.vue?raw'
 import { reactive } from "vue";
-import MCode from "@/components/MCode.vue";
-import { messageBox } from "@/libs";
-const openMessageBox = () => {
-    messageBox.alert('这是一段内容', '提示', {
-        beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
-                instance.confirmLoading = true
-            } else {
-                done()
-            }
-        }
-    })
-}
-const openMessageBoxCenter = () => {
-    messageBox.alert('这是一段内容', '提示', {
-        align: 'center'
-    }).then(() => {
-
-    }).catch(() => { })
-}
-const openConfirmBox = () => {
-    messageBox.confirm('这是一段内容', '提示').then(() => { }).catch(() => { })
-}
-const openpromptBox = () => {
-    messageBox.prompt('请输入邮箱', '提示',
-        {
-            inputValue: '', inputPlaceholder: '请输入邮箱啊',
-            inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-            errorMessage: '请输入邮箱',
-        }).then(({ value }) => {
-            console.log(value)
-        }).catch(() => { })
-}
+const Prism = (window as any).Prism;
+const demo1 = Prism.highlight(
+    messageboxDemoRaw1,
+    Prism.languages.html,
+    "html"
+);
+const demo2 = Prism.highlight(
+    messageboxDemoRaw2,
+    Prism.languages.html,
+    "html"
+);
+const demo3 = Prism.highlight(
+    messageboxDemoRaw3,
+    Prism.languages.html,
+    "html"
+);
+const demo4 = Prism.highlight(
+    messageboxDemoRaw4,
+    Prism.languages.html,
+    "html"
+);
 const inputData = reactive({
     value: "",
     code: 'import { messageBox，message } from "tg-ui";,<script setup>,2&messageBox.alert("这是一段内容"，"提示").then(()=>{,4&,6&message.success("确认了弹窗") ,2&}),<script>',
@@ -184,24 +180,18 @@ const toggleDemoCode = () => {
     inputData.visible = !inputData.visible;
 };
 const inputData1 = reactive({
-    value: "",
-    code: 'import { messageBox，message } from "tg-ui";,<script setup>,2&messageBox.confirm("这是一段内容"，"提示").then(()=>{,4&,6&message.success("确认了弹窗") ,2&}).catch(()=>{,6&message.error("取消了弹窗"),2&}),<script>',
     visible: false,
 });
 const toggleDemoCode1 = () => {
     inputData1.visible = !inputData1.visible;
 };
 const inputData2 = reactive({
-    value: "",
-    code: 'import { messageBox，message } from "tg-ui";,<script setup>,2&messageBox.prompt("这是一段内容"，"提示",4&{,6&errorMessage:"请输入邮箱",6&inputPattern:/正则内容/,4&}).then(()=>{,4&,6&message.success("确认了弹窗"),2&}).catch(()=>{,6&message.error("取消了弹窗"),2&}),<script>',
     visible: false,
 });
 const toggleDemoCode2 = () => {
     inputData2.visible = !inputData2.visible;
 };
 const inputData3 = reactive({
-    value: "",
-    code: 'import { messageBox，message } from "tg-ui";,<script setup>,2&messageBox.alert("这是一段内容"，"提示",4&{,6&align:"center",4&}).then(()=>{,4&,6&message.success("确认了弹窗"),2&}).catch(()=>{,6&message.error("取消了弹窗"),2&}),<script>',
     visible: false,
 });
 const toggleDemoCode3 = () => {

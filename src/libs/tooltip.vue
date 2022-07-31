@@ -13,8 +13,8 @@
         <slot class="tg-tooltip-content"></slot>
     </div>
 </template>
-<script setup>
-import { ref, toRef, useSlots } from "vue"
+<script setup lang="ts">
+import { onUnmounted, ref, useSlots } from "vue"
 const props = defineProps({
     content: { type: String, default: '' },
     theme: { type: String, default: 'dark' },
@@ -28,9 +28,13 @@ const onClick = () => {
         visible.value = !visible.value
     }
 }
-document.body.onclick = e=>{
-    visible.value = false
+const remove = () => { visible.value = false }
+if (props.trigger === 'click') {
+    document.body.addEventListener('click', remove)
+    onUnmounted(() => { document.body.removeEventListener('click', remove) })
 }
+
+
 </script>
 <style lang="scss" scoped>
 $bg: rgba(0, 0, 0, .8);
@@ -38,6 +42,7 @@ $bg: rgba(0, 0, 0, .8);
 .tg-tooltip {
     display: inline-flex;
     position: relative;
+
     >.tg-tooltip-flow {
         position: absolute;
         white-space: nowrap;
@@ -45,11 +50,11 @@ $bg: rgba(0, 0, 0, .8);
         background: $bg;
         color: #fff;
         border-radius: 6px;
-        
         z-index: 9999;
+
         >.tg-tooltip-flow-wrap {
             position: relative;
-font-size: 12px;
+            font-size: 12px;
         }
     }
 
@@ -70,7 +75,7 @@ font-size: 12px;
         >.tg-tooltip-flow {
             top: 0;
             left: 50%;
-            transform: translate(-50%, calc(-100% - 12px) );
+            transform: translate(-50%, calc(-100% - 12px));
 
             .arrow {
                 bottom: -12px;
@@ -133,6 +138,7 @@ font-size: 12px;
             right: calc(100% + 16px);
             top: 50%;
             transform: translateY(-50%);
+
             .arrow {
                 right: -18px;
                 top: 50%;
