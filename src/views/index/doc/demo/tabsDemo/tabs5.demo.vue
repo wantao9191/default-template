@@ -23,6 +23,7 @@ const onClick = e => {
 const onLeave = ({ activeName, beforeName }, done) => {
     messageBox.confirm(`是否确认从${beforeName}切换到${activeName}?`,'提示').then(()=>{
         done()
+        message({message:'切换成功',type:'success'})
     }).catch(()=>{
         message({message:'取消了切换',type:'error'})
     })

@@ -162,7 +162,6 @@
     </div>
 </template>
 <script setup lang="ts">
-import MCode from '@/components/MCode.vue'
 import { ref, reactive } from "vue";
 import switchDemo1 from './switch1.demo.vue';
 import switchDemoRaw1 from './switch1.demo.vue?raw';

@@ -84,6 +84,11 @@ const routes = [
                 component: () => import('@/views/index/doc/demo/tabsDemo/index.vue'),
                 meta: { title: 'Tabs 标签页' }
             },
+            {
+                path: 'timeSelect', name: 'timeSelect',
+                component: () => import('@/views/index/doc/demo/timeSelectDemo/index.vue'),
+                meta: { title: 'TimeSelect 标签页' }
+            },
         ]
     },
     {
