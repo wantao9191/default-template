@@ -2,11 +2,10 @@
   <template v-if="visible">
     <Teleport to='body'>
       <div class="wt-dialog-overlay" @click="onClickOverlay"></div>
-      <div class="wt-dialog-wrapper" :style="{width}">
-        <div class="wt-dialog" :class="`wt-dialog-${center ? 'center' :'default'}`">
+      <div class="wt-dialog-wrapper" :style="{ width }">
+        <div class="wt-dialog" :class="`wt-dialog-${center ? 'center' : 'default'}`">
           <header>
-            <div v-if="title">{{title}}</div>
-            <slot name="title" v-else />
+            <slot name="title">{{ title }}</slot>
             <span class="wt-dialog-close" @click="close">X</span>
           </header>
           <main>
@@ -27,7 +26,7 @@ export default {
     closeOnOverlay: { type: Boolean, default: true },
     title: { type: String, default: "" },
     center: { type: Boolean, default: false },
-    width:{type:String,default:'50%'}
+    width: { type: String, default: '50%' }
   },
   setup(props, context) {
     const close = () => {
@@ -53,6 +52,7 @@ export default {
   background: rgba(0, 0, 0, 0.45);
   z-index: 2000;
 }
+
 .wt-dialog-wrapper {
   width: 50%;
   background: #fff;
@@ -62,13 +62,15 @@ export default {
   border-radius: 3px;
   transform: translate(-50%, -50%);
   z-index: 2001;
-  > .wt-dialog {
-    > header {
+
+  >.wt-dialog {
+    >header {
       font-size: 18px;
       padding: 20px 20px 10px;
       font-weight: 400;
       position: relative;
-      > .wt-dialog-close {
+
+      >.wt-dialog-close {
         cursor: pointer;
         font-weight: normal;
         font-size: 14px;
@@ -77,14 +79,18 @@ export default {
         right: 20px;
       }
     }
-    > main {
+
+    >main {
       padding: 30px 20px;
     }
-    > footer {
+
+    >footer {
       padding: 10px 20px 20px;
       text-align: right;
     }
+
     &.wt-dialog-center {
+
       header,
       footer {
         text-align: center;

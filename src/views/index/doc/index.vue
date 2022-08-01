@@ -31,13 +31,13 @@ document.title = route.meta ? route.meta.title + ' | TG-Design' : 'TG-Design'
   display: flex;
 
   >.router-main {
-    width: calc(100vw - 200px);
+    width: calc(100vw - 240px);
     overflow-y: auto;
     border-radius: 4px;
 
     &::-webkit-scrollbar {
       /*高宽分别对应横竖滚动条的尺寸*/
-      width: 8px;
+      width: 6px;
       height: 8px;
     }
 

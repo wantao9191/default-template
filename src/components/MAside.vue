@@ -41,10 +41,13 @@ export default {
           { label: "Radio 单选框", path: "/doc/radio" },
           { label: "Checkbox 多选框", path: "/doc/checkbox" },
           { label: "Select 下拉框", path: "/doc/select" },
-          { label: "DatePicker 时间选择器", path: "/doc/datePicker" },
+          { label: "DatePicker 日期选择器", path: "/doc/datePicker" },
           { label: "Tooltip 文字提示", path: "/doc/tooltip" },
           { label: "MessageBox 提示弹框", path: "/doc/messageBox" },
           { label: "Message 消息提示", path: "/doc/message" },
+          { label: "Tabs 标签页", path: "/doc/tabs" },
+          { label: "TimeSelect 时间选择", path: "/doc/timeSelect" },
+          { label: "TimePicker 时间选择器", path: "/doc/timePicker" },
         ],
       },
     ]);
@@ -62,9 +65,26 @@ export default {
 <style lang="scss" scoped>
 .m-aside {
   background: #fff;
-  width: 200px;
+  width: 240px;
   height: calc(100% - 2px);
   margin-top: 2px;
+  overflow-y: auto;
+  padding-right: 10px;
+  &::-webkit-scrollbar {
+    /*高宽分别对应横竖滚动条的尺寸*/
+    width: 5px;
+    height: 20px;
+  }
+
+  /*滚动条里面小方块*/
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px !important;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2) !important;
+    /* 颜色 */
+    /* background:#b6b6b6!important; */
+    /* 线性渐变背景 */
+    background: #d2d6dd;
+  }
 
   ul {
     li {

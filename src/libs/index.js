@@ -11,6 +11,10 @@ import Select from './select/select.vue'
 import Option from './select/option.vue'
 import DatePicker from './date/datePicker.vue'
 import ToolTip from './tooltip.vue'
+import TimePicker from "./timePicker.vue";
+import TimeSelect from "./timeSelect.vue";
+import Tabs from "./tabs/tabs.vue";
+import TabsPane from "./tabs/tabsPane.vue";
 import { messageBox } from "./messageBox/messageBox.js";
 import { message } from "./message/message.js";
 function libs(Vue) {
@@ -26,6 +30,10 @@ function libs(Vue) {
     Vue.component('tg-select', Select)
     Vue.component('tg-option', Option)
     Vue.component('tg-date-picker', DatePicker)
-    Vue.component('tg-tooltip',ToolTip)
+    Vue.component('tg-tooltip', ToolTip)
+    Vue.component('tg-time-picker', TimePicker)
+    Vue.component('tg-time-select', TimeSelect)
+    Vue.component('tg-tabs', Tabs)
+    Vue.component('tg-tabs-pane', TabsPane)
 }
-export {libs,messageBox,message} 
+export { libs, messageBox, message } 

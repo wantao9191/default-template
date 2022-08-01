@@ -62,7 +62,7 @@ const routes = [
             {
                 path: 'datePicker', name: 'datePicker',
                 component: () => import('@/views/index/doc/demo/datePickerDemo/index.vue'),
-                meta: { title: 'DataPicker 时间选择器' }
+                meta: { title: 'DataPicker 日期选择器' }
             },
             {
                 path: 'tooltip', name: 'tooltip',
@@ -78,6 +78,11 @@ const routes = [
                 path: 'message', name: 'message',
                 component: () => import('@/views/index/doc/demo/messageDemo/index.vue'),
                 meta: { title: 'Message 消息提示' }
+            },
+            {
+                path: 'tabs', name: 'tabs',
+                component: () => import('@/views/index/doc/demo/tabsDemo/index.vue'),
+                meta: { title: 'Tabs 标签页' }
             },
         ]
     },

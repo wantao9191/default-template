@@ -1,111 +1,138 @@
 .demo {
-    > p {
-      padding: 24px 0;
-      color: #888;
-    }
-    > ul {
-      color: #888;
-      font-size: 14px;
-      padding: 16px;
-      list-style: circle;
-      > li {
-        padding: 8px;
-      }
-    }
-    > .demo-block {
-      box-shadow: 0 2px 8px #ddd;
-      margin: 16px 0;
-      &:last-child{
-        margin-bottom: 0;
-      }
-      > .demo-component {
-        padding: 24px;
-        > .component-item {
-          display: flex;
-          margin-bottom: 12px;
-          > span {
-            width: 70px;
-            margin-right: 10px;
-          }
-        }
-      }
-      > .demo-desc {
-        position: relative;
-        padding: 16px 0;
-        color: #888;
-        border-top: 1px solid #ddd;
-        > .desc-title {
-          position: absolute;
-          top: -10px;
-          left: 16px;
-          background: #fff;
-          width: auto;
-          padding: 0 8px;
-          font-size: 14px;
-          font-weight: bold;
-        }
-        > .desc-text {
-          padding-left: 24px;
-          font-size: 12px;
-        }
-      }
-      > .demo-code {
-        > code {
-          display: block;
-          padding: 12px 24px;
-          line-height: 1.8;
-          background: #fafafa;
-          font-size: 12px;
-          > .code-text {
-            background: #fff;
-            padding: 12px;
-            border: 1px solid #ddd;
-            // margin-bottom: 24px;
-            border-radius: 4px;
-            line-height: 30px;
-            > code {
-              font-family: Menlo, Monaco, Consolas, Courier, monospace;
-              background-color: #e6effb;
-              padding: 4px 8px;
-              border-radius: 3px;
-            }
-          }
-          > .code-tag {
-            color: #3182bd;
-            display: block;
-            font-family: Menlo, Monaco, Consolas, Courier, monospace;
-            >span {color: #333;}
-          }
-          > .code-script-2 {
-            margin-left: 2em;
-          }
-          > .code-script-4 {
-            margin-left: 4em;
-          }
-          > .code-script-6 {
-            margin-left: 6em;
-          }
-        }
-      }
-      > .demo-btns {
-        font-size: 12px;
-        color: #888;
-        text-align: center;
-        padding: 12px 0;
-        border-top: 1px dashed #ddd;
-        > a {
-          padding: 0 8px;
-          .iconfont {
-            vertical-align: middle;
-          }
-        }
-      }
-      pre {
-        font-family: inherit !important;
-      }
-      code[class*="language-"], pre[class*="language-"]{
-        font-size: 13px;
-        
-      }
+  >p {
+    padding: 24px 0;
+    color: #888;
+  }
+
+  >ul {
+    color: #888;
+    font-size: 14px;
+    padding: 16px;
+    list-style: circle;
+
+    >li {
+      padding: 8px;
     }
   }
+
+  >.demo-block {
+    box-shadow: 0 2px 8px #ddd;
+    margin: 16px 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    >.demo-component {
+      padding: 24px;
+
+      >.component-item {
+        display: flex;
+        margin-bottom: 12px;
+
+        >span {
+          width: 70px;
+          margin-right: 10px;
+        }
+      }
+    }
+
+    >.demo-desc {
+      position: relative;
+      padding: 16px 0;
+      color: #888;
+      border-top: 1px solid #ddd;
+
+      >.desc-title {
+        position: absolute;
+        top: -10px;
+        left: 16px;
+        background: #fff;
+        width: auto;
+        padding: 0 8px;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      >.desc-text {
+        padding-left: 24px;
+        font-size: 12px;
+      }
+    }
+
+    >.demo-code {
+      >code {
+        display: block;
+        padding: 12px 24px;
+        line-height: 1.8;
+        background: #fafafa;
+        font-size: 12px;
+
+        >.code-text {
+          background: #fff;
+          padding: 12px;
+          border: 1px solid #ddd;
+          // margin-bottom: 24px;
+          border-radius: 4px;
+          line-height: 30px;
+
+          >code {
+            font-family: Menlo, Monaco, Consolas, Courier, monospace;
+            background-color: #e6effb;
+            padding: 4px 8px;
+            border-radius: 3px;
+          }
+        }
+
+        >.code-tag {
+          color: #3182bd;
+          display: block;
+          font-family: Menlo, Monaco, Consolas, Courier, monospace;
+
+          >span {
+            color: #333;
+          }
+        }
+
+        >.code-script-2 {
+          margin-left: 2em;
+        }
+
+        >.code-script-4 {
+          margin-left: 4em;
+        }
+
+        >.code-script-6 {
+          margin-left: 6em;
+        }
+      }
+    }
+
+    >.demo-btns {
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+      padding: 12px 0;
+      border-top: 1px dashed #ddd;
+
+      >a {
+        padding: 0 8px;
+
+        .iconfont {
+          vertical-align: middle;
+        }
+      }
+    }
+
+    pre {
+      font-family: -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
+    letter-spacing: 1px;
+    }
+
+    code[class*="language-"],
+    pre[class*="language-"] {
+      font-size: 13px;
+
+    }
+  }
+}
