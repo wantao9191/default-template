@@ -3,7 +3,8 @@ import { createStore } from "vuex";
     state() {
         return {
             logined: false,
-            userInfo: {}
+            userInfo: {},
+            menuVisible:false
         }
     },
     getters: {
@@ -12,6 +13,9 @@ import { createStore } from "vuex";
         },
         userInfo: (state) => {
             return state.userInfo
+        },
+        menuVisible:(state)=>{
+            return state.menuVisible
         }
     },
     mutations: {
@@ -20,6 +24,9 @@ import { createStore } from "vuex";
         },
         updateUserInfo: (state, data) => {
             return state.userInfo = data
+        },
+        menuChange:(state,flag)=>{
+            return state.menuVisible = flag
         }
     }
 })

@@ -1,18 +1,20 @@
 <template>
   <main class="doc-main">
-    <m-aside></m-aside>
+    <m-aside :class="{ 'mobile-aside': menuVisible }"></m-aside>
     <main class="router-main">
       <router-view class="router-view"></router-view>
-      <m-nav :key="routerkey"></m-nav>
+      <m-nav :key="routerkey" class="m-nav"></m-nav>
     </main>
   </main>
 </template>
 <script setup>
 import MAside from "@/components/MAside.vue";
 import MNav from "@/components/MNav.vue";
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { onBeforeRouteUpdate, useRoute } from 'vue-router';
-
+import { useStore } from "vuex";
+const store = useStore()
+const menuVisible = computed(() => store.getters.menuVisible)
 const routerkey = ref(new Date().getTime())
 const route = useRoute()
 onBeforeRouteUpdate((to) => {
@@ -60,5 +62,30 @@ document.title = route.meta ? route.meta.title + ' | TG-Design' : 'TG-Design'
 
   }
 
+  @media screen and (max-width: 680px) {
+    .m-nav {
+      display: none;
+    }
+
+    >.router-main {
+      width: 100%;
+
+      >.router-view {
+        width: 100%;
+        margin: 0;
+      }
+    }
+
+    .m-aside {
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: calc(100vh - 50px);
+      z-index: 999;
+    }
+    .mobile-aside{
+      display: block;
+    }
+  }
 }
 </style>

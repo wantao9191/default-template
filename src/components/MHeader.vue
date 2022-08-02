@@ -5,22 +5,23 @@
       <span>TG Design</span>
     </div>
     <div class="nav">
-      <tg-button theme="text" type="default">指南</tg-button>
-      <tg-button theme="text" type="default">组件</tg-button>
+      <!-- <tg-button theme="text" type="default">指南</tg-button>
+      -->
+      <tg-button theme="text" type="default" @click="menuClick">组件</tg-button>
     </div>
   </div>
 </template>
-<script>
+<script setup>
 import { useRouter } from "vue-router";
-export default {
-  setup() {
-    const router = useRouter()
-    const onClick=() =>{
-      router.replace('/home')
-    }
-    return {onClick}
-  },
-};
+import { useStore } from "vuex";
+const router = useRouter()
+const store = useStore()
+const onClick = () => {
+  router.replace('/home')
+}
+const menuClick = () => {
+  store.commit('menuChange', true)
+}
 </script>
 <style lang="scss" scoped>
 .m-header {
@@ -30,15 +31,18 @@ export default {
   padding: 0 24px;
   height: 50px;
   background: #fff;
-  position:relative;
-  z-index:1;
+  position: relative;
+  z-index: 1;
+
   .logo {
     cursor: pointer;
+
     img {
       width: 50px;
       vertical-align: middle;
     }
-    > span {
+
+    >span {
       display: inline-block;
       vertical-align: sub;
       margin-left: 12px;
@@ -47,8 +51,17 @@ export default {
       color: #1890ff;
     }
   }
+
   .nav {
     line-height: 50px;
+    display: none;
+  }
+
+  @media screen and (max-width:680px) {
+    .nav {
+      display: block;
+    }
+
   }
 }
 </style>

@@ -141,5 +141,11 @@ const toggleDemoCode1 = () => {
             margin-top: 6px;
         }
     }
+    @media screen and (max-width:680px) {
+        .icon-item {
+            width:33.33%;
+        }
+        
+    }
 }
 </style>
