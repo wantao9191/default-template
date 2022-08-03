@@ -3,7 +3,9 @@
     <tg-input
       v-model:value="value"
       readonly
-      :placeholder="props.placeholder"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :size="size"
       @focus="onFocus"
       @blur="onBlur"
       ref="input"
@@ -30,16 +32,16 @@
       class="tg-select-dropdown shadow"
       :class="[`direction-${placement}`]"
     >
-      <div class="tg-select-dropdown-wrap " >
+      <div class="tg-select-dropdown-wrap">
         <ul class="scroll" ref="drop">
           <li
             v-for="(item, index) in list"
-            :class="{ active: props.value === item }"
+            :class="{ active: props.value === item, disabled: item.disabled }"
             :key="index"
             @mousedown.prevent
             @click="onClick(item)"
           >
-            {{ item }}
+            {{ item.label }}
           </li>
         </ul>
         <span class="arrow-light arrow-down arrow"></span>
@@ -50,6 +52,7 @@
 </template>
 <script setup>
 import { computed, nextTick, reactive, ref } from "vue";
+import { C } from "../../dist/assets/index.e6d3a975";
 import TgInput from "./input.vue";
 const props = defineProps({
   value: { type: String, default: "" },
@@ -57,6 +60,10 @@ const props = defineProps({
   step: { type: String, default: "00:30" },
   start: { type: String, default: "09:00" },
   end: { type: String, default: "18:00" },
+  disabled: Boolean,
+  size: { type: String, default: "small" },
+  minTime: { type: String },
+  maxTime: { type: String },
 });
 const emits = defineEmits(["update:value", "change"]);
 const value = computed(() => props.value);
@@ -73,18 +80,29 @@ const getMins = (time) => {
 const mins = getMins(props.step);
 const start = getMins(props.start);
 const end = getMins(props.end);
-const timeArrays = new Array(Math.floor((end - start + mins) / mins))
-  .fill("")
-  .map((item, index) => {
-    const T = index * mins + start;
-    const H = Math.floor(T / 60);
-    const M = T % 60;
-    return `${H < 10 ? "0" + H : H}:${M < 10 ? "0" + M : M}`;
-  });
-const list = reactive(timeArrays);
+const minTime = props.minTime && getMins(props.minTime);
+const maxTime = props.maxTime && getMins(props.maxTime);
+
+const list = computed(() =>
+  new Array(Math.floor((end - start + mins) / mins))
+    .fill("")
+    .map((item, index) => {
+      const T = index * mins + start;
+      const H = Math.floor(T / 60);
+      const M = T % 60;
+      if (props.maxTime) {
+        console.log(maxTime)
+      }
+      return {
+        label: `${H < 10 ? "0" + H : H}:${M < 10 ? "0" + M : M}`,
+        disabled: T < minTime||T>maxTime,
+      };
+    })
+);
 const onClick = (e) => {
-  emits("update:value", e);
-  emits("change", e);
+  if (e.disabled) return;
+  emits("update:value", e.label);
+  emits("change", e.label);
   input.value.blur();
 };
 const onFocus = () => {
@@ -99,7 +117,7 @@ const onFocus = () => {
   });
 };
 const onBlur = () => {
-    visible.value = false;
+  visible.value = false;
 };
 const onMouseover = () => {
   isHover.value = true;
@@ -129,11 +147,10 @@ const clear = () => {
       padding: 6px 0;
       position: relative;
       font-size: 14px;
-      
 
       ul {
         height: 200px;
-      overflow-y: auto;
+        overflow-y: auto;
         > li {
           padding: 6px 0 6px 12px;
           color: #666;
@@ -147,6 +164,13 @@ const clear = () => {
 
           &:hover {
             background: #f5f7fa;
+          }
+          &.disabled{
+            cursor:not-allowed;
+            color: #999;
+            &:hover{
+                background: none;
+            }
           }
         }
       }

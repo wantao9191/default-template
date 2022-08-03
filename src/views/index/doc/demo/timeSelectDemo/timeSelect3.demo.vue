@@ -1,5 +1,5 @@
 <template>
-    <tg-time-select v-model:value="value" start="00:00" end="12:30" step="00:15"></tg-time-select>
+    <tg-time-select v-model:value="value" disabled></tg-time-select>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
