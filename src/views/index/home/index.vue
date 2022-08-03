@@ -8,7 +8,7 @@
       <div class="btns">
         <a href="javaScrip:;" @click="jump">
           <tg-icon icon="tg-paper-plane" size="21" style="margin-right:4px"></tg-icon>
-          <span >开始使用</span>
+          <span>开始使用</span>
         </a>
         <a href="https://github.com/wantao9191/default-template" class="default">
           <tg-icon icon="tg-rocket" size="21" style="margin-right:4px"></tg-icon>
@@ -42,7 +42,7 @@ const jump = () => {
 </script>
 <style lang="scss" scoped>
 #home-page {
-  height: 100%;
+  min-height: 100%;
   background: url(../../../assets/images/bg.png) center center no-repeat;
   background-size: cover;
 
@@ -57,7 +57,7 @@ const jump = () => {
     padding-top: 160px;
 
     h3 {
-      font-size: #999;
+      color: #666;
     }
 
     >.title {
@@ -117,6 +117,34 @@ const jump = () => {
       }
 
     }
+  }
+
+  @media screen and (max-width:680px) {
+    >.banner {
+      position: static;
+      padding: 40px 0;
+      transform: translate(0,0);
+      width: 90vw;
+      margin: 0 auto;
+      >.title {
+        font-size: 48px;
+        margin-bottom: 24px;
+      }
+
+      >img {
+        width: 160px;
+      }
+
+      .intros {
+        display: block;
+        margin: 48px auto 0;
+        width: 210px;
+        .intro-item{
+          margin-bottom: 24px;
+        }
+      }
+    }
+
   }
 }
 </style>

@@ -24,9 +24,11 @@
 <script>
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from 'vuex';
 export default {
   setup() {
     const router = useRouter();
+    const store = useStore()
     const menus = reactive([
       {
         label: "组件",
@@ -54,6 +56,7 @@ export default {
     const onClick = (e) => {
       if (e.path) {
         router.replace(e.path);
+        store.commit('menuChange',false)
       } else {
       }
 

@@ -16,5 +16,8 @@ export default defineConfig({
         additionalData: '@import "@/libs/mixin.scss";'
       }
     }
+  },
+  server:{
+    host:'0.0.0.0'
   }
 })
