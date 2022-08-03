@@ -1,5 +1,4 @@
 <template>
-{{value}}
     <tg-time-select v-model:value="value"></tg-time-select>
 </template>
 <script setup lang="ts">
