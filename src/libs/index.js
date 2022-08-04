@@ -17,7 +17,8 @@ import Tabs from "./tabs/tabs.vue";
 import TabsPane from "./tabs/tabsPane.vue";
 import { messageBox } from "./messageBox/messageBox.js";
 import { message } from "./message/message.js";
-function libs(Vue) {
+export { Dialog, Button, Switch, Icon, Input, Radio, RadioGroup, Checkbox, CheckboxGroup, Select, Option, DatePicker, ToolTip, TimePicker, TimeSelect, Tabs, TabsPane, message, messageBox }
+function install(Vue) {
     Vue.component('tg-dialog', Dialog)
     Vue.component('tg-button', Button)
     Vue.component('tg-switch', Switch)
@@ -36,4 +37,4 @@ function libs(Vue) {
     Vue.component('tg-tabs', Tabs)
     Vue.component('tg-tabs-pane', TabsPane)
 }
-export { libs, messageBox, message } 
+export default { install }

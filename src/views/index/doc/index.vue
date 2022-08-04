@@ -2,41 +2,50 @@
   <main class="doc-main">
     <m-aside :class="{ 'mobile-aside': menuVisible }"></m-aside>
     <main class="router-main">
-      <router-view class="router-view"></router-view>
-      <m-nav :key="routerkey" class="m-nav"></m-nav>
+      <router-view
+        class="router-view"
+        :class="{ wrap: visible || !reload }"
+      ></router-view>
+      <m-nav v-if="reload && !visible" class="m-nav"></m-nav>
     </main>
   </main>
 </template>
 <script setup>
 import MAside from "@/components/MAside.vue";
 import MNav from "@/components/MNav.vue";
-import { computed, ref } from 'vue';
-import { onBeforeRouteUpdate, useRoute } from 'vue-router';
+import { computed, nextTick, ref } from "vue";
+import { onBeforeRouteUpdate, useRoute } from "vue-router";
 import { useStore } from "vuex";
-const store = useStore()
-const menuVisible = computed(() => store.getters.menuVisible)
-const routerkey = ref(new Date().getTime())
-const route = useRoute()
+const store = useStore();
+const route = useRoute();
+console.log(route.path);
+const menuVisible = computed(() => store.getters.menuVisible);
+const reload = ref(true);
+const visible = ref(["/doc/install", "/doc/start"].includes(route.path));
 onBeforeRouteUpdate((to) => {
-  routerkey.value = to.path
-  document.title = to.meta ? to.meta.title + ' | TG-Design' : 'TG-Design'
-  document.querySelector('.router-main').scrollTop = 0
-})
-document.title = route.meta ? route.meta.title + ' | TG-Design' : 'TG-Design'
+  reload.value = false;
+  nextTick(() => {
+    if (!["/doc/install", "/doc/start"].includes(to.path))
+      reload.value = true;
+  });
+  document.title = to.meta ? to.meta.title + " | TG-Design" : "TG-Design";
+  document.querySelector(".router-main").scrollTop = 0;
+});
+document.title = route.meta ? route.meta.title + " | TG-Design" : "TG-Design";
 </script>
 <style lang="scss">
-@import './demo/demo.scss';
+@import "./demo/demo.scss";
 </style>
 <style lang="scss" scoped>
 .doc-main {
   height: 100%;
   display: flex;
 
-  >.router-main {
+  > .router-main {
     width: calc(100vw - 240px);
     overflow-y: auto;
     border-radius: 4px;
-
+    padding: 12px;
     &::-webkit-scrollbar {
       /*高宽分别对应横竖滚动条的尺寸*/
       width: 6px;
@@ -53,13 +62,15 @@ document.title = route.meta ? route.meta.title + ' | TG-Design' : 'TG-Design'
       background: #d2d6dd;
     }
 
-    >.router-view {
+    > .router-view {
       background: #fff;
-      margin: 12px;
+      // margin: 12px;
       padding: 12px;
-      width: calc(100% - 200px);
+      width: calc(100% - 180px);
+      &.wrap {
+        width: 100%;
+      }
     }
-
   }
 
   @media screen and (max-width: 680px) {
@@ -67,10 +78,10 @@ document.title = route.meta ? route.meta.title + ' | TG-Design' : 'TG-Design'
       display: none;
     }
 
-    >.router-main {
+    > .router-main {
       width: 100%;
 
-      >.router-view {
+      > .router-view {
         width: 100%;
         margin: 0;
       }
@@ -83,7 +94,7 @@ document.title = route.meta ? route.meta.title + ' | TG-Design' : 'TG-Design'
       height: calc(100vh - 50px);
       z-index: 999;
     }
-    .mobile-aside{
+    .mobile-aside {
       display: block;
     }
   }

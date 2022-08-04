@@ -5,9 +5,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import {libs}  from './libs'
+import install  from './libs'
 import "prismjs";
 import "prismjs/themes/prism-solarizedlight.css";
 const app = createApp(App)
-app.use(router).use(store).use(libs)
+app.use(router).use(store).use(install)
 app.mount('#app')

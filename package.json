@@ -1,11 +1,22 @@
 {
-  "name": "default-template",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@wantao/tgdesign",
+  "private": false,
+  "version": "1.0.3",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/tgdesign.umd.js",
+  "module": "./dist/tgdesign.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/tgdesign.es.js",
+      "require": "./dist/tgdesign.umd.js"
+    }
   },
   "dependencies": {
     "axios": "^0.27.2",

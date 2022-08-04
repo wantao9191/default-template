@@ -52,7 +52,6 @@
 </template>
 <script setup>
 import { computed, nextTick, reactive, ref } from "vue";
-import { C } from "../../dist/assets/index.e6d3a975";
 import TgInput from "./input.vue";
 const props = defineProps({
   value: { type: String, default: "" },

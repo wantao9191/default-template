@@ -20,6 +20,16 @@ const routes = [
         redirect: '/doc/icon',
         children: [
             {
+                path: 'install', name: 'install',
+                component: () => import('@/views/index/doc/ins.vue'),
+                meta: { title: '安装' }
+            },
+            {
+                path: 'start', name: 'start',
+                component: () => import('@/views/index/doc/start.vue'),
+                meta: { title: '快速开始' }
+            },
+            {
                 path: 'icon', name: 'icon',
                 component: () => import('@/views/index/doc/demo/iconDemo/index.vue'),
                 meta: { title: 'Icon 图标' }
