@@ -10,7 +10,7 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/tgdesign.umd.js",
+  "main": "./dist/tgdesign.umd.js", 
   "module": "./dist/tgdesign.es.js",
   "exports": {
     ".": {
