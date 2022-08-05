@@ -1,13 +1,11 @@
 <template>
   <div id="app-view">
-    <m-header></m-header>
     <main>
       <router-view class="router-view" />
     </main>
   </div>
 </template>
 <script setup>
-import MHeader from "@/components/MHeader.vue";
 </script>
 
 <style lang="scss">
