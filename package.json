@@ -1,7 +1,7 @@
 {
   "name": "@wantao/tgdesign",
   "private": false,
-  "version": "1.0.3",
+  "version": "1.1.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,8 +10,8 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/tgdesign.umd.js", 
-  "module": "./dist/tgdesign.es.js",
+  "main": "./dist/tgdesign.es.js",
+  "module": "./dist/tgdesign.umd.js",
   "exports": {
     ".": {
       "import": "./dist/tgdesign.es.js",
@@ -19,15 +19,12 @@
     }
   },
   "dependencies": {
-    "axios": "^0.27.2",
-    "vue": "^3.2.25",
-    "vue-router": "^4.0.16",
-    "vuex": "^4.0.2"
+    "vue": "^3.2.25"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
-    "prismjs": "^1.21.0",
     "sass": "^1.26.10",
-    "vite": "^2.9.9"
+    "vite": "^2.9.9",
+    "vite-plugin-libcss": "^1.0.5"
   }
 }
