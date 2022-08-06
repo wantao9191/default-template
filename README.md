@@ -33,7 +33,7 @@ import {
   tgButton,
   tgInput
   // ...
-} from 'element-ui'
+} from '@wantao/tgdesign'
 
 app.use(tgButton)
 app.use(tgInput)
