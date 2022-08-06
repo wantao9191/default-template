@@ -1,9 +1,53 @@
-# Vue 3 + Vite
-# [![OSCS Status](https://www.oscs1024.com/platform/badge/wantao9191/default-template.svg?size=small)](https://www.oscs1024.com/project/wantao9191/default-template?ref=badge_small)
 
-!(http://static.runoob.com/images/runoob-logo.png)[TG-Design]
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+<p align="center">
+  <img src="./dist/logo.svg">
+</p>
 
-## Recommended IDE Setup
+<p align="center">
+  <a href="https://www.oscs1024.com/project/wantao9191/default-template?ref=badge_small">
+    <img src="https://www.oscs1024.com/platform/badge/wantao9191/default-template.svg?size=small">
+  </a>
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+</p>
+
+> A Vue.js 3.0 UI Toolkit for Web.
+
+TG-Design will stay with Vue 3.x 
+
+
+## Install
+```shell
+npm install @wantao/tgdesign
+```
+
+## Quick Start
+``` javascript
+import { createApp } from 'vue'
+import App from './App.vue'
+import tgdesign from '@wantao/tgdesign'
+const app = createApp(App)
+app.use(tgdesign)
+
+// or
+import {
+  tgButton,
+  tgInput
+  // ...
+} from 'element-ui'
+
+app.use(tgButton)
+app.use(tgInput)
+```
+For more information, please refer to [Quick Start](http://8.142.144.11/index.html#/doc/install) in our documentation.
+
+## Browser Support
+Modern browsers and Internet Explorer 10+.
+
+## developer
+
+- [wantao](https://github.com/wantao9191)
+
+
+## LICENSE
+[MIT](LICENSE)
+
