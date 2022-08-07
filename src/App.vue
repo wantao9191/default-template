@@ -1,11 +1,20 @@
 <template>
   <div id="app-view">
     <main>
-      <router-view class="router-view" />
     </main>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { messageBox, message } from '@/libs'
+const visible = ref(false);
+const beforeClose = (done: any) => {
+  messageBox.confirm('是否确认关闭', '提示').then(() => {
+    done()
+  }).catch(() => {
+    message({ message: '取消关闭', type: 'error' })
+  })
+}
 </script>
 
 <style lang="scss">
