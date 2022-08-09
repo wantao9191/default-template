@@ -1,7 +1,7 @@
 <template>
   <div id="app-view">
     <main>
-      <router-view class="router-view" />
+      <tg-button >1111</tg-button> 
     </main>
   </div>
 </template>
