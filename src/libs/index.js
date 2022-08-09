@@ -17,6 +17,8 @@ import Tabs from "./tabs/tabs.vue";
 import TabsPane from "./tabs/tabsPane.vue";
 import { messageBox } from "./messageBox/messageBox.js";
 import { message } from "./message/message.js";
+import Form from "./form/form.vue";
+import FormItem from "./form/formItem.vue";
 const tgDialog = Vue => {
     Vue.component('tg-dialog', Dialog)
 }
@@ -68,7 +70,13 @@ const tgTabs = Vue => {
 const tgTabsPane = Vue => {
     Vue.component('tg-tabs-pane', TabsPane)
 }
-export { tgDialog, tgTabsPane, tgTabs, tgTimeSelect, tgTimePicker, tgToolTip, tgDatePicker, tgOption, tgSelect, tgCheckbox, tgCheckboxGroup, tgRadio, tgRadioGroup, tgInput, tgIcon, tgSwitch, tgButton, Dialog, Button, Switch, Icon, Input, Radio, RadioGroup, Checkbox, CheckboxGroup, Select, Option, DatePicker, ToolTip, TimePicker, TimeSelect, Tabs, TabsPane, message, messageBox }
+const tgForm = Vue => {
+    Vue.component('tg-form', Form)
+}
+const tgFormItem = Vue => {
+    Vue.component('tg-form-item', FormItem)
+}
+export {tgForm,tgFormItem, tgDialog, tgTabsPane, tgTabs, tgTimeSelect, tgTimePicker, tgToolTip, tgDatePicker, tgOption, tgSelect, tgCheckbox, tgCheckboxGroup, tgRadio, tgRadioGroup, tgInput, tgIcon, tgSwitch, tgButton, Dialog, Button, Switch, Icon, Input, Radio, RadioGroup, Checkbox, CheckboxGroup, Select, Option, DatePicker, ToolTip, TimePicker, TimeSelect, Tabs, TabsPane, message, messageBox }
 
 function install(Vue) {
     Vue.component('tg-dialog', Dialog)
@@ -88,5 +96,7 @@ function install(Vue) {
     Vue.component('tg-time-select', TimeSelect)
     Vue.component('tg-tabs', Tabs)
     Vue.component('tg-tabs-pane', TabsPane)
+    Vue.component('tg-form', Form)
+    Vue.component('tg-form-item', FormItem)
 }
 export default { install }

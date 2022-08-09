@@ -1,7 +1,7 @@
 {
   "name": "@wantao/tgdesign",
   "private": false,
-  "version": "1.1.1",
+  "version": "1.1.2",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -19,6 +19,7 @@
     }
   },
   "dependencies": {
+    "async-validator": "^4.2.5",
     "vue": "^3.2.25"
   },
   "devDependencies": {

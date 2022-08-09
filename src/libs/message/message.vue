@@ -45,7 +45,7 @@ onMounted(() => off())
     top: 2vh;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1000;
+    z-index: 2001;
     transition: .5s;
 
     .tg-message-wrap {

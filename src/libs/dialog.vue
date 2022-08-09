@@ -26,10 +26,18 @@ export default {
     closeOnOverlay: { type: Boolean, default: true },
     title: { type: String, default: "" },
     center: { type: Boolean, default: false },
-    width: { type: String, default: '50%' }
+    width: { type: String, default: '50%' },
+    beforeClose: { type: Function, default: null }
   },
   setup(props, context) {
     const close = () => {
+      if (props.beforeClose) {
+        props.beforeClose(() => {
+          context.emit("update:visible", false);
+          context.emit("close");
+        })
+        return
+      }
       context.emit("update:visible", false);
       context.emit("close");
     };

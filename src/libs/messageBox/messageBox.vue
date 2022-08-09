@@ -1,26 +1,29 @@
 <template>
-    <div class="tg-messagebox-box" @click="close">
-        <div class="tg-messagebox-wrap" :class="[`tg-message-${props.align}`]" @click.stop>
-            <header>
-                {{ props.title }}
-                <tg-icon icon="tg-close" class="close" size="24" @click="close"></tg-icon>
-            </header>
-            <main>
-                {{ props.content }}
-                <tg-input v-model:value="inputValue" :placeholder="props.inputPlaceholder" @input="emitValue"
-                    size="mini" style="margin:12px 0" v-if="props.type === 'prompt'" />
-                <div class="is-error" v-if="props.isError">{{ props.errorMessage }}</div>
-            </main>
-            <footer>
-                <tg-button size="mini" @click="cancel" :loading="props.cancelLoading" v-if="props.type != 'alert'">{{
-                        props.cancelButtonText
-                }}
-                </tg-button>
-                <tg-button size="mini" type="primary" @click="confirm" :loading="props.confirmLoading">
-                    {{ props.confirmButtonText }}</tg-button>
-            </footer>
+    <Teleport to='body'>
+        <div class="tg-messagebox-box" @click="close">
+            <div class="tg-messagebox-wrap" :class="[`tg-message-${props.align}`]" @click.stop>
+                <header>
+                    {{ props.title }}
+                    <tg-icon icon="tg-close" class="close" size="24" @click="close"></tg-icon>
+                </header>
+                <main>
+                    {{ props.content }}
+                    <tg-input v-model:value="inputValue" :placeholder="props.inputPlaceholder" @input="emitValue"
+                        size="mini" style="margin:12px 0" v-if="props.type === 'prompt'" />
+                    <div class="is-error" v-if="props.isError">{{ props.errorMessage }}</div>
+                </main>
+                <footer>
+                    <tg-button size="mini" @click="cancel" :loading="props.cancelLoading" v-if="props.type != 'alert'">
+                        {{
+                                props.cancelButtonText
+                        }}
+                    </tg-button>
+                    <tg-button size="mini" type="primary" @click="confirm" :loading="props.confirmLoading">
+                        {{ props.confirmButtonText }}</tg-button>
+                </footer>
+            </div>
         </div>
-    </div>
+    </Teleport>
 </template>
 <script setup>
 import { ref, toRef } from "vue";
@@ -64,7 +67,7 @@ const emitValue = value => {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, .45);
-    z-index: 1000;
+    z-index: 2001;
 
     .tg-messagebox-wrap {
         position: absolute;
@@ -74,12 +77,15 @@ const emitValue = value => {
         background: #fff;
         border-radius: 6px;
         width: 320px;
+
         &.tg-message-center {
             text-align: center;
+
             footer {
                 text-align: center;
             }
         }
+
         header {
             padding: 12px;
             position: relative;
