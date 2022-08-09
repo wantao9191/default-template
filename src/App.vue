@@ -7,6 +7,7 @@
         label-width="70px"
         ref="formRef"
         :rules="rules"
+        size="mini"
       >
         <tg-form-item label="姓名" prop="name">
           <tg-input v-model:value="form.name"></tg-input>

@@ -2,7 +2,7 @@
   <div
     class="tg-form-item"
     :class="[
-      `tg-form-item-${size}`,
+      `tg-form-item-${injectSize || size || 'small'}`,
       `tg-form-item-${labelPosition}`,
       { 'tg-inline-form-item': inline },
     ]"
@@ -26,12 +26,13 @@ import { computed, inject, provide, reactive, ref, useSlots } from "vue";
 
 const props = defineProps({
   label: String,
-  size: { type: String, default: "small" },
+  size: { type: String, default: "" },
   labelPosition: { type: String, default: "left" },
   labelWidth: { type: String, default: "auto" },
   prop: String,
 });
-provide("size", props.size);
+const injectSize = ref(inject("size"));
+provide("size", injectSize || props.size || "small");
 const labelPosition = ref(inject("labelPosition"));
 const labelWidth = ref(inject("labelWidth"));
 const inline = ref(inject("inline"));
@@ -55,8 +56,6 @@ const validFn = (errors) => {
   const item = errors.find((e) => e.field === props.prop);
   errorConfig.visible = item != null;
   errorConfig.message = item.message;
-  console.log(errors);
-  console.log("validFn");
 };
 defineExpose({ validFn, prop: props.prop });
 </script>
@@ -64,11 +63,12 @@ defineExpose({ validFn, prop: props.prop });
 .tg-form-item {
   display: flex;
   // align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 18px;
   > .tg-form-item-label {
     font-size: 14px;
     margin-right: 12px;
     line-height: 32px;
+
     &.label-required::before {
       display: inline-block;
       content: "*";
@@ -76,11 +76,27 @@ defineExpose({ validFn, prop: props.prop });
       color: $danger;
     }
   }
+  &.tg-form-item-mini {
+    > .tg-form-item-label {
+      font-size: 13px;
+      line-height: 24px;
+    }
+  }
+  &.tg-form-item-large {
+    > .tg-form-item-label {
+      font-size: 16px;
+      line-height: 36px;
+    }
+  }
   > .tg-form-item-content {
     flex-grow: 1;
+    position: relative;
     .error-content {
       font-size: 12px;
       color: $danger;
+      position: absolute;
+      left: 0;
+      bottom: -16px;
     }
   }
   &.tg-form-item-center {
